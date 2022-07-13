@@ -2,10 +2,15 @@
 Would you like to use the many functions of the Valorant API to see the rank of your opponents or your mates? Or rather get the match history with K/D from the player? Or just the ranking of the best players in Europe or North America? With this program, which I programmed with Python and PyQT5, you can currently
 
 A) See Account Level
+
 B) See a player's rank and MMR
+
 C) See how much plus or minus he made
+
 D) See his last 5 matches
+
 E) See global leaderboard in each region
+
 and soon View match data from a match.
 
 I know that there are already many other apps like Valorant Tracker or Blitz but this program is not in-game but can also be used outside of Valorant.
