@@ -16,7 +16,9 @@ and soon View match data from a match.
 I know that there are already many other apps like Valorant Tracker or Blitz but this program is not in-game but can also be used outside of Valorant.
 (If you can remember a player's name and hashtag)
 
-Valorant Tracker and Blitz are definitely better. But my program is in beta. So if you look at the full release that will come at some point, you will notice differences to the beta. SO if you are looking for better programs -> Valorant Tracker | Blitz.gg AND if you want to use functions outside of Valorant and functions that may not exist -> Valorant Tracking  Thank you for looking at the description :)
+Valorant Tracker and Blitz are definitely better. But my program is in beta. So if you look at the full release that will come at some point, you will notice differences to the beta. SO if you are looking for better programs -> Valorant Tracker | Blitz.gg AND if you want to use functions outside of Valorant and functions that may not exist -> Valorant Tracking
+
+Thank you for reading :)
 
 
 Q&A
@@ -24,7 +26,8 @@ Q&A
 Q:  Why is the program detected/flagged as a virus?
 
 
-A:  Stay calm. The program is NOT a virus.
+A:  IMPORTANT!
+    Stay calm. The program is NOT a virus.
     The program I used to make Python into an EXE file is called PyInstaller.
     Lots of viruses, key loggers and other B!llsh!t
     are also built with Python and PyInstaller.
