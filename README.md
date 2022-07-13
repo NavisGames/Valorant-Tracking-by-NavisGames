@@ -39,4 +39,4 @@ A:  IMPORTANT!
 
 CREDITS
 -----
-BIG VERY BIG Credits are going to @Henrik-3 aka. Henrik Mertens for making an UNOFFICIAL VALORANT API which you guys can use to make these things what i made too! https://github.com/Henrik-3/unofficial-valorant-api for more informations!  Thanks Henrik without this i couldn't make this Project <3
+BIG VERY BIG Credits are going to @Henrik-3 for making an UNOFFICIAL VALORANT API which you guys can use to make these things what i made too! https://github.com/Henrik-3/unofficial-valorant-api for more informations!  Thanks Henrik without this i couldn't make this Project <3
