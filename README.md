@@ -15,3 +15,8 @@ A:  Stay calm. The program is NOT a virus.
     Py to Exe is not a real compiler, but just a container in Exe format, which when you start it, in addition to your Py file, also secretly writes the necessary    runtime to disk and also executes it automatically.
     This behavior is heuristically consistent with Trojans and other malware. Security programs react accordingly.
     To prove that this program is NOT A VIRUS, here is a VirusTotal https://www.virustotal.com/gui/file/185c8c612d23263130cfddd2b14755b663cd18b5de6725acb459909628b6a0d0
+
+
+CREDITS
+-----
+BIG VERY BIG Credits are going to @Henrik-3 aka. Henrik Mertens for making an UNOFFICIAL VALORANT API which you guys can use to make these things what i made too! https://github.com/Henrik-3/unofficial-valorant-api for more informations!  Thanks Henrik without this i couldn't make this Project <3
