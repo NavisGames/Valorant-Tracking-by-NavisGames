@@ -5,6 +5,8 @@ Would you like to use the many functions of the Valorant API to see the rank of 
 Q&A
 -----
 Q:  Why is the program detected/flagged as a virus?
+
+
 A:  Stay calm. The program is NOT a virus.
     The program I used to make Python into an EXE file is called PyInstaller.
     Lots of viruses, key loggers and other B!llsh!t
