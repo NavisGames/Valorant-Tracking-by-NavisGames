@@ -1,20 +1,22 @@
 # Valorant Tracking by NavisGames
-Do you want to Valorant Tracker but without entering the Game?
-Then use this Valorant Tracker i programmed using PyQT5 and Python.
+Want a great Valorant Tracker but to lazy to start the game for Valorant Tracker?
+Use this Valorant Tracker:
 
-Functions are:
-+ See Account Level
-+ See a player's rank and MMR
-+ See how much plus or minus he made
-+ See a player's last 5 matches
-+ See global leaderboard in each region
+Functions:
+- See Account Level
+- See a player's rank and MMR
+- See how much plus or minus he made
+- See his last 5 matches
+- See global leaderboard in each region
 
 Coming Soon:
-+ See Data from a Match like Rounds, Players, KDA, Ranks etc.
-+ Better Interface
-+ Images for better Design
+- Get Match Data
+- Better Interface
+- Images for better Design
 
-Download it and try it out!
+ (build with PyQT5 and Python)
+
+Download and try it out! 🙂
 
 
 Q&A
