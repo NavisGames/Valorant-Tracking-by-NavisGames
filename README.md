@@ -10,7 +10,7 @@ Functions are:
 + See global leaderboard in each region
 
 Coming Soon:
-+ Get Match Data
++ See Data from a Match like Rounds, Players, KDA, Ranks etc.
 + Better Interface
 + Images for better Design
 
