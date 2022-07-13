@@ -1,24 +1,20 @@
 # Valorant Tracking by NavisGames
-Would you like to use the many functions of the Valorant API to see the rank of your opponents or your mates? Or rather get the match history with K/D from the player? Or just the ranking of the best players in Europe or North America? With this program, which I programmed with Python and PyQT5, you can currently
+Do you want to Valorant Tracker but without entering the Game?
+Then use this Valorant Tracker i programmed using PyQT5 and Python.
 
-A) See Account Level
+Functions are:
++ See Account Level
++ See a player's rank and MMR
++ See how much plus or minus he made
++ See a player's last 5 matches
++ See global leaderboard in each region
 
-B) See a player's rank and MMR
+Coming Soon:
++ Get Match Data
++ Better Interface
++ Images for better Design
 
-C) See how much plus or minus he made
-
-D) See his last 5 matches
-
-E) See global leaderboard in each region
-
-and soon View match data from a match.
-
-I know that there are already many other apps like Valorant Tracker or Blitz but this program is not in-game but can also be used outside of Valorant.
-(If you can remember a player's name and hashtag)
-
-Valorant Tracker and Blitz are definitely better. But my program is in beta. So if you look at the full release that will come at some point, you will notice differences to the beta. SO if you are looking for better programs -> Valorant Tracker | Blitz.gg AND if you want to use functions outside of Valorant and functions that may not exist -> Valorant Tracking
-
-Thank you for reading :)
+Download it and try it out!
 
 
 Q&A
