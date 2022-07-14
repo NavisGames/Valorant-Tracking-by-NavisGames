@@ -21,7 +21,7 @@ Download and try it out! 🙂
 
 
 Q&A
------
+-------
 Q:  Why is the program detected/flagged as a virus?
 
 
@@ -38,5 +38,5 @@ A:  IMPORTANT!
 
 
 Credits
------
+-------
 BIG VERY BIG Credits are going to @Henrik-3 for making an UNOFFICIAL VALORANT API which you guys can use to make these things what i made too! https://github.com/Henrik-3/unofficial-valorant-api for more informations!  Thanks Henrik without this i couldn't make this Project <3
