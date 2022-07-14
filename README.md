@@ -9,9 +9,10 @@ Functions:
 - See how much plus or minus he made
 - See his last 5 matches
 - See global leaderboard in each region
+- Get Match Data (BETA)
+- Saving a .txt File with the Output called Output.txt
 
 Coming Soon:
-- Get Match Data
 - Better Interface
 - Images for better Design
 - Remove False Positive Virus
