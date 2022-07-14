@@ -1,3 +1,4 @@
+![Banner](https://cdn.discordapp.com/attachments/939565324855033906/997096531691839580/Logo.png)
 # Valorant Tracking
 Want a great Valorant Tracker but to lazy to start the game for Valorant Tracker?
 
