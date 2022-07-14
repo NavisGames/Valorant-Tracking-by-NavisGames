@@ -1,3 +1,4 @@
+![Valorant Tracking](https://cdn.discordapp.com/attachments/939565324855033906/997094516223922206/Logo.png)
 # Valorant Tracking by NavisGames
 Want a great Valorant Tracker but to lazy to start the game for Valorant Tracker?
 
