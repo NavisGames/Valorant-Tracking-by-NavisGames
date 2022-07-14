@@ -1,4 +1,5 @@
-# Valorant Tracking by NavisGames
+<p align="center">
+ # Valorant Tracking by NavisGames
 Want a great Valorant Tracker but to lazy to start the game for Valorant Tracker?
 
 Use this Valorant Tracker:
@@ -40,3 +41,4 @@ A:  IMPORTANT!
 Credits
 -----
 BIG VERY BIG Credits are going to @Henrik-3 for making an UNOFFICIAL VALORANT API which you guys can use to make these things what i made too! https://github.com/Henrik-3/unofficial-valorant-api for more informations!  Thanks Henrik without this i couldn't make this Project <3
+</p>
