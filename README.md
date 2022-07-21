@@ -9,18 +9,22 @@ Functions:
 - See how much plus or minus he made
 - See his last 5 matches
 - See global leaderboard in each region
-- Get Match Data (BETA)
 - Saving a .txt File with the Output called Output.txt
 
 Coming Soon:
-- Better Interface
-- Images for better Design
+- Get Match Data
 - Remove False Positive Virus
-
- (build with PyQT5 and Python)
+- Darkmode
+- Fix loud waiting time
+- Save Output
+- More Options like Match History Gamemode,
+                    how many Matches in History,
+                    Starting Players in Leaderboard like starting at Player 2502 -> going to 5502
+                    and more!
+                    
+(build with PyQT5, Python and PyInstaller)
 
 Download and try it out! 🙂
-
 
 Q&A
 -------
