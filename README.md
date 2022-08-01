@@ -36,7 +36,7 @@ A:  IMPORTANT!
     i.e
     Py to Exe is not a real compiler, but just a container in Exe format, which when you start it, in addition to your Py file, also secretly writes the necessary    runtime to disk and also executes it automatically.
     This behavior is heuristically consistent with Trojans and other malware. Security programs react accordingly.
-    To prove that this program is NOT A VIRUS, here is a VirusTotal Link: https://www.virustotal.com/gui/file/185c8c612d23263130cfddd2b14755b663cd18b5de6725acb459909628b6a0d0
+    To prove that this program is NOT A VIRUS, here is a VirusTotal Link: https://www.virustotal.com/gui/file/b89e392d5fffe65913b726e9df82c318ad17a153d4cfb85903fc6517e43b8b50?nocache=1
      
      
      im currently working on a fix for this so no worries :)
