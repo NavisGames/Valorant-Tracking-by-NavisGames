@@ -1,6 +1,5 @@
 # Valorant Tracking
 Want a great Valorant Tracker but to lazy to start the game for Valorant Tracker?
-
 Use this Valorant Tracker:
 
 Functions:
