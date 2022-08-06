@@ -46,7 +46,8 @@ A:  No problem! Just put the spaces in the program. The program recognizes the s
 
 Credits
 -------
-BIG VERY BIG Credits are going to @Henrik-3 for making an UNOFFICIAL VALORANT API which you guys can use to make these things what i made too! https://github.com/Henrik-3/unofficial-valorant-api for more informations!
-Thanks Henrik without this i couldn't make this Project <3
+BIG VERY BIG Credits are going to @Henrik-3 for making an UNOFFICIAL VALORANT API which you guys can use to make these things what i made too! https://github.com/Henrik-3/unofficial-valorant-api thanks Henrik without this i couldn't make this Project <3
+
 The python wrapper im using for the unofficial valorant api is https://github.com/raimannma/ValorantAPI
+
 and credits to the game https://playvalorant.com
