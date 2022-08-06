@@ -13,13 +13,10 @@ Functions:
 Coming Soon:
 - Get Match Data
 - Remove False Positive Virus
-- Darkmode
 - Fix long waiting time
 - More Options like Match History Gamemode,
-                    how many Matches in History,
                     Starting Players in Leaderboard like starting at Player 2502 -> going to 5502
                     and more!
-- Longer leaderboard
                     
 (build with PyQT5, Python and PyInstaller)
 
