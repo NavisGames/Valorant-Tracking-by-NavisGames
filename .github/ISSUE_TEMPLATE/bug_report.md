@@ -1,6 +1,6 @@
 ---
 name: 🐞 Bug report
-about: If theres a bug like crashing 🐞
+about: If theres a bug like programm crashing 🐞
 title: ''
 labels: bug
 assignees:
