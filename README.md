@@ -1,21 +1,21 @@
 # Valorant Tracking
-Want a great Valorant Tracker but to lazy to start the game for Valorant Tracker?
+Want a great Valorant Tracker but to lazy to start the game for Tracking?
 
 Use this Valorant Tracker:
 
 Functions:
-- See Account Level
+- See a players account level
 - See a player's rank and MMR
-- See how much plus or minus he made
-- See his last 5 matches
-- See global leaderboard in each region
+- See how much RR he made in the last matches
+- See his last matches
+- See global leaderboard of every act in each region
 
 Coming Soon:
-- Get Match Data
+- Get data of a Match
 - Remove False Positive Virus
 - Fix long waiting time
-- More Options like Match History Gamemode,
-                    Starting Players in Leaderboard like starting at Player 2502 -> going to 5502
+- More Options like Match History of a Gamemode,
+                    starting Players in Leaderboard like starting at Player 2502 -> going to 5502
                     and more!
                     
 (build with PyQT5, Python and PyInstaller)
