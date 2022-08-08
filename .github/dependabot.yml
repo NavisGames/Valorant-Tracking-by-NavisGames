@@ -12,5 +12,5 @@ updates:
       - dependency-type: "all"
     commit-message:
       prefix: ":hammer:"
-    open-pull-requests-limit: 50
+    open-pull-requests-limit: 25
     
