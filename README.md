@@ -25,7 +25,6 @@ Download and try it out! 🙂
 Q&A
 -------
 Q:  Why is the program detected/flagged as a virus?
-
 A:  IMPORTANT!
     Stay calm. The program is NOT a virus.
     The program I used to make Python into an EXE file is called PyInstaller.
@@ -40,7 +39,6 @@ A:  IMPORTANT!
      im currently working on a fix for this so no worries :)
 
 Q: What if my Names have spaces
-
 A:  No problem! Just put the spaces in the program. The program recognizes the spaces ^^
 
 
