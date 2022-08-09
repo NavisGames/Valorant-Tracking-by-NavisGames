@@ -23,8 +23,6 @@ from valo_api.exceptions.valo_api_exception import ValoAPIException
 
 import urllib3
 
-from discord_webhook import DiscordWebhook, DiscordEmbed
-
 import time
 import requests
 from pathlib import Path
@@ -382,22 +380,7 @@ class Ui_MainWindow(object):
                                                                 tag=self.HashtagInput.text(),
                                                                 size=5)
             MMRDetails = valo_api.get_mmr_history_by_name(version="v1", region=self.RegionInput.currentText(),
-                                                          name=self.NameInput.text(), tag=self.HashtagInput.text())
-
-            # sends Discord Webhook with rate limits
-            webhook = DiscordWebhook(
-                url='') # HIDE IN GITHUB!
-
-            ratelimit = valo_api.exceptions.rate_limit.rate_limit()
-            remaining = ratelimit.remaining
-            reset = ratelimit.reset
-
-            embed = DiscordEmbed(title="Rate Limit - from Details",
-                                 description=f"{remaining} Remaining\n Resetting in: {reset} seconds",
-                                 color="ff002b")
-            embed.set_footer(text=f"{time.strftime('%a, %d %b %Y %H:%M:%S')}")
-            webhook.add_embed(embed)
-            #webhook.execute()
+                                                          name=self.NameInput.text(), tag=self.HashtagInput.text())  
 
             # Puuid, Region, Account Level and the PlayerCard
 
@@ -578,19 +561,6 @@ class Ui_MainWindow(object):
             self.msg.setWindowTitle("Valorant Tracking")
             self.msg.exec_()
 
-            # Discord Webhook rate limit
-            webhook = DiscordWebhook(
-                url='') # HIDE IN GITHUB!
-            remaining = int(error.ratelimit.remaining)
-            remaining -= 1
-
-            embed = DiscordEmbed(title="Rate Limit - Error from Details",
-                                 description=f"{remaining} Remaining\n Resetting in: {error.ratelimit.reset} seconds",
-                                 color="ff002b")
-            embed.set_footer(text=f"{time.strftime('%a, %d %b %Y %H:%M:%S')}")
-            webhook.add_embed(embed)
-            #webhook.execute()
-
     def get_leaderboard(self):
         try:
             # Valo API get leaderboard with season_id
@@ -601,22 +571,7 @@ class Ui_MainWindow(object):
                                                    season_id=self.LeaderboardSeason.currentText())
             # Get all Players of Leaderboard
             Player = Details.players
-
-            # Discord Webhook nrate limit
-            webhook = DiscordWebhook(
-                url='') # HIDE IN GITHUB!
-
-            ratelimit = valo_api.exceptions.rate_limit.rate_limit()
-            remaining = ratelimit.remaining
-            reset = ratelimit.reset
-
-            embed = DiscordEmbed(title="Rate Limit - from Leaderboard",
-                                 description=f"{remaining} Remaining\n Resetting in: {reset} seconds",
-                                 color="ff002b")
-            embed.set_footer(text=f"{time.strftime('%a, %d %b %Y %H:%M:%S')}")
-            webhook.add_embed(embed)
-            #webhook.execute()
-
+            
             # Gets Message Box for Loading Leaderboard
 
             self.msg2.setText(
@@ -686,19 +641,6 @@ class Ui_MainWindow(object):
             self.msg.setInformativeText(f'{error.message}')
             self.msg.setWindowTitle("Valorant Tracking")
             self.msg.exec_()
-
-            # Discord webhook ratelimit
-            webhook = DiscordWebhook(
-                url='') # HIDE IN GITHUB!
-            remaining = int(error.ratelimit.remaining)
-            remaining -= 1
-
-            embed = DiscordEmbed(title="Rate Limit - Error from Leaderboard",
-                                 description=f"{remaining} Remaining\n Resetting in: {error.ratelimit.reset} seconds",
-                                 color="ff002b")
-            embed.set_footer(text=f"{time.strftime('%a, %d %b %Y %H:%M:%S')}")
-            webhook.add_embed(embed)
-            #webhook.execute()
 
 
 if __name__ == "__main__":
