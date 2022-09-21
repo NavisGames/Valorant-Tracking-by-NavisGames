@@ -11,6 +11,8 @@ Functions:
 - See global leaderboard of every act in each region
 
 Coming Soon:
+- See current Bundles in the game (CURRENTLY WORKING ON!)
+
 - Get data of a Match
 - Remove False Positive Virus
 - Fix long waiting time
