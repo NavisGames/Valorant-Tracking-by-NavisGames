@@ -2,23 +2,28 @@
 # license for more. If you want, please fork this program to share what you changed in this program ^^
 
 from itertools import accumulate
-
 from PyQt5.QtCore import Qt, QSettings
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QIcon
-
 import valo_api
 from valo_api.exceptions.valo_api_exception import ValoAPIException
-
-import urllib3
-
 import requests
 from pathlib import Path
 
-http = urllib3.PoolManager()
+import httpx as http
+import asyncio
+import time
 
-valo_api.set_api_key("")  # HIDE IN GITHUB!
+valo_api.set_api_key("HDEV-e6c002ce-3c53-4464-9586-c58c586baf1c")  # HIDE IN GITHUB!
+
+
+def get_image(url):
+    with http.Client() as client:
+        r = client.get(url)
+    img = QImage()
+    img.loadFromData(r.content)
+    return img
 
 
 class Ui_MainWindow(object):
@@ -303,115 +308,119 @@ class Ui_MainWindow(object):
         self.CompetitiveInformation.setFont(font)
 
         # Added Bundles Tab
-        self.Bundles = QtWidgets.QWidget()
-        self.Bundles.setObjectName("Bundle")
-
-        # Getting Current Bundle+
+        self.Bundles = dict()
         current_Bundle = valo_api.get_store_featured_v2()
-        bundleUuid = current_Bundle[0].bundle_uuid
-
-        # Getting Bundle Banner as PixMap
-        bundleJson = requests.get(url=f"https://valorant-api.com/v1/bundles/{bundleUuid}").json()
-        bundleIcon = http.request('GET', bundleJson["data"]["displayIcon2"])
-        img = QImage()
-        img.loadFromData(bundleIcon.data)
-
-        # Layouts
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.Bundles)
-        self.verticalLayout_2.setContentsMargins(5, 5, 5, 5)
-        self.verticalLayout_2.setSpacing(5)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-
-        # Bundle Name
-        self.BundleName = QtWidgets.QLabel(self.Bundles)
-        font = QtGui.QFont()
-        font.setFamily("Open Sans")
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
-        self.BundleName.setFont(font)
-        self.BundleName.setAlignment(QtCore.Qt.AlignCenter)
-        self.BundleName.setObjectName("Name")
-        self.verticalLayout_2.addWidget(self.BundleName)
-
-        # Bundle Image
-        self.Image = QtWidgets.QLabel(self.Bundles)
-        self.Image.setText("")
-        self.Image.setPixmap(QtGui.QPixmap(img))
-        self.Image.setScaledContents(True)
-        self.Image.setIndent(-1)
-        self.Image.setObjectName("Image")
-        self.verticalLayout_2.addWidget(self.Image)
-
-        # Bundle Description
-        self.extraDescription = QtWidgets.QLabel(self.Bundles)
-        font = QtGui.QFont()
-        font.setFamily("Open Sans")
-        font.setPointSize(18)
-        font.setBold(True)
-        font.setWeight(75)
-        self.extraDescription.setFont(font)
-        self.extraDescription.setScaledContents(False)
-        self.extraDescription.setAlignment(QtCore.Qt.AlignCenter)
-        self.extraDescription.setWordWrap(True)
-        self.extraDescription.setObjectName("extraDescription")
-
-        self.verticalLayout_2.addWidget(self.extraDescription)
-
-        # Bundle Price
-        self.Price = QtWidgets.QLabel(self.Bundles)
-        font = QtGui.QFont()
-        font.setFamily("Open Sans")
-        font.setPointSize(15)
-        font.setBold(True)
-        font.setWeight(75)
-        self.Price.setFont(font)
-        self.Price.setScaledContents(False)
-        self.Price.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
-        self.Price.setWordWrap(True)
-        self.Price.setObjectName("Price")
-        self.verticalLayout_2.addWidget(self.Price)
-
-        # Bundle Items
-        self.Items = QtWidgets.QLabel(self.Bundles)
-        font = QtGui.QFont()
-        font.setFamily("Open Sans")
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
-        self.Items.setFont(font)
-        self.Items.setScaledContents(False)
-        self.Items.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
-        self.Items.setWordWrap(True)
-        self.Items.setObjectName("Items")
-        self.verticalLayout_2.addWidget(self.Items)
-
-        # Get Bundle Items
-        Items = []
-        for item in current_Bundle[0].items:
-            if item.amount > 1:
-                Items.append(f"{item.amount}x {item.name} - {item.base_price} Valorant Points\n")
-            else:
-                Items.append(f"{item.name} - {item.base_price} Valorant Points\n")
-
-        # Sets the Current Bundle Texts
-        self.BundleName.setText(f"{bundleJson['data']['displayName']}")
-        if bundleJson['data']['extraDescription'] is None:
-            self.extraDescription.hide()
-        else:
-            self.extraDescription.setText(f"{bundleJson['data']['extraDescription']}")
-        self.Price.setText(f"Bundle Price: {current_Bundle[0].bundle_price} Valorant Points")
-        self.Items.setText("".join(Items))
 
         # Adding Tabs
         self.Tabs.addTab(self.Home, "Home")
         self.Tabs.addTab(self.Leaderboard, "Leaderboard")
-        self.Tabs.addTab(self.Bundles, f"Bundle: {bundleJson['data']['displayName']}")
+
+        for i, bundles in enumerate(current_Bundle):
+            self.Bundles[i] = QtWidgets.QWidget()
+            self.Bundles[i].setObjectName("Bundle")
+
+            # Getting Current Bundle
+            bundleUuid = current_Bundle[i].bundle_uuid
+            # Getting Bundle Banner as PixMap
+            bundleJson = requests.get(url=f"https://valorant-api.com/v1/bundles/{bundleUuid}").json()
+            img = get_image(bundleJson["data"]["displayIcon2"])
+
+            # Layouts
+            self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.Bundles[i])
+            self.verticalLayout_2.setContentsMargins(5, 5, 5, 5)
+            self.verticalLayout_2.setSpacing(5)
+            self.verticalLayout_2.setObjectName("verticalLayout_2")
+
+            # Bundle Name
+            self.BundleName = QtWidgets.QLabel(self.Bundles[i])
+            font = QtGui.QFont()
+            font.setFamily("Open Sans")
+            font.setPointSize(22)
+            font.setBold(True)
+            font.setWeight(75)
+            self.BundleName.setFont(font)
+            self.BundleName.setAlignment(QtCore.Qt.AlignCenter)
+            self.BundleName.setObjectName("Name")
+            self.verticalLayout_2.addWidget(self.BundleName)
+
+            # Bundle Image
+            self.Image = QtWidgets.QLabel(self.Bundles[i])
+            self.Image.setText("")
+            self.Image.setScaledContents(True)
+            self.Image.setIndent(-1)
+            self.Image.setObjectName("Image")
+            self.Image.setPixmap(QtGui.QPixmap(img))
+            self.verticalLayout_2.addWidget(self.Image)
+
+            # Bundle Description
+            self.extraDescription = QtWidgets.QLabel(self.Bundles[i])
+            font = QtGui.QFont()
+            font.setFamily("Open Sans")
+            font.setPointSize(12)
+            font.setBold(True)
+            font.setWeight(75)
+            self.extraDescription.setFont(font)
+            self.extraDescription.setScaledContents(False)
+            self.extraDescription.setAlignment(QtCore.Qt.AlignCenter)
+            self.extraDescription.setWordWrap(True)
+            self.extraDescription.setObjectName("extraDescription")
+
+            self.verticalLayout_2.addWidget(self.extraDescription)
+
+            # Bundle Price
+            self.Price = QtWidgets.QLabel(self.Bundles[i])
+            font = QtGui.QFont()
+            font.setFamily("Open Sans")
+            font.setPointSize(15)
+            font.setBold(True)
+            font.setWeight(75)
+            self.Price.setFont(font)
+            self.Price.setScaledContents(False)
+            self.Price.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
+            self.Price.setWordWrap(True)
+            self.Price.setObjectName("Price")
+            self.verticalLayout_2.addWidget(self.Price)
+
+            # Bundle Items
+            self.Items = QtWidgets.QLabel(self.Bundles[i])
+            font = QtGui.QFont()
+            font.setFamily("Open Sans")
+            font.setPointSize(12)
+            font.setBold(True)
+            font.setWeight(75)
+            self.Items.setFont(font)
+            self.Items.setScaledContents(False)
+            self.Items.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
+            self.Items.setWordWrap(True)
+            self.Items.setObjectName("Items")
+            self.verticalLayout_2.addWidget(self.Items)
+
+            # Get Bundle Items
+            Items = []
+            for item in current_Bundle[i].items:
+                if item.amount > 1:
+                    Items.append(
+                        f"{item.amount}x {item.name} - {item.base_price} Valorant Points | {item.discounted_price} Valorant Points if buying whole Bundle\n")
+                else:
+                    Items.append(
+                        f"{item.name} - {item.base_price} Valorant Points | {item.discounted_price} Valorant Points if buying whole Bundle\n")
+
+            # Sets the Current Bundle Texts
+            self.BundleName.setText(f"{bundleJson['data']['displayName']}")
+            if bundleJson['data']['extraDescription'] is None:
+                self.extraDescription.hide()
+            else:
+                self.extraDescription.setText(f"{bundleJson['data']['extraDescription']}")
+            self.Price.setText(f"Bundle Price - {current_Bundle[i].bundle_price} Valorant Points")
+            self.Items.setText("".join(Items))
+
+            self.Tabs.addTab(self.Bundles[i], f"Bundle: {bundleJson['data']['displayName']}")
 
         # Functions
         self.Tabs.setCurrentIndex(0)
 
         self.GetButton.clicked.connect(self.get_information)
+
         self.LeaderboardRefresh.clicked.connect(self.get_leaderboard)
 
         self.retranslateUi(MainWindow)
@@ -460,8 +469,8 @@ class Ui_MainWindow(object):
 
             # API funcions
             Details = valo_api.get_account_details_by_name(version="v1", name=self.NameInput.text(),
-                                                   tag=self.HashtagInput.text(),
-                                                   force_update=True)
+                                                           tag=self.HashtagInput.text(),
+                                                           force_update=True)
             # Puuid, Region, Account Level and the PlayerCard
             Puuid = Details.puuid
             Region = Details.region
@@ -538,9 +547,7 @@ class Ui_MainWindow(object):
             previous_ranks = "".join(previous_ranks)
 
             # Getting Banner as PixMap
-            r = http.request('GET', Card)
-            img = QImage()
-            img.loadFromData(r.data)
+            img = get_image(Card)
 
             # Setting Banner, Name and Region, Puuid, Previous Ranks
             self.BannerInformation.setPixmap(QPixmap(img))
@@ -656,6 +663,7 @@ class Ui_MainWindow(object):
             print(error.name)
 
     def get_leaderboard(self):
+
         try:
             # Valo API get leaderboard with season_id
             if self.LeaderboardSeason.currentText() == "E5A2":
@@ -663,101 +671,90 @@ class Ui_MainWindow(object):
             else:
                 Details = valo_api.get_leaderboard(version="v2", region=self.LeaderboardRegion.currentText(),
                                                    season_id=self.LeaderboardSeason.currentText())
-            # Get all Players of Leaderboard
-            Player = Details.players
 
             # Gets Message Box for Loading Leaderboard
-
             self.msg2.setText(
-                f"Loading leaderboard! The program could possibly freeze.\nWait a few minutes until its done")
+                f"Loading leaderboard! The program could possibly freeze.\nWait a few seconds to minutes until its done")
             self.msg2.setWindowTitle("Valorant Tracking")
             self.msg2.exec_()
 
-            # Index Variable
-            i = 0
-
+            start_time = time.time()
             # For every Player get Ranks, RR, Placing, Number of wins, PlayerCard
-
-            for x in Player:
+            for i, x in enumerate(Details.players):
                 if i < 5000:
-                    try:
-                        # For every number to 5000 add Player (Layout), Banner and Text
-                        self.Player[i] = QtWidgets.QHBoxLayout()
-                        self.Player[i].setObjectName(f"Player{i}")
-                        self.PlayerBanner[i] = QtWidgets.QLabel(self.scrollArea)
-                        self.PlayerBanner[i].setText("")
-                        self.PlayerBanner[i].setScaledContents(True)
-                        self.PlayerBanner[i].setObjectName(f"Player{i}Banner")
-                        self.Player[i].addWidget(self.PlayerBanner[i])
-                        self.PlayerText[i] = QtWidgets.QLabel(self.scrollArea)
-                        self.PlayerText[i].setObjectName(f"Player{i}Text")
-                        font = QtGui.QFont()
-                        font.setPointSize(12)
-                        self.PlayerText[i].setFont(font)
-                        self.Player[i].addWidget(self.PlayerText[i])
-                        self.Player[i].setStretch(1, 1)
-                        self.verticalLayout.addLayout(self.Player[i])
-                        self.PlayerText[i].setText(f"")
+                    # For every number to 5000 add Player (Layout), Banner and Text
+                    self.Player[i] = QtWidgets.QHBoxLayout()
+                    self.Player[i].setObjectName(f"Player{i}")
 
-                        PlayerCard = f"https://media.valorant-api.com/playercards/{x.PlayerCardID}/smallart.png"
+                    self.PlayerBanner[i] = QtWidgets.QLabel(self.scrollArea)
+                    self.PlayerBanner[i].setText("")
+                    self.PlayerBanner[i].setScaledContents(True)
+                    self.PlayerBanner[i].setObjectName(f"Player{i}Banner")
 
-                        if self.LeaderboardSeason.currentText() == "E5A1" or "E5A2":
-                            if x.competitiveTier == 27:
-                                Rank = "Radiant"
-                            elif x.competitiveTier == 26:
-                                Rank = "Immortal 3"
-                            elif x.competitiveTier == 25:
-                                Rank = "Immortal 2"
-                            elif x.competitiveTier == 24:
-                                Rank = "Immortal 1"
-                            elif x.competitiveTier == 23:
-                                Rank = "Ascendant 3"
-                            elif x.competitiveTier == 22:
-                                Rank = "Ascendant 2"
-                            elif x.competitiveTier == 21:
-                                Rank = "Ascendant 1"
-                        else:
-                            if x.competitiveTier == 24:
-                                Rank = "Radiant"
-                            elif x.competitiveTier == 23:
-                                Rank = "Immortal 3"
-                            elif x.competitiveTier == 22:
-                                Rank = "Immortal 2"
-                            elif x.competitiveTier == 21:
-                                Rank = "Immortal 1"
+                    self.Player[i].addWidget(self.PlayerBanner[i])
 
-                        if x.IsAnonymized:
-                            # Set Anonymous Player from Current Index to Information
-                            self.PlayerText[i].setText(
-                                f"#{x.leaderboardRank} Anonymous Player | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins")
+                    self.PlayerText[i] = QtWidgets.QLabel(self.scrollArea)
+                    self.PlayerText[i].setObjectName(f"Player{i}Text")
+                    font = QtGui.QFont()
+                    font.setPointSize(12)
+                    self.PlayerText[i].setFont(font)
+                    self.Player[i].addWidget(self.PlayerText[i])
+                    self.Player[i].setStretch(1, 1)
 
-                        else:
-                            # Set PlayerText from Current Index to Information
-                            self.PlayerText[i].setText(
-                                f"#{x.leaderboardRank} {x.gameName}#{x.tagLine} | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins | {x.puuid}")
+                    self.verticalLayout.addLayout(self.Player[i])
+                    self.PlayerText[i].setText(f"")
 
-                        # Get Player Banner
+                    if self.LeaderboardSeason.currentText() == "E5A1" or "E5A2":
+                        if x.competitiveTier == 27:
+                            Rank = "Radiant"
+                        elif x.competitiveTier == 26:
+                            Rank = "Immortal 3"
+                        elif x.competitiveTier == 25:
+                            Rank = "Immortal 2"
+                        elif x.competitiveTier == 24:
+                            Rank = "Immortal 1"
+                        elif x.competitiveTier == 23:
+                            Rank = "Ascendant 3"
+                        elif x.competitiveTier == 22:
+                            Rank = "Ascendant 2"
+                        elif x.competitiveTier == 21:
+                            Rank = "Ascendant 1"
+                    else:
+                        if x.competitiveTier == 24:
+                            Rank = "Radiant"
+                        elif x.competitiveTier == 23:
+                            Rank = "Immortal 3"
+                        elif x.competitiveTier == 22:
+                            Rank = "Immortal 2"
+                        elif x.competitiveTier == 21:
+                            Rank = "Immortal 1"
 
-                        r = http.request('GET', PlayerCard)
-                        img = QImage()
-                        img.loadFromData(r.data)
-                        self.PlayerBanner[i].setPixmap(QPixmap(img))
+                    if x.IsAnonymized:
+                        # Set Anonymous Player from Current Index to Information
+                        self.PlayerText[i].setText(
+                            f"#{x.leaderboardRank} Anonymous Player | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins")
 
-                        print(f"{i} done")
+                    else:
+                        # Set PlayerText from Current Index to Information
+                        self.PlayerText[i].setText(
+                            f"#{x.leaderboardRank} {x.gameName}#{x.tagLine} | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins | {x.puuid}")
 
-                        # Index to +1 Next Player (0,1,2,3..)
-                        i += 1
-                    except KeyError:
-                        break
+                    PlayerCard = f"https://media.valorant-api.com/playercards/{x.PlayerCardID}/smallart.png"
+                    img = get_image(PlayerCard)
+
+                    self.PlayerBanner[i].setPixmap(QPixmap(img))
+                    print(f"{i}" + " - %s seconds" % (time.time() - start_time))
+
                 else:
-                    spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
-                                                       QtWidgets.QSizePolicy.Expanding)
-                    self.verticalLayout.addItem(spacerItem)
-                    self.scrollFrame.setWidget(self.scrollArea)
+                    print("--- %s seconds ---" % (time.time() - start_time))
                     break
 
-        except ValoAPIException as error:
+                spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
+                                                   QtWidgets.QSizePolicy.Expanding)
+                self.verticalLayout.addItem(spacerItem)
+                self.scrollFrame.setWidget(self.scrollArea)
 
+        except ValoAPIException as error:
             # Message Errorbox
             self.msg.setText(f"{error.status}")
             self.msg.setInformativeText(f'{error.message}')
