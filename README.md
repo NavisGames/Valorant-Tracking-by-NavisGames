@@ -9,7 +9,7 @@ Functions:
 - See how much RR he made in the last matches
 - See his last matches
 - See global leaderboard of every act in each region
-- See current bundles in the game including weapon and price (BETA!)
+- See current bundles in the game including weapon and price
 
 Coming Soon:
 - Get data of a Match
