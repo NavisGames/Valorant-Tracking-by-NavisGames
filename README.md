@@ -9,12 +9,11 @@ Functions:
 - See how much RR he made in the last matches
 - See his last matches
 - See global leaderboard of every act in each region
-- See current bundles in the game including weapon and price
+- See current bundles in the game including skins and their prices
 
 Coming Soon:
 - Get data of a Match
 - Remove False Positive Virus
-- Fix long waiting time (WORKING ON!)
 - More Options like Match History of a Gamemode,
                     starting Players in Leaderboard like starting at Player 2502 -> going to 5502
                     and more!
