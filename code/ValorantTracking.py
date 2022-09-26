@@ -1,6 +1,5 @@
 # Credits for this program go to NavisGames, selling this program or saying it's yours is not allowed! Read the
 # license for more. If you want, please fork this program to share what you changed in this program ^^
-
 from itertools import accumulate
 from PyQt5.QtCore import Qt, QSettings
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -12,10 +11,14 @@ import requests
 from pathlib import Path
 
 import httpx as http
-import asyncio
+import threading
+from multiprocessing import Pool
 import time
 
 valo_api.set_api_key("")  # HIDE IN GITHUB!
+
+# Get a Image from a Url (like the name it says..)
+image = []
 
 
 def get_image(url):
@@ -23,7 +26,7 @@ def get_image(url):
         r = client.get(url)
     img = QImage()
     img.loadFromData(r.content)
-    return img
+    image.append(img)
 
 
 class Ui_MainWindow(object):
@@ -323,7 +326,9 @@ class Ui_MainWindow(object):
             bundleUuid = current_Bundle[i].bundle_uuid
             # Getting Bundle Banner as PixMap
             bundleJson = requests.get(url=f"https://valorant-api.com/v1/bundles/{bundleUuid}").json()
-            img = get_image(bundleJson["data"]["displayIcon2"])
+            img = threading.Thread(target=get_image, args=[bundleJson["data"]["displayIcon2"]])
+            img.start()
+            time.sleep(0.3)
 
             # Layouts
             self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.Bundles[i])
@@ -349,8 +354,8 @@ class Ui_MainWindow(object):
             self.Image.setScaledContents(True)
             self.Image.setIndent(-1)
             self.Image.setObjectName("Image")
-            self.Image.setPixmap(QtGui.QPixmap(img))
             self.verticalLayout_2.addWidget(self.Image)
+            self.Image.setPixmap(QtGui.QPixmap(image.pop(0)))
 
             # Bundle Description
             self.extraDescription = QtWidgets.QLabel(self.Bundles[i])
@@ -466,7 +471,7 @@ class Ui_MainWindow(object):
 
     def get_information(self):
         try:
-
+            start_time = time.time()
             # API funcions
             Details = valo_api.get_account_details_by_name(version="v1", name=self.NameInput.text(),
                                                            tag=self.HashtagInput.text(),
@@ -547,10 +552,12 @@ class Ui_MainWindow(object):
             previous_ranks = "".join(previous_ranks)
 
             # Getting Banner as PixMap
-            img = get_image(Card)
+            img = threading.Thread(target=get_image, args=[Card])
+            img.start()
+            time.sleep(0.3)
 
             # Setting Banner, Name and Region, Puuid, Previous Ranks
-            self.BannerInformation.setPixmap(QPixmap(img))
+            self.BannerInformation.setPixmap(QPixmap(image.pop(0)))
             self.NameInformation.setText(f"{Details.name}#{Details.tag}")
             self.PuuidRegionInformation.setText(f"{Puuid} | {Region.upper()}")
             self.CompetitiveInformation.setText(f"{previous_ranks}")  # <- The List which got made to a string
@@ -652,6 +659,7 @@ class Ui_MainWindow(object):
 
             # Set Match History Text
             self.MatchHistory.setText(f"{match_History}")  # <- List which got made to a string
+            print("PLAYER took --- %s seconds ---" % (time.time() - start_time))
 
         except ValoAPIException as error:
             # Message error
@@ -665,6 +673,7 @@ class Ui_MainWindow(object):
     def get_leaderboard(self):
 
         try:
+
             # Valo API get leaderboard with season_id
             if self.LeaderboardSeason.currentText() == "E5A2":
                 Details = valo_api.get_leaderboard(version="v2", region=self.LeaderboardRegion.currentText())
@@ -678,82 +687,96 @@ class Ui_MainWindow(object):
             self.msg2.setWindowTitle("Valorant Tracking")
             self.msg2.exec_()
 
+            # Start Timer
             start_time = time.time()
+            Player_Cards = {
+
+            }
+
             # For every Player get Ranks, RR, Placing, Number of wins, PlayerCard
             for i, x in enumerate(Details.players):
                 if i < 5000:
-                    # For every number to 5000 add Player (Layout), Banner and Text
-                    self.Player[i] = QtWidgets.QHBoxLayout()
-                    self.Player[i].setObjectName(f"Player{i}")
+                    try:
+                        # Create "Player Layout"
+                        self.Player[i] = QtWidgets.QHBoxLayout()
+                        self.Player[i].setObjectName(f"Player{i}")
 
-                    self.PlayerBanner[i] = QtWidgets.QLabel(self.scrollArea)
-                    self.PlayerBanner[i].setText("")
-                    self.PlayerBanner[i].setScaledContents(True)
-                    self.PlayerBanner[i].setObjectName(f"Player{i}Banner")
+                        # Create Player Banner
+                        self.PlayerBanner[i] = QtWidgets.QLabel(self.scrollArea)
+                        self.PlayerBanner[i].setText("")
+                        self.PlayerBanner[i].setScaledContents(True)
+                        self.PlayerBanner[i].setObjectName(f"Player{i}Banner")
 
-                    self.Player[i].addWidget(self.PlayerBanner[i])
+                        self.Player[i].addWidget(self.PlayerBanner[i])
 
-                    self.PlayerText[i] = QtWidgets.QLabel(self.scrollArea)
-                    self.PlayerText[i].setObjectName(f"Player{i}Text")
-                    font = QtGui.QFont()
-                    font.setPointSize(12)
-                    self.PlayerText[i].setFont(font)
-                    self.Player[i].addWidget(self.PlayerText[i])
-                    self.Player[i].setStretch(1, 1)
+                        # Create Player Text (For Win Counter etc.)
+                        self.PlayerText[i] = QtWidgets.QLabel(self.scrollArea)
+                        self.PlayerText[i].setObjectName(f"Player{i}Text")
+                        font = QtGui.QFont()
+                        font.setPointSize(12)
+                        self.PlayerText[i].setFont(font)
 
-                    self.verticalLayout.addLayout(self.Player[i])
-                    self.PlayerText[i].setText(f"")
+                        self.Player[i].addWidget(self.PlayerText[i])
+                        self.Player[i].setStretch(1, 1)
+                        self.verticalLayout.addLayout(self.Player[i])
 
-                    if self.LeaderboardSeason.currentText() == "E5A1" or "E5A2":
-                        if x.competitiveTier == 27:
-                            Rank = "Radiant"
-                        elif x.competitiveTier == 26:
-                            Rank = "Immortal 3"
-                        elif x.competitiveTier == 25:
-                            Rank = "Immortal 2"
-                        elif x.competitiveTier == 24:
-                            Rank = "Immortal 1"
-                        elif x.competitiveTier == 23:
-                            Rank = "Ascendant 3"
-                        elif x.competitiveTier == 22:
-                            Rank = "Ascendant 2"
-                        elif x.competitiveTier == 21:
-                            Rank = "Ascendant 1"
-                    else:
-                        if x.competitiveTier == 24:
-                            Rank = "Radiant"
-                        elif x.competitiveTier == 23:
-                            Rank = "Immortal 3"
-                        elif x.competitiveTier == 22:
-                            Rank = "Immortal 2"
-                        elif x.competitiveTier == 21:
-                            Rank = "Immortal 1"
+                        if self.LeaderboardSeason.currentText() == "E5A1" or "E5A2":
+                            if x.competitiveTier == 27:
+                                Rank = "Radiant"
+                            elif x.competitiveTier == 26:
+                                Rank = "Immortal 3"
+                            elif x.competitiveTier == 25:
+                                Rank = "Immortal 2"
+                            elif x.competitiveTier == 24:
+                                Rank = "Immortal 1"
+                            elif x.competitiveTier == 23:
+                                Rank = "Ascendant 3"
+                            elif x.competitiveTier == 22:
+                                Rank = "Ascendant 2"
+                            elif x.competitiveTier == 21:
+                                Rank = "Ascendant 1"
+                        else:
+                            if x.competitiveTier == 24:
+                                Rank = "Radiant"
+                            elif x.competitiveTier == 23:
+                                Rank = "Immortal 3"
+                            elif x.competitiveTier == 22:
+                                Rank = "Immortal 2"
+                            elif x.competitiveTier == 21:
+                                Rank = "Immortal 1"
 
-                    if x.IsAnonymized:
-                        # Set Anonymous Player from Current Index to Information
-                        self.PlayerText[i].setText(
-                            f"#{x.leaderboardRank} Anonymous Player | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins")
+                        if x.IsAnonymized:
+                            # Set Anonymous Player from Current Index to Information
+                            self.PlayerText[i].setText(
+                                f"#{x.leaderboardRank} Anonymous Player | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins")
+                        else:
+                            # Set Player from Current Index to Information (Rank, Name, #, RR, Wins, PUUID)
+                            self.PlayerText[i].setText(
+                                f"#{x.leaderboardRank} {x.gameName}#{x.tagLine} | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins | {x.puuid}")
 
-                    else:
-                        # Set PlayerText from Current Index to Information
-                        self.PlayerText[i].setText(
-                            f"#{x.leaderboardRank} {x.gameName}#{x.tagLine} | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins | {x.puuid}")
+                        # Get Playercard
+                        PlayerCard = f"https://media.valorant-api.com/playercards/{x.PlayerCardID}/smallart.png"
+                        Player_Cards[i] = PlayerCard
 
-                    PlayerCard = f"https://media.valorant-api.com/playercards/{x.PlayerCardID}/smallart.png"
-                    img = get_image(PlayerCard)
-
-                    self.PlayerBanner[i].setPixmap(QPixmap(img))
-                    print(f"{i}" + " - %s seconds" % (time.time() - start_time))
-
+                    except AttributeError:
+                        break  # In case if some Players dont load (API problems)
                 else:
-                    print("--- %s seconds ---" % (time.time() - start_time))
                     break
 
-                spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
-                                                   QtWidgets.QSizePolicy.Expanding)
-                self.verticalLayout.addItem(spacerItem)
-                self.scrollFrame.setWidget(self.scrollArea)
+            # Set PlayerCard
+            p = Pool(processes=15)
+            result = p.map(requests.get, Player_Cards.values())
+            for _ in Player_Cards:
+                img = QImage()
+                img.loadFromData(result[_].content)
+                self.PlayerBanner[_].setPixmap(QPixmap(img))
 
+            # Spacer for Banner etc
+            spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
+                                               QtWidgets.QSizePolicy.Expanding)
+            self.verticalLayout.addItem(spacerItem)
+            self.scrollFrame.setWidget(self.scrollArea)
+            print(f"LEADERBOARD took --- %s seconds ---" % (time.time() - start_time))
         except ValoAPIException as error:
             # Message Errorbox
             self.msg.setText(f"{error.status}")
