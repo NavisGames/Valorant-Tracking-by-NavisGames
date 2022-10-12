@@ -15,6 +15,7 @@ import time
 
 valo_api.set_api_key("")  # HIDE IN GITHUB!
 
+
 def get_image(url):
     with http.Client() as client:
         r = client.get(url)
@@ -767,12 +768,11 @@ class Ui_MainWindow(object):
                 else:
                     break
 
-            # Get Banner
+            # Get & Set Banner
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 image = executor.map(requests.get, Player_Cards.values())
                 image = tuple(image)
 
-            # Set Banner
             for _ in Player_Cards:
                 img = QImage()
                 img.loadFromData(image[_].content)
@@ -796,32 +796,27 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
 
-    Is_DarkMode = True
+    QApplication.setStyle("Fusion")
+    dark_palette = QPalette()
+    dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.WindowText, Qt.white)
+    dark_palette.setColor(QPalette.Base, QColor(35, 35, 35))
+    dark_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.ToolTipBase, QColor(25, 25, 25))
+    dark_palette.setColor(QPalette.ToolTipText, Qt.white)
+    dark_palette.setColor(QPalette.Text, Qt.white)
+    dark_palette.setColor(QPalette.Button, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.ButtonText, Qt.white)
+    dark_palette.setColor(QPalette.BrightText, Qt.red)
+    dark_palette.setColor(QPalette.Link, QColor(42, 130, 218))
+    dark_palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
+    dark_palette.setColor(QPalette.HighlightedText, QColor(35, 35, 35))
+    dark_palette.setColor(QPalette.Active, QPalette.Button, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
+    dark_palette.setColor(QPalette.Disabled, QPalette.WindowText, Qt.darkGray)
+    dark_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
+    dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(53, 53, 53))
+    QApplication.setPalette(dark_palette)
 
-    if Is_DarkMode is True:
-        QApplication.setStyle("Fusion")
-        dark_palette = QPalette()
-        dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
-        dark_palette.setColor(QPalette.WindowText, Qt.white)
-        dark_palette.setColor(QPalette.Base, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
-        dark_palette.setColor(QPalette.ToolTipBase, QColor(25, 25, 25))
-        dark_palette.setColor(QPalette.ToolTipText, Qt.white)
-        dark_palette.setColor(QPalette.Text, Qt.white)
-        dark_palette.setColor(QPalette.Button, QColor(53, 53, 53))
-        dark_palette.setColor(QPalette.ButtonText, Qt.white)
-        dark_palette.setColor(QPalette.BrightText, Qt.red)
-        dark_palette.setColor(QPalette.Link, QColor(42, 130, 218))
-        dark_palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
-        dark_palette.setColor(QPalette.HighlightedText, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.Active, QPalette.Button, QColor(53, 53, 53))
-        dark_palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
-        dark_palette.setColor(QPalette.Disabled, QPalette.WindowText, Qt.darkGray)
-        dark_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
-        dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(53, 53, 53))
-        QApplication.setPalette(dark_palette)
-    else:
-        QApplication.setStyle("")
-        pass
     MainWindow.show()
     sys.exit(app.exec_())
