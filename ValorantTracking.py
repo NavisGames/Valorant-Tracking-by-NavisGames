@@ -44,7 +44,6 @@ class Ui_MainWindow(object):
             MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
             MainWindow.setWindowIcon((QtGui.QIcon('icon.png')))
             self.centralwidget = QtWidgets.QWidget(MainWindow)
-            font = QtGui.QFont()
             font.setPointSize(8)
             self.centralwidget.setFont(font)
             self.centralwidget.setAutoFillBackground(False)
@@ -69,7 +68,6 @@ class Ui_MainWindow(object):
             self.Tabs.setMinimumSize(QtCore.QSize(0, 0))
             self.Tabs.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
-            font = QtGui.QFont()
             font.setPointSize(18)
             font.setKerning(True)
             self.Tabs.setFont(font)
@@ -402,13 +400,13 @@ class Ui_MainWindow(object):
                 for item in current_Bundle[i].items:
                     if item.amount > 1:
                         Items.append(
-                            f"{item.amount}x {item.name} - {item.base_price} Valorant Points | {item.discounted_price} -> whole Bundle\n")
+                            f"{item.amount}x {item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n")
                     else:
                         Items.append(
-                            f"{item.name} - {item.base_price} Valorant Points | {item.discounted_price} -> whole Bundle\n")
+                            f"{item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n")
 
                 # Sets the Current Bundle Texts
-                self.BundleName.setText(f"{bundleJson['data']['displayName']}")
+                self.BundleName.setText(f"CURRENT BUNDLE\n{bundleJson['data']['displayName']}")
                 if bundleJson['data']['extraDescription'] is None:
                     self.extraDescription.hide()
                 else:
@@ -798,24 +796,24 @@ if __name__ == "__main__":
 
     QApplication.setStyle("Fusion")
     dark_palette = QPalette()
-    dark_palette.setColor(QPalette.Window, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.Window, QColor(16, 20, 28))
     dark_palette.setColor(QPalette.WindowText, Qt.white)
     dark_palette.setColor(QPalette.Base, QColor(35, 35, 35))
-    dark_palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
-    dark_palette.setColor(QPalette.ToolTipBase, QColor(25, 25, 25))
+    dark_palette.setColor(QPalette.AlternateBase, QColor(16, 20, 28))
+    dark_palette.setColor(QPalette.ToolTipBase, QColor(16, 20, 28))
     dark_palette.setColor(QPalette.ToolTipText, Qt.white)
     dark_palette.setColor(QPalette.Text, Qt.white)
-    dark_palette.setColor(QPalette.Button, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.Button, QColor(16, 20, 28))
     dark_palette.setColor(QPalette.ButtonText, Qt.white)
     dark_palette.setColor(QPalette.BrightText, Qt.red)
     dark_palette.setColor(QPalette.Link, QColor(42, 130, 218))
-    dark_palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
-    dark_palette.setColor(QPalette.HighlightedText, QColor(35, 35, 35))
-    dark_palette.setColor(QPalette.Active, QPalette.Button, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.Highlight, QColor(18, 45, 117))
+    dark_palette.setColor(QPalette.HighlightedText, QColor(82, 82, 82))
+    dark_palette.setColor(QPalette.Active, QPalette.Button, QColor(16, 20, 28))
     dark_palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
     dark_palette.setColor(QPalette.Disabled, QPalette.WindowText, Qt.darkGray)
     dark_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
-    dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(53, 53, 53))
+    dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(16, 20, 28))
     QApplication.setPalette(dark_palette)
 
     MainWindow.show()
