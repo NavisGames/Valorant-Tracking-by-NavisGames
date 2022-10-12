@@ -13,7 +13,7 @@ import httpx as http
 import concurrent.futures
 import time
 
-valo_api.set_api_key("HDEV-e6c002ce-3c53-4464-9586-c58c586baf1c")  # HIDE IN GITHUB!
+valo_api.set_api_key("")  # HIDE IN GITHUB!
 
 def get_image(url):
     with http.Client() as client:
