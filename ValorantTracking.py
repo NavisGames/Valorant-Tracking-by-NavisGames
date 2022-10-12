@@ -44,6 +44,7 @@ class Ui_MainWindow(object):
             MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
             MainWindow.setWindowIcon((QtGui.QIcon('icon.png')))
             self.centralwidget = QtWidgets.QWidget(MainWindow)
+            font = QtGui.QFont()
             font.setPointSize(8)
             self.centralwidget.setFont(font)
             self.centralwidget.setAutoFillBackground(False)
@@ -68,6 +69,7 @@ class Ui_MainWindow(object):
             self.Tabs.setMinimumSize(QtCore.QSize(0, 0))
             self.Tabs.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
+            font = QtGui.QFont()
             font.setPointSize(18)
             font.setKerning(True)
             self.Tabs.setFont(font)
