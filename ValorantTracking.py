@@ -5,10 +5,10 @@ from PyQt5.QtCore import Qt, QSettings
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox, QApplication
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QIcon
+import traceback
 import valo_api
 import requests
 from pathlib import Path
-
 import httpx as http
 import concurrent.futures
 import time
@@ -43,6 +43,7 @@ class Ui_MainWindow(object):
             MainWindow.setStyleSheet("")
             MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
             MainWindow.setWindowIcon((QtGui.QIcon('icon.png')))
+
             self.centralwidget = QtWidgets.QWidget(MainWindow)
             font = QtGui.QFont()
             font.setPointSize(8)
@@ -64,8 +65,8 @@ class Ui_MainWindow(object):
             sizePolicy.setHorizontalStretch(0)
             sizePolicy.setVerticalStretch(0)
             sizePolicy.setHeightForWidth(self.Tabs.sizePolicy().hasHeightForWidth())
-            self.Tabs.setSizePolicy(sizePolicy)
 
+            self.Tabs.setSizePolicy(sizePolicy)
             self.Tabs.setMinimumSize(QtCore.QSize(0, 0))
             self.Tabs.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
@@ -257,6 +258,7 @@ class Ui_MainWindow(object):
             font.setWeight(75)
             self.LeaderboardSeason.setFont(font)
             self.LeaderboardSeason.setObjectName("LeaderboardSeason")
+            self.LeaderboardSeason.addItem("E5A3")
             self.LeaderboardSeason.addItem("E5A2")
             self.LeaderboardSeason.addItem("E5A1")
             self.LeaderboardSeason.addItem("E4A3")
@@ -315,7 +317,6 @@ class Ui_MainWindow(object):
             self.Tabs.addTab(self.Leaderboard, "Leaderboard")
 
             for i, bundles in enumerate(current_Bundle):
-                # for i in range(current_Bundle):
                 self.Bundles[i] = QtWidgets.QWidget()
                 self.Bundles[i].setObjectName("Bundle")
 
@@ -366,7 +367,6 @@ class Ui_MainWindow(object):
                 self.extraDescription.setAlignment(QtCore.Qt.AlignCenter)
                 self.extraDescription.setWordWrap(True)
                 self.extraDescription.setObjectName("extraDescription")
-
                 self.verticalLayout_2.addWidget(self.extraDescription)
 
                 # Bundle Price
@@ -415,8 +415,7 @@ class Ui_MainWindow(object):
                     self.extraDescription.setText(f"{bundleJson['data']['extraDescription']}")
                 self.Price.setText(f"Bundle Price - {current_Bundle[i].bundle_price} Valorant Points")
                 self.Items.setText("".join(Items))
-
-                self.Tabs.addTab(self.Bundles[i], f"Bundle: {bundleJson['data']['displayName']}")
+                self.Tabs.addTab(self.Bundles[i], f"{bundleJson['data']['displayName']} Bundle")
 
             # Functions
             self.Tabs.setCurrentIndex(0)
@@ -430,8 +429,8 @@ class Ui_MainWindow(object):
             QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
             self.gridLayout.addWidget(self.Tabs)
-        except BaseException as error:
-            print('An exception occurred: {}'.format(error))
+        except BaseException:
+            print(traceback.format_exc())
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -470,6 +469,7 @@ class Ui_MainWindow(object):
     def get_information(self):
         try:
             start_time = time.time()
+
             # API funcions
             Details = valo_api.get_account_details_by_name(version="v1", name=self.NameInput.text(),
                                                            tag=self.HashtagInput.text(),
@@ -499,8 +499,8 @@ class Ui_MainWindow(object):
 
             # Checks if there any games already played.
             try:
-                wins = RankDetails.by_season["e5a2"].wins
-                games_played = RankDetails.by_season["e5a2"].number_of_games
+                wins = RankDetails.by_season["e5a3"].wins
+                games_played = RankDetails.by_season["e5a3"].number_of_games
             except AttributeError:
                 wins = 0
                 games_played = 0
@@ -526,7 +526,7 @@ class Ui_MainWindow(object):
                         continue
                 # If API problem (I guess?) then continue
                 except BaseException as error:
-                    print('An exception occurred: {}'.format(error))
+                    print(traceback.format_exc())
 
             # If there is an rank, add a rank history (MMR Details)
             if Rank is not None:
@@ -558,9 +558,12 @@ class Ui_MainWindow(object):
 
             # Gets the current Rank AS TIER INDEX (int) and compares it with the index data, to get the RANK IMAGE
             tier_index = RankDetails.current_data.currenttier
+
             data = requests.get("https://valorant-api.com/v1/competitivetiers").json()
+
             tiers = data["data"][-1]["tiers"]
             tier = None
+
             # If it has any Rank, get it ELSE say unranked
             if Rank is not None:
                 for tier in tiers:
@@ -569,17 +572,18 @@ class Ui_MainWindow(object):
                         break
             else:
                 tier = "UNRANKED"
+
             # Gets the PNG for the HTML Rich Text
             tier_icon = Path(__file__).parent.joinpath(f'Ranks/{tier}.png')
 
             # Sets an HTML Text with the Rank as Texture and a Text also it gets the Current Rank as PNG
             if Rank is not None:
                 self.Informations.setText(
-                    f"<html><head/><body><p><span style=\" font-size:18pt;\">Account Level: {Account_level}<br>Current Rank: {Rank} </span><img src=\"{tier_icon}\" width=\"29\" height=\"29\"/><span style=\" font-size:18pt;\"> {RR}rr</span></p></body></html>")
+                    f"<html><head/><body><p><span style=\" font-size:18pt;\">Account Level: {Account_level}<br>Current Rank: {Rank} </span><img src=\"{tier_icon}\" width=\"27\" height=\"27\"/><span style=\" font-size:18pt;\"> {RR}rr</span></p></body></html>")
             else:
                 remaining = RankDetails.current_data.games_needed_for_rating
                 self.Informations.setText(
-                    f"<html><head/><body><p><span style=\" font-size:18pt;\">Account Level: {Account_level}<br>Current Rank: Unrated </span><img src=\"{tier_icon}\" width=\"29\" height=\"29\"/><span style=\" font-size:18pt;\"> {remaining} games remaining</span></p></body></html>")
+                    f"<html><head/><body><p><span style=\" font-size:18pt;\">Account Level: {Account_level}<br>Current Rank: Unrated </span><img src=\"{tier_icon}\" width=\"27\" height=\"27\"/><span style=\" font-size:18pt;\"> {remaining} games remaining</span></p></body></html>")
 
             # Get Match History as a List, and gets every current matches
             match_History = []
@@ -610,28 +614,21 @@ class Ui_MainWindow(object):
 
                 # Get Team and Team information of Player with get_team function
                 get_team = findTeamOfPlayer(Details.name)
-
-                # If Team is Blue, Else Red, if nothing do nothing.
                 if get_team == "Blue":
-                    won = teams.blue.has_won
-                    rounds_won = teams.blue.rounds_won
-                    rounds_lost = teams.blue.rounds_lost
-
-                elif get_team == "Red":
-                    won = teams.red.has_won
-                    rounds_won = teams.red.rounds_won
-                    rounds_lost = teams.red.rounds_lost
-
+                    get_team = teams.blue
                 else:
-                    won = ""
-                    rounds_won = ""
-                    rounds_lost = ""
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
 
                 # If match lost, make text lost
-                if not won:
-                    won = "LOST"
-                else:
+                if won:
                     won = "WON"
+                else:
+                    won = "LOST"
 
                 # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
                 match_id = match.matchid
@@ -662,7 +659,7 @@ class Ui_MainWindow(object):
             self.MatchHistory.setText("")
             self.BannerInformation.setPixmap(QPixmap(None))
             self.CompetitiveInformation.setText('An exception occurred: {}'.format(error))
-            print('An exception occurred: {}'.format(error))
+            print(traceback.format_exc())
 
     def get_leaderboard(self):
         PlayerCount = 3000
@@ -670,7 +667,7 @@ class Ui_MainWindow(object):
         try:
 
             # Valo API get leaderboard with season_id
-            if self.LeaderboardSeason.currentText() == "E5A2":
+            if self.LeaderboardSeason.currentText() == "E5A3":
                 Details = valo_api.get_leaderboard(version="v2", region=self.LeaderboardRegion.currentText())
             else:
                 Details = valo_api.get_leaderboard(version="v2", region=self.LeaderboardRegion.currentText(),
@@ -726,7 +723,7 @@ class Ui_MainWindow(object):
                         self.verticalLayout.addLayout(self.Player[i])
 
                         # Needs an Update
-                        if self.LeaderboardSeason.currentText() == "E5A1" or "E5A2":
+                        if self.LeaderboardSeason.currentText() == "E5A1" or "E5A2" or "E5A3":
                             if x.competitiveTier == 27:
                                 Rank = "Radiant"
                             elif x.competitiveTier == 26:
@@ -784,8 +781,8 @@ class Ui_MainWindow(object):
             self.verticalLayout.addItem(spacerItem)
             self.scrollFrame.setWidget(self.scrollArea)
             print(f"LEADERBOARD took --- %s seconds ---" % (time.time() - start_time))
-        except BaseException as error:
-            print('An exception occurred: {}'.format(error))
+        except BaseException:
+            print(traceback.format_exc())
 
 
 if __name__ == "__main__":
