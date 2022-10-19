@@ -419,13 +419,9 @@ class Ui_MainWindow(object):
 
             # Functions
             self.Tabs.setCurrentIndex(0)
-
             self.GetButton.clicked.connect(self.get_information)
-
             self.LeaderboardRefresh.clicked.connect(self.get_leaderboard)
-
             self.retranslateUi(MainWindow)
-
             QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
             self.gridLayout.addWidget(self.Tabs)
@@ -558,9 +554,7 @@ class Ui_MainWindow(object):
 
             # Gets the current Rank AS TIER INDEX (int) and compares it with the index data, to get the RANK IMAGE
             tier_index = RankDetails.current_data.currenttier
-
             data = requests.get("https://valorant-api.com/v1/competitivetiers").json()
-
             tiers = data["data"][-1]["tiers"]
             tier = None
 
@@ -722,7 +716,7 @@ class Ui_MainWindow(object):
                         self.Player[i].setStretch(1, 1)
                         self.verticalLayout.addLayout(self.Player[i])
 
-                        # Needs an Update
+                        # Needs an Update ; Update to Update: I should really fix this..
                         if self.LeaderboardSeason.currentText() == "E5A1" or "E5A2" or "E5A3":
                             if x.competitiveTier == 27:
                                 Rank = "Radiant"
