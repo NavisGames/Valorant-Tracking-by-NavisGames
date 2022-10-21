@@ -406,6 +406,7 @@ class Ui_MainWindow(object):
                     else:
                         Items.append(
                             f"{item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n")
+                bundles.seconds_remaining
 
                 # Sets the Current Bundle Texts
                 self.BundleName.setText(f"CURRENT BUNDLE\n{bundleJson['data']['displayName']}")
