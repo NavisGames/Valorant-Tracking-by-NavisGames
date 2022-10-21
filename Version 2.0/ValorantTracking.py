@@ -43,7 +43,7 @@ def display_time(seconds, granularity=2):
             if value == 1:
                 name = name.rstrip('s')
             result.append("{} {}".format(value, name))
-    return ', '.join(result[:granularity])
+    return ' | '.join(result[:granularity])
 
 
 class Ui_ValorantTrackerByNavisGames(object):
