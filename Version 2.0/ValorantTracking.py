@@ -243,7 +243,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Player.setFont(font)
             self.Player.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.Player.setText(
-                "<html><head/><body><p><span style=\" font-size:36pt;\">Player#Tag | Account Level | Rank </span><img src=\"StandardRank.png\"width=\"36\"height=\"36\"/><span style=\" font-size:20pt;\">rr</span></p></body></html>")
+                "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag | Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
             self.Player.setTextFormat(QtCore.Qt.RichText)
             self.Player.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
             self.Player.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
@@ -282,7 +282,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             font.setStrikeOut(False)
             self.AccuracyTitle.setFont(font)
             self.AccuracyTitle.setText(
-                "<html><head/><body><p><span style=\" font-size:22pt;\">Accuracy </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 5 Matches)</span></p></body></html>")
+                "<html><head/><body><p><span style=\" font-size:22pt;\">Accuracy </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p></body></html>")
             self.AccuracyTitle.setTextFormat(QtCore.Qt.RichText)
             self.AccuracyTitle.setAlignment(QtCore.Qt.AlignCenter)
             self.AccuracyTitle.setObjectName("AccuracyTitle")
@@ -332,7 +332,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating ANOTHER complicated HTML Code with Average KD, Winrate and the Title in it (URGH)
             self.OtherStatsTexts = QtWidgets.QLabel(self.OtherStats)
             self.OtherStatsTexts.setText(
-                "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 5 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: 0.00</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: 0%</span></p></body></html>")
+                "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: 0.00</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: 0%</span></p></body></html>")
             self.OtherStatsTexts.setTextFormat(QtCore.Qt.RichText)
             self.OtherStatsTexts.setScaledContents(False)
             self.OtherStatsTexts.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
@@ -713,7 +713,226 @@ class Ui_ValorantTrackerByNavisGames(object):
             print(traceback.format_exc())
 
     def get_information(self):
-        pass
+        try:
+            # Functions
+            def findTeamOfPlayer(player, players):
+                team = list(accumulate(p.team for p in players.all_players if p.name == player))
+                return team[0] if team else None
+
+            def findStatsOfPlayer(player, players):
+                stats = list(accumulate(p.stats for p in players.all_players if p.name == player))
+                return stats[0] if stats else None
+
+            def findAgentOfPlayer(player, players):
+                agent = list(accumulate(p.character for p in players.all_players if p.name == player))
+                return agent if agent else None
+
+            # API functions
+            Details = valo_api.get_account_details_by_name(version="v1", name=self.PlayerName.text(),
+                                                           tag=self.PlayerTag.text())
+
+            # Get Rank, RR and MMR
+            RankDetails = valo_api.get_mmr_details_by_name_v2(region=self.PlayerRegion.currentText(),
+                                                              name=self.PlayerName.text(), tag=self.PlayerTag.text())
+
+            # Get Match History
+            HistoryDetails = valo_api.get_match_history_by_name(version="v3", region=self.PlayerRegion.currentText(),
+                                                                name=self.PlayerName.text(), tag=self.PlayerTag.text(),
+                                                                size=10)
+
+            # Get Recent Rank Changes
+            MMRDetails = valo_api.get_mmr_history_by_name(version="v1", region=self.PlayerRegion.currentText(),
+                                                          name=self.PlayerName.text(), tag=self.PlayerTag.text())
+
+            # DETAILS ~ Puuid, Region, Account Level and the PlayerCard
+            # RANKDETAILS ~ Rank, RR, MMR
+            Puuid = Details.puuid
+            Region = Details.region
+            Account_level = Details.account_level
+            Card = str(Details.card.wide)
+            Rank = RankDetails.current_data.currenttierpatched
+            RR = RankDetails.current_data.ranking_in_tier
+            MMR = RankDetails.current_data.elo
+
+            # Sets PUU-ID and Region
+            self.PlayerIDs.setText(f"{Puuid} | {Region}")
+
+            # Wins, Games Played
+            try:
+                wins = RankDetails.by_season["e5a3"].wins
+                games_played = RankDetails.by_season["e5a3"].number_of_games
+            except AttributeError:
+                wins = 0
+                games_played = 0
+
+            # Creates List with MMR, Comp Wins, Comp Games
+            previous_ranks = [f"Matchmaking Ratio: {MMR}\n"
+                              f"Competitive Wins: {wins}\n"
+                              f"Competitive Games played: {games_played}\n"
+                              "\nPrevious Ranks:\n"
+                              ]
+
+            # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
+            # API Problem is there, then continue
+            lastRank = RankDetails.by_season
+            for x in lastRank:
+                try:
+                    if lastRank[x].final_rank_patched is not None:
+                        previous_ranks.append(
+                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n")
+                    else:
+                        continue
+                except BaseException:
+                    print(traceback.format_exc())
+
+            # If there is a rank, add a rank history)
+            # For every last match in the detail get +RR or -RR and rank / rr
+            # And if getting + add a + symbol else -
+            if Rank is not None:
+                previous_ranks.append(
+                    f"\nRank History:\n")
+                for x in MMRDetails:
+                    if x.mmr_change_to_last_game >= 0:
+                        previous_ranks.append(
+                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr (+{x.mmr_change_to_last_game})\n")
+                    else:
+                        previous_ranks.append(
+                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr ({x.mmr_change_to_last_game})\n")
+
+            # Makes Ranks to str and makes it to Text
+            # Sets CompHistory to Ranks
+            previous_ranks = "".join(previous_ranks)
+            self.CompHistory.setText(previous_ranks)
+
+            # Makes a ThreadPool for getting an QImage for the Player Card.
+            # Sets Banner
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                img = executor.submit(get_image, Card)
+                img = img.result()
+            self.PlayerBanner.setPixmap(QPixmap(img))
+
+            # Get Match History as a List, and gets every current matches
+            match_History = []
+
+            headshots = 0
+            bodyshots = 0
+            legshots = 0
+            total_kills = 0
+            total_deaths = 0
+            total_wins = 0
+            total_matches = 0
+
+            for x in HistoryDetails:
+
+                # Match, Team and Players
+                match = x.metadata
+                teams = x.teams
+                players = x.players
+
+                # Get Stats of Player with get_stats function
+                get_stats = findStatsOfPlayer(Details.name, players)
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                score = get_stats.score
+
+                total_kills += kills
+                total_deaths += deaths
+
+                # Get Agent of Player
+                get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Add Aim rates
+                headshots += get_stats.headshots
+                bodyshots += get_stats.bodyshots
+                legshots += get_stats.legshots
+
+                # Rounds to 0.00 <- 2 Decimals
+                try:
+                    KD = format(kills / deaths, '.2f')
+                except ZeroDivisionError:
+                    KD = format(kills, '.2f')
+
+                # Get Team and Team information of Player with get_team function
+                get_team = findTeamOfPlayer(Details.name, players)
+                if get_team == "Blue":
+                    get_team = teams.blue
+                else:
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
+                total_matches += 1
+
+                # If match lost, make text lost
+                if won:
+                    total_wins += 1
+                    won = "WON"
+                else:
+                    won = "LOST"
+
+                # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
+                match_id = match.matchid
+                match_map = match.map
+                region = match.region.upper()
+                cluster = match.cluster
+                mode = match.mode
+
+                # If Deathmatch, remove Rounds and Won/Lost
+                if mode == "Deathmatch":
+                    match_History.append(
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n")
+                else:
+                    match_History.append(
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n")
+            # Set Match to Text
+            match_History = "".join(match_History)
+
+            # Set Rates with Math
+            headshot_rate = round(headshots / (headshots + bodyshots + legshots) * 100)
+            bodyshot_rate = round(bodyshots / (headshots + bodyshots + legshots) * 100)
+            legshot_rate = round(legshots / (headshots + bodyshots + legshots) * 100)
+
+            # Set Dummy Prior
+            if headshot_rate > bodyshot_rate and headshot_rate > legshot_rate:
+                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Headshot.png"))
+            elif bodyshot_rate > headshot_rate and bodyshot_rate > legshot_rate:
+                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Bodyshot.png"))
+            elif legshot_rate > headshot_rate and legshot_rate > bodyshot_rate:
+                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Legshot.png"))
+
+            # Gets the current Rank AS TIER INDEX (int) and compares it with the index data, to get the RANK IMAGE
+            tier_index = RankDetails.current_data.currenttier
+            data = requests.get("https://valorant-api.com/v1/competitivetiers").json()
+            tiers = data["data"][-1]["tiers"]
+            tier = None
+            
+            # If it has any Rank, get it ELSE say Unranked
+            if Rank is not None:
+                for tier in tiers:
+                    if tier["tier"] == tier_index:
+                        tier = tier["tierName"]
+                        break
+            else:
+                tier = "UNRANKED"
+
+            # Gets the PNG for the HTML Rich Text
+            tier_icon = Path(__file__).parent.joinpath(f'Ranks/{tier}.png')
+
+            # Add Texts
+            self.History.setText(match_History)  # <- List which got made to a string
+            self.AccuracyText.setText(f"Headshots: {headshot_rate}%\n"
+                                      f"Bodyshots: {bodyshot_rate}%\n"
+                                      f"Legshots: {legshot_rate}%")
+            self.OtherStatsTexts.setText(
+                f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: {round(total_wins / total_matches * 100)}%</span></p></body></html>")
+            self.Player.setText(
+                f"<html><head/><body><p><span style=\" font-size:29pt;\">{Details.name}#{Details.tag} | Account Level {Account_level} | {Rank} </span><img src=\"{tier_icon}\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> {RR}rr</span></p></body></html>")
+
+        except BaseException:
+            print(traceback.format_exc())
 
     def reset_information(self):
         self.PlayerName.setText("")
@@ -723,18 +942,24 @@ class Ui_ValorantTrackerByNavisGames(object):
         self.PlayerBanner.setPixmap(QtGui.QPixmap("StandardBanner.png"))
         self.PlayerIDs.setText("puu-ID | EU")
         self.Player.setText(
-            "<html><head/><body><p><span style=\" font-size:36pt;\">Player#Tag | Account Level | Rank </span><img src=\"StandardRank.png\"width=\"36\"height=\"36\"/><span style=\" font-size:20pt;\">rr</span></p></body></html>")
+            "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag | Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
         self.AccuracyText.setText("Headshots: 0%\n"
                                   "Bodyshots: 0%\n"
                                   "Legshots: 0%")
+        self.AccuracyLogo.setPixmap(QtGui.QPixmap("Basic.png"))
         self.OtherStatsTexts.setText(
-            "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 5 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: 0.00</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: 0%</span></p></body></html>")
+            "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: 0.00</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: 0%</span></p></body></html>")
         self.CompHistory.setText("Matchmaking Ratio \n"
                                  "Competitive Wins \n"
                                  "Competitive Games played \n"
                                  "Previous Ranks \n"
                                  "Rank History\n"
                                  "")
+        self.History.setText("Day, Date, Time | Match ID\n"
+                             "REGION - CLUSTER\n"
+                             " Map - Gamemode - Agent Played: Jett\n"
+                             "0-0 \n"
+                             "Kills Assists Deaths - KD |  Score")
 
 
 if __name__ == "__main__":
