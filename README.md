@@ -6,17 +6,11 @@ Use this Valorant Tracker made with Python and PYQT!
 ## Functions:
 - See a players account level
 - See a player's rank and MMR
-- See how much RR he made in the last matches
 - See his last matches
-- See global leaderboard of every act in each region
-- See current bundles in the game including skins and their prices
-
-### Coming Soon:
-- Get data of a Match
-- Remove False Positive Virus
-- More Options like Match History of a Gamemode,
-                    starting Players in Leaderboard like starting at Player 2502 -> going to 5502
-                    and more!
+- See how much RR he made
+- See global leaderboard of *almost* every act in each region
+- See current bundles in the game including skins, their prices and how long they are remaining in the store.
+- See Accuracy, Winrate and Average K.D of the last 5 matches
                     
 (build with PyQT5, Python and PyInstaller)
 
@@ -31,6 +25,7 @@ A:  IMPORTANT! Stay calm. The program is NOT a virus. The program I used to make
 Q: What if my Names have spaces
 
 A:  No problem! Just put the spaces in the program. The program recognizes the spaces ^^
+
 
 
 Q: What if there are any Bugs in the programm? How should i report them.
