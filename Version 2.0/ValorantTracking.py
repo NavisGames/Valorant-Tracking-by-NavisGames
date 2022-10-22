@@ -52,7 +52,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating MainWindow
             ValorantTrackerByNavisGames.setObjectName("ValorantTrackerByNavisGames")
             ValorantTrackerByNavisGames.setEnabled(True)
-            ValorantTrackerByNavisGames.resize(1088, 890)
+            ValorantTrackerByNavisGames.resize(945, 922)
             ValorantTrackerByNavisGames.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
             # Creating Font Standards
@@ -908,7 +908,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             data = requests.get("https://valorant-api.com/v1/competitivetiers").json()
             tiers = data["data"][-1]["tiers"]
             tier = None
-            
+
             # If it has any Rank, get it ELSE say Unranked
             if Rank is not None:
                 for tier in tiers:
