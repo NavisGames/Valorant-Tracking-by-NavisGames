@@ -243,7 +243,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Player.setFont(font)
             self.Player.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.Player.setText(
-                "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag | Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
+                "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag<p>Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
             self.Player.setTextFormat(QtCore.Qt.RichText)
             self.Player.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
             self.Player.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
@@ -929,7 +929,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.OtherStatsTexts.setText(
                 f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: {round(total_wins / total_matches * 100)}%</span></p></body></html>")
             self.Player.setText(
-                f"<html><head/><body><p><span style=\" font-size:29pt;\">{Details.name}#{Details.tag} | Account Level {Account_level} | {Rank} </span><img src=\"{tier_icon}\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> {RR}rr</span></p></body></html>")
+                f"<html><head/><body><p><span style=\" font-size:29pt;\">{Details.name}#{Details.tag}<p>Account Level {Account_level} | {Rank} </span><img src=\"{tier_icon}\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> {RR}rr</span></p></body></html>")
 
         except BaseException:
             print(traceback.format_exc())
@@ -942,7 +942,7 @@ class Ui_ValorantTrackerByNavisGames(object):
         self.PlayerBanner.setPixmap(QtGui.QPixmap("StandardBanner.png"))
         self.PlayerIDs.setText("puu-ID | EU")
         self.Player.setText(
-            "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag | Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
+            "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag<p>Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
         self.AccuracyText.setText("Headshots: 0%\n"
                                   "Bodyshots: 0%\n"
                                   "Legshots: 0%")
