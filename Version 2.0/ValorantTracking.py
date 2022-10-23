@@ -297,6 +297,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.Accuracy)
             self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
             self.horizontalLayout_9.setSpacing(0)
+            self.horizontalLayout_9.setStretch(0, 3)
             self.horizontalLayout_9.setObjectName("horizontalLayout_9")
 
             # Creating Accuracy Pixmap
