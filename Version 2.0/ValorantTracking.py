@@ -964,6 +964,9 @@ class Ui_ValorantTrackerByNavisGames(object):
         except BaseException:
             print(traceback.format_exc())
 
+    def leaderboard(self):
+        pass
+
     def reset_information(self):
         self.PlayerName.setText("")
         self.PlayerName.setPlaceholderText("PLAYER NAME (16 characters)")
