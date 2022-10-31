@@ -1,4 +1,4 @@
-# Valorant Tracking Version 2.0
+# Valorant Tracking Version
 
 Want a great Valorant Tracker but to lazy to start the game or open tracker.gg?
 
