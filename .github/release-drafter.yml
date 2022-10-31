@@ -4,18 +4,18 @@ tag-template: "v$NEXT_PATCH_VERSION"
 categories:
   - title: "🚀 New features and requests"
     labels:
-      - enhancement
+      - "enhancement"
   - title: "🐞 Bugs and fixxes"
     labels:
-      - bugs
-      - bugfix
+      - "bugs"
+      - "bugfix"
   - title: "📝 Documentations and questions"
     labels:
-      - documentation
-      - questions
+      - "documentation"
+      - "questions"
   - title: "🔨 Dependencies updates"
     labels:
-      - dependencies
+      - "dependencies"
 template: |
   ## New Changes 
 
