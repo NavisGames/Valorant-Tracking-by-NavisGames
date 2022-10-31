@@ -35,9 +35,9 @@ Q: What if my Names have spaces
 
 A:  No problem! Just put the spaces in the program. The program recognizes the spaces ^^
 
-Q: What if there are any Bugs in the programm? How should i report them.
+Q: What if there are any Bugs in the programm? How should I report them.
 
-A: Simply open a Issue :) i will look at it as soon as i have time.
+A: Simply open an Issue :) I will look at it as soon as I have time.
 
 ## Credits
 
