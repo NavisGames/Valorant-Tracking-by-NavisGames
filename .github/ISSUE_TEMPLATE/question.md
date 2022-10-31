@@ -1,6 +1,6 @@
 ---
 name: ❔ Question
-about: Ask any question about this project
+about: Ask any question about this project 💯
 title: ''
 labels: question
 assignees:
