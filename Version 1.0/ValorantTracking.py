@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
             MainWindow.setAutoFillBackground(False)
             MainWindow.setStyleSheet("")
             MainWindow.setLocale(QtCore.QLocale(QtCore.QLocale.English, QtCore.QLocale.UnitedStates))
-            MainWindow.setWindowIcon((QtGui.QIcon('icon.png')))
+            MainWindow.setWindowIcon((QtGui.QIcon("icon.png")))
 
             self.centralwidget = QtWidgets.QWidget(MainWindow)
             font = QtGui.QFont()
@@ -154,7 +154,8 @@ class Ui_MainWindow(object):
             self.NameInformation.setFont(font)
             self.NameInformation.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
             self.NameInformation.setTextInteractionFlags(
-                QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByKeyboard | QtCore.Qt.TextSelectableByMouse)
+                QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByKeyboard | QtCore.Qt.TextSelectableByMouse
+            )
             self.NameInformation.setObjectName("NameInformation")
 
             # Account Level
@@ -167,7 +168,8 @@ class Ui_MainWindow(object):
             self.Informations.setFont(font)
             self.Informations.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
             self.Informations.setTextInteractionFlags(
-                QtCore.Qt.TextSelectableByKeyboard | QtCore.Qt.TextSelectableByMouse)
+                QtCore.Qt.TextSelectableByKeyboard | QtCore.Qt.TextSelectableByMouse
+            )
             self.Informations.setObjectName("Informations")
 
             # PuuID & Region
@@ -177,9 +179,11 @@ class Ui_MainWindow(object):
             font.setPointSize(10)
             self.PuuidRegionInformation.setFont(font)
             self.PuuidRegionInformation.setAlignment(
-                QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+                QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
+            )
             self.PuuidRegionInformation.setTextInteractionFlags(
-                QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByKeyboard | QtCore.Qt.TextSelectableByMouse)
+                QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByKeyboard | QtCore.Qt.TextSelectableByMouse
+            )
             self.PuuidRegionInformation.setObjectName("PuuidRegionInformation")
 
             # Added Leaderboard Tab
@@ -402,15 +406,17 @@ class Ui_MainWindow(object):
                 for item in current_Bundle[i].items:
                     if item.amount > 1:
                         Items.append(
-                            f"{item.amount}x {item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n")
+                            f"{item.amount}x {item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n"
+                        )
                     else:
                         Items.append(
-                            f"{item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n")
+                            f"{item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n"
+                        )
                 bundles.seconds_remaining
 
                 # Sets the Current Bundle Texts
                 self.BundleName.setText(f"CURRENT BUNDLE\n{bundleJson['data']['displayName']}")
-                if bundleJson['data']['extraDescription'] is None:
+                if bundleJson["data"]["extraDescription"] is None:
                     self.extraDescription.hide()
                 else:
                     self.extraDescription.setText(f"{bundleJson['data']['extraDescription']}")
@@ -468,9 +474,9 @@ class Ui_MainWindow(object):
             start_time = time.time()
 
             # API funcions
-            Details = valo_api.get_account_details_by_name(version="v1", name=self.NameInput.text(),
-                                                           tag=self.HashtagInput.text(),
-                                                           force_update=True)
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.NameInput.text(), tag=self.HashtagInput.text(), force_update=True
+            )
             # Puuid, Region, Account Level and the PlayerCard
             Puuid = Details.puuid
             Region = Details.region
@@ -478,21 +484,29 @@ class Ui_MainWindow(object):
             Card = str(Details.card.wide)
 
             # Get Rank, RR and MMR
-            RankDetails = valo_api.get_mmr_details_by_name_v2(region=self.RegionInput.currentText(),
-                                                              name=self.NameInput.text(), tag=self.HashtagInput.text())
+            RankDetails = valo_api.get_mmr_details_by_name_v2(
+                region=self.RegionInput.currentText(), name=self.NameInput.text(), tag=self.HashtagInput.text()
+            )
             Rank = RankDetails.current_data.currenttierpatched
             RR = RankDetails.current_data.ranking_in_tier
             MMR = RankDetails.current_data.elo
 
             # Get Match History
-            HistoryDetails = valo_api.get_match_history_by_name(version="v3", region=self.RegionInput.currentText(),
-                                                                name=self.NameInput.text(),
-                                                                tag=self.HashtagInput.text(),
-                                                                size=5)
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.RegionInput.currentText(),
+                name=self.NameInput.text(),
+                tag=self.HashtagInput.text(),
+                size=5,
+            )
 
             # Get Recent Rank Changes
-            MMRDetails = valo_api.get_mmr_history_by_name(version="v1", region=self.RegionInput.currentText(),
-                                                          name=self.NameInput.text(), tag=self.HashtagInput.text())
+            MMRDetails = valo_api.get_mmr_history_by_name(
+                version="v1",
+                region=self.RegionInput.currentText(),
+                name=self.NameInput.text(),
+                tag=self.HashtagInput.text(),
+            )
 
             # Checks if there any games already played.
             try:
@@ -506,18 +520,20 @@ class Ui_MainWindow(object):
             lastRank = RankDetails.by_season
 
             # Creates List with MMR, Comp Wins, Comp Games
-            previous_ranks = [f"Matchmaking Ratio: {MMR}\n"
-                              f"Competitive Wins: {wins}\n"
-                              f"Competitive Games played: {games_played}\n"
-                              "\nPrevious Ranks:\n"
-                              ]
+            previous_ranks = [
+                f"Matchmaking Ratio: {MMR}\n"
+                f"Competitive Wins: {wins}\n"
+                f"Competitive Games played: {games_played}\n"
+                "\nPrevious Ranks:\n"
+            ]
 
             # Adds last Ranks with MMR, Wins, Games to the List
             for x in lastRank:
                 try:
                     if lastRank[x].final_rank_patched is not None:
                         previous_ranks.append(
-                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n")
+                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n"
+                        )
                     else:
                         # if player didn't play in this act, then say continue
                         continue
@@ -527,17 +543,18 @@ class Ui_MainWindow(object):
 
             # If there is an rank, add a rank history (MMR Details)
             if Rank is not None:
-                previous_ranks.append(
-                    f"\nRank History:\n")
+                previous_ranks.append(f"\nRank History:\n")
                 # For every Last Match in The Detail get +RR or -RR and current rank / rr
                 for x in MMRDetails:
                     # If getting + else -
                     if x.mmr_change_to_last_game >= 0:
                         previous_ranks.append(
-                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr (+{x.mmr_change_to_last_game})\n")
+                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr (+{x.mmr_change_to_last_game})\n"
+                        )
                     else:
                         previous_ranks.append(
-                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr ({x.mmr_change_to_last_game})\n")
+                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr ({x.mmr_change_to_last_game})\n"
+                        )
 
             # Makes List to a String.
             previous_ranks = "".join(previous_ranks)
@@ -569,16 +586,18 @@ class Ui_MainWindow(object):
                 tier = "UNRANKED"
 
             # Gets the PNG for the HTML Rich Text
-            tier_icon = Path(__file__).parent.joinpath(f'Ranks/{tier}.png')
+            tier_icon = Path(__file__).parent.joinpath(f"Ranks/{tier}.png")
 
             # Sets an HTML Text with the Rank as Texture and a Text also it gets the Current Rank as PNG
             if Rank is not None:
                 self.Informations.setText(
-                    f"<html><head/><body><p><span style=\" font-size:18pt;\">Account Level: {Account_level}<br>Current Rank: {Rank} </span><img src=\"{tier_icon}\" width=\"27\" height=\"27\"/><span style=\" font-size:18pt;\"> {RR}rr</span></p></body></html>")
+                    f'<html><head/><body><p><span style=" font-size:18pt;">Account Level: {Account_level}<br>Current Rank: {Rank} </span><img src="{tier_icon}" width="27" height="27"/><span style=" font-size:18pt;"> {RR}rr</span></p></body></html>'
+                )
             else:
                 remaining = RankDetails.current_data.games_needed_for_rating
                 self.Informations.setText(
-                    f"<html><head/><body><p><span style=\" font-size:18pt;\">Account Level: {Account_level}<br>Current Rank: Unrated </span><img src=\"{tier_icon}\" width=\"27\" height=\"27\"/><span style=\" font-size:18pt;\"> {remaining} games remaining</span></p></body></html>")
+                    f'<html><head/><body><p><span style=" font-size:18pt;">Account Level: {Account_level}<br>Current Rank: Unrated </span><img src="{tier_icon}" width="27" height="27"/><span style=" font-size:18pt;"> {remaining} games remaining</span></p></body></html>'
+                )
 
             # Get Match History as a List, and gets every current matches
             match_History = []
@@ -605,7 +624,7 @@ class Ui_MainWindow(object):
                 assists = get_stats.assists
                 score = get_stats.score
                 # Rounds to 0.00 <- 2 Decimals
-                KD = format(kills / deaths, '.2f')
+                KD = format(kills / deaths, ".2f")
 
                 # Get Team and Team information of Player with get_team function
                 get_team = findTeamOfPlayer(Details.name)
@@ -635,10 +654,12 @@ class Ui_MainWindow(object):
                 # If Deathmatch, remove Rounds and Won/Lost
                 if mode == "Deathmatch":
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode}\n {kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n")
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode}\n {kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                    )
                 else:
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n")
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                    )
 
             # Makes List to String.
             match_History = "".join(match_History)
@@ -653,7 +674,7 @@ class Ui_MainWindow(object):
             self.PuuidRegionInformation.setText("")
             self.MatchHistory.setText("")
             self.BannerInformation.setPixmap(QPixmap(None))
-            self.CompetitiveInformation.setText('An exception occurred: {}'.format(error))
+            self.CompetitiveInformation.setText("An exception occurred: {}".format(error))
             print(traceback.format_exc())
 
     def get_leaderboard(self):
@@ -665,12 +686,16 @@ class Ui_MainWindow(object):
             if self.LeaderboardSeason.currentText() == "E5A3":
                 Details = valo_api.get_leaderboard(version="v2", region=self.LeaderboardRegion.currentText())
             else:
-                Details = valo_api.get_leaderboard(version="v2", region=self.LeaderboardRegion.currentText(),
-                                                   season_id=self.LeaderboardSeason.currentText())
+                Details = valo_api.get_leaderboard(
+                    version="v2",
+                    region=self.LeaderboardRegion.currentText(),
+                    season_id=self.LeaderboardSeason.currentText(),
+                )
 
             # Gets Message Box for Loading Leaderboard
             self.msg.setText(
-                f"Loading leaderboard! The program could possibly freeze.\nWait a few seconds to minutes until its done")
+                f"Loading leaderboard! The program could possibly freeze.\nWait a few seconds to minutes until its done"
+            )
             self.msg.setWindowTitle("Valorant Tracking")
             self.msg.exec_()
 
@@ -746,11 +771,13 @@ class Ui_MainWindow(object):
                         if x.IsAnonymized:
                             # Set Anonymous Player from Current Index to Information
                             self.PlayerText[i].setText(
-                                f"#{x.leaderboardRank} Anonymous Player | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins")
+                                f"#{x.leaderboardRank} Anonymous Player | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins"
+                            )
                         else:
                             # Set Player from Current Index to Information (Rank, Name, #, RR, Wins, PUUID)
                             self.PlayerText[i].setText(
-                                f"#{x.leaderboardRank} {x.gameName}#{x.tagLine} | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins | {x.puuid}")
+                                f"#{x.leaderboardRank} {x.gameName}#{x.tagLine} | {Rank} {x.rankedRating}rr - {x.numberOfWins} Wins | {x.puuid}"
+                            )
 
                         # Get Playercard for Banner
                         PlayerCard = f"https://media.valorant-api.com/playercards/{x.PlayerCardID}/smallart.png"
@@ -771,8 +798,7 @@ class Ui_MainWindow(object):
                 self.PlayerBanner[_].setPixmap(QPixmap(img))
 
             # Spacer for Banner etc
-            spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
-                                               QtWidgets.QSizePolicy.Expanding)
+            spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
             self.verticalLayout.addItem(spacerItem)
             self.scrollFrame.setWidget(self.scrollArea)
             print(f"LEADERBOARD took --- %s seconds ---" % (time.time() - start_time))
