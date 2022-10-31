@@ -14,14 +14,14 @@ import httpx as http
 import concurrent.futures
 import time
 
-valo_api.set_api_key("")  # HIDE IN GITHUB!
+valo_api.set_api_key("")
 
 intervals = (
-    ('Weeks', 604800),  # 60 * 60 * 24 * 7
-    ('Days', 86400),  # 60 * 60 * 24
-    ('Hours', 3600),  # 60 * 60
-    ('Minutes', 60),
-    ('Seconds', 1),
+    ("Weeks", 604800),  # 60 * 60 * 24 * 7
+    ("Days", 86400),  # 60 * 60 * 24
+    ("Hours", 3600),  # 60 * 60
+    ("Minutes", 60),
+    ("Seconds", 1),
 )
 
 
@@ -41,9 +41,9 @@ def display_time(seconds, granularity=2):
         if value:
             seconds -= value * count
             if value == 1:
-                name = name.rstrip('s')
+                name = name.rstrip("s")
             result.append("{} {}".format(value, name))
-    return ' | '.join(result[:granularity])
+    return " | ".join(result[:granularity])
 
 
 class Ui_ValorantTrackerByNavisGames(object):
@@ -72,7 +72,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             icon.addPixmap(QtGui.QPixmap("icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             ValorantTrackerByNavisGames.setWindowIcon(icon)
             ValorantTrackerByNavisGames.setDockOptions(
-                QtWidgets.QMainWindow.AllowTabbedDocks | QtWidgets.QMainWindow.AnimatedDocks)
+                QtWidgets.QMainWindow.AllowTabbedDocks | QtWidgets.QMainWindow.AnimatedDocks
+            )
 
             # Create CENTRAL WIDGET (What is it? i still dont get it..)
             self.centralwidget = QtWidgets.QWidget(ValorantTrackerByNavisGames)
@@ -243,7 +244,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Player.setFont(font)
             self.Player.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.Player.setText(
-                "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag<p>Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
+                '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="StandardRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
+            )
             self.Player.setTextFormat(QtCore.Qt.RichText)
             self.Player.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
             self.Player.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
@@ -282,7 +284,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             font.setStrikeOut(False)
             self.AccuracyTitle.setFont(font)
             self.AccuracyTitle.setText(
-                "<html><head/><body><p><span style=\" font-size:22pt;\">Accuracy </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p></body></html>")
+                '<html><head/><body><p><span style=" font-size:22pt;">Accuracy </span><span style=" font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p></body></html>'
+            )
             self.AccuracyTitle.setTextFormat(QtCore.Qt.RichText)
             self.AccuracyTitle.setAlignment(QtCore.Qt.AlignCenter)
             self.AccuracyTitle.setObjectName("AccuracyTitle")
@@ -312,9 +315,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating Accuracy Texts for HS Rate etc.
             self.AccuracyText = QtWidgets.QLabel(self.Accuracy)
             self.AccuracyText.setLayoutDirection(QtCore.Qt.LeftToRight)
-            self.AccuracyText.setText("Headshots: 0%\n"
-                                      "Bodyshots: 0%\n"
-                                      "Legshots: 0%")
+            self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
             self.AccuracyText.setAlignment(QtCore.Qt.AlignCenter)
             self.AccuracyText.setObjectName("AccuracyText")
             self.horizontalLayout_9.addWidget(self.AccuracyText)
@@ -333,7 +334,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating ANOTHER complicated HTML Code with Average KD, Winrate and the Title in it (URGH)
             self.OtherStatsTexts = QtWidgets.QLabel(self.OtherStats)
             self.OtherStatsTexts.setText(
-                "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: 0.00</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: 0%</span></p></body></html>")
+                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">Average KD: 0.00</span></p><p><span style=" font-size:22pt; color:#000000;">Winrate: 0%</span></p></body></html>'
+            )
             self.OtherStatsTexts.setTextFormat(QtCore.Qt.RichText)
             self.OtherStatsTexts.setScaledContents(False)
             self.OtherStatsTexts.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
@@ -392,12 +394,14 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.CompHistory.setFont(font)
             self.CompHistory.setFrameShape(QtWidgets.QFrame.Box)
             self.CompHistory.setLineWidth(1)
-            self.CompHistory.setText("Matchmaking Ratio \n"
-                                     "Competitive Wins \n"
-                                     "Competitive Games played \n"
-                                     "Previous Ranks \n"
-                                     "Rank History\n"
-                                     "")
+            self.CompHistory.setText(
+                "Matchmaking Ratio \n"
+                "Competitive Wins \n"
+                "Competitive Games played \n"
+                "Previous Ranks \n"
+                "Rank History\n"
+                ""
+            )
             self.CompHistory.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
             self.CompHistory.setObjectName("CompHistory")
             self.horizontalLayout_3.addWidget(self.CompHistory)
@@ -444,11 +448,13 @@ class Ui_ValorantTrackerByNavisGames(object):
             font = QtGui.QFont()
             font.setPointSize(14)
             self.History.setFont(font)
-            self.History.setText("Day, Date, Time | Match ID\n"
-                                 "REGION - CLUSTER\n"
-                                 " Map - Gamemode - Agent Played: Jett\n"
-                                 "0-0 \n"
-                                 "Kills Assists Deaths - KD |  Score")
+            self.History.setText(
+                "Day, Date, Time | Match ID\n"
+                "REGION - CLUSTER\n"
+                " Map - Gamemode - Agent Played: Jett\n"
+                "0-0 \n"
+                "Kills Assists Deaths - KD |  Score"
+            )
             self.History.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
             self.History.setObjectName("History")
             self.horizontalLayout_4.addWidget(self.History)
@@ -657,13 +663,15 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # Create Bundle Prices
                 self.BundlePrices = QtWidgets.QLabel(self.BundleMain)
-                self.BundlePrices.setText("BUNDLE PRICE: 0 VP\n"
-                                          "Weapon: 0 VP | 0 VP -> Whole Bundle\n"
-                                          "Weapon: 0 VP | 0 VP -> Whole Bundle\n"
-                                          "Weapon: 0 VP | 0 VP -> Whole Bundle\n"
-                                          "2x Buddy: 0 VP | 0 VP -> Whole Bundle\n"
-                                          "Player Card: 0 VP | 0 VP -> Whole Bundle\n"
-                                          " Spray: 0 VP | 0 VP -> Whole Bundle")
+                self.BundlePrices.setText(
+                    "BUNDLE PRICE: 0 VP\n"
+                    "Weapon: 0 VP | 0 VP -> Whole Bundle\n"
+                    "Weapon: 0 VP | 0 VP -> Whole Bundle\n"
+                    "Weapon: 0 VP | 0 VP -> Whole Bundle\n"
+                    "2x Buddy: 0 VP | 0 VP -> Whole Bundle\n"
+                    "Player Card: 0 VP | 0 VP -> Whole Bundle\n"
+                    " Spray: 0 VP | 0 VP -> Whole Bundle"
+                )
                 self.BundlePrices.setAlignment(QtCore.Qt.AlignCenter)
                 self.BundlePrices.setObjectName("BundlePrices")
                 self.verticalLayout_11.addWidget(self.BundlePrices)
@@ -684,10 +692,12 @@ class Ui_ValorantTrackerByNavisGames(object):
                 for item in current_Bundle[i].items:
                     if item.amount > 1:
                         Prices.append(
-                            f"{item.amount}x {item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n")
+                            f"{item.amount}x {item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n"
+                        )
                     else:
                         Prices.append(
-                            f"{item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n")
+                            f"{item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n"
+                        )
                 Prices = "".join(Prices)
 
                 # Set Texts
@@ -729,21 +739,33 @@ class Ui_ValorantTrackerByNavisGames(object):
                 return agent if agent else None
 
             # API functions
-            Details = valo_api.get_account_details_by_name(version="v1", name=self.PlayerName.text(),
-                                                           tag=self.PlayerTag.text())
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
+            )
 
             # Get Rank, RR and MMR
-            RankDetails = valo_api.get_mmr_details_by_name_v2(region=self.PlayerRegion.currentText(),
-                                                              name=self.PlayerName.text(), tag=self.PlayerTag.text())
+            RankDetails = valo_api.get_mmr_details_by_name_v2(
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+            )
 
             # Get Match History
-            HistoryDetails = valo_api.get_match_history_by_name(version="v3", region=self.PlayerRegion.currentText(),
-                                                                name=self.PlayerName.text(), tag=self.PlayerTag.text(),
-                                                                size=10)
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+                size=10,
+            )
 
             # Get Recent Rank Changes
-            MMRDetails = valo_api.get_mmr_history_by_name(version="v1", region=self.PlayerRegion.currentText(),
-                                                          name=self.PlayerName.text(), tag=self.PlayerTag.text())
+            MMRDetails = valo_api.get_mmr_history_by_name(
+                version="v1",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+            )
 
             # DETAILS ~ Puuid, Region, Account Level and the PlayerCard
             # RANKDETAILS ~ Rank, RR, MMR
@@ -767,11 +789,12 @@ class Ui_ValorantTrackerByNavisGames(object):
                 games_played = 0
 
             # Creates List with MMR, Comp Wins, Comp Games
-            previous_ranks = [f"Matchmaking Ratio: {MMR}\n"
-                              f"Competitive Wins: {wins}\n"
-                              f"Competitive Games played: {games_played}\n"
-                              "\nPrevious Ranks:\n"
-                              ]
+            previous_ranks = [
+                f"Matchmaking Ratio: {MMR}\n"
+                f"Competitive Wins: {wins}\n"
+                f"Competitive Games played: {games_played}\n"
+                "\nPrevious Ranks:\n"
+            ]
 
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
             # API Problem is there, then continue
@@ -780,7 +803,8 @@ class Ui_ValorantTrackerByNavisGames(object):
                 try:
                     if lastRank[x].final_rank_patched is not None:
                         previous_ranks.append(
-                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n")
+                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n"
+                        )
                     else:
                         continue
                 except BaseException:
@@ -790,15 +814,16 @@ class Ui_ValorantTrackerByNavisGames(object):
             # For every last match in the detail get +RR or -RR and rank / rr
             # And if getting + add a + symbol else -
             if Rank is not None:
-                previous_ranks.append(
-                    f"\nRank History:\n")
+                previous_ranks.append(f"\nRank History:\n")
                 for x in MMRDetails:
                     if x.mmr_change_to_last_game >= 0:
                         previous_ranks.append(
-                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr (+{x.mmr_change_to_last_game})\n")
+                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr (+{x.mmr_change_to_last_game})\n"
+                        )
                     else:
                         previous_ranks.append(
-                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr ({x.mmr_change_to_last_game})\n")
+                            f"{x.date} | {x.currenttierpatched} {x.ranking_in_tier}rr ({x.mmr_change_to_last_game})\n"
+                        )
 
             # Makes Ranks to str and makes it to Text
             # Sets CompHistory to Ranks
@@ -850,9 +875,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # Rounds to 0.00 <- 2 Decimals
                 try:
-                    KD = format(kills / deaths, '.2f')
+                    KD = format(kills / deaths, ".2f")
                 except ZeroDivisionError:
-                    KD = format(kills, '.2f')
+                    KD = format(kills, ".2f")
 
                 # Get Team and Team information of Player with get_team function
                 get_team = findTeamOfPlayer(Details.name, players)
@@ -884,10 +909,12 @@ class Ui_ValorantTrackerByNavisGames(object):
                 # If Deathmatch, remove Rounds and Won/Lost
                 if mode == "Deathmatch":
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n")
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                    )
                 else:
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n")
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                    )
             # Set Match to Text
             match_History = "".join(match_History)
 
@@ -920,17 +947,19 @@ class Ui_ValorantTrackerByNavisGames(object):
                 tier = "UNRANKED"
 
             # Gets the PNG for the HTML Rich Text
-            tier_icon = Path(__file__).parent.joinpath(f'Ranks/{tier}.png')
+            tier_icon = Path(__file__).parent.joinpath(f"Ranks/{tier}.png")
 
             # Add Texts
             self.History.setText(match_History)  # <- List which got made to a string
-            self.AccuracyText.setText(f"Headshots: {headshot_rate}%\n"
-                                      f"Bodyshots: {bodyshot_rate}%\n"
-                                      f"Legshots: {legshot_rate}%")
+            self.AccuracyText.setText(
+                f"Headshots: {headshot_rate}%\n" f"Bodyshots: {bodyshot_rate}%\n" f"Legshots: {legshot_rate}%"
+            )
             self.OtherStatsTexts.setText(
-                f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: {round(total_wins / total_matches * 100)}%</span></p></body></html>")
+                f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: {round(total_wins / total_matches * 100)}%</span></p></body></html>"
+            )
             self.Player.setText(
-                f"<html><head/><body><p><span style=\" font-size:29pt;\">{Details.name}#{Details.tag}<p>Account Level {Account_level} | {Rank} </span><img src=\"{tier_icon}\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> {RR}rr</span></p></body></html>")
+                f'<html><head/><body><p><span style=" font-size:29pt;">{Details.name}#{Details.tag}<p>Account Level {Account_level} | {Rank} </span><img src="{tier_icon}"width="33"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>'
+            )
 
         except BaseException:
             print(traceback.format_exc())
@@ -943,24 +972,28 @@ class Ui_ValorantTrackerByNavisGames(object):
         self.PlayerBanner.setPixmap(QtGui.QPixmap("StandardBanner.png"))
         self.PlayerIDs.setText("puu-ID | EU")
         self.Player.setText(
-            "<html><head/><body><p><span style=\" font-size:29pt;\">Player#Tag<p>Account Level 0 | Rank </span><img src=\"StandardRank.png\"width=\"33\"height=\"33\"/><span style=\" font-size:20pt;\"> 0rr</span></p></body></html>")
-        self.AccuracyText.setText("Headshots: 0%\n"
-                                  "Bodyshots: 0%\n"
-                                  "Legshots: 0%")
+            '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="StandardRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
+        )
+        self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
         self.AccuracyLogo.setPixmap(QtGui.QPixmap("Basic.png"))
         self.OtherStatsTexts.setText(
-            "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: 0.00</span></p><p><span style=\" font-size:22pt; color:#000000;\">Winrate: 0%</span></p></body></html>")
-        self.CompHistory.setText("Matchmaking Ratio \n"
-                                 "Competitive Wins \n"
-                                 "Competitive Games played \n"
-                                 "Previous Ranks \n"
-                                 "Rank History\n"
-                                 "")
-        self.History.setText("Day, Date, Time | Match ID\n"
-                             "REGION - CLUSTER\n"
-                             " Map - Gamemode - Agent Played: Jett\n"
-                             "0-0 \n"
-                             "Kills Assists Deaths - KD |  Score")
+            '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">Average KD: 0.00</span></p><p><span style=" font-size:22pt; color:#000000;">Winrate: 0%</span></p></body></html>'
+        )
+        self.CompHistory.setText(
+            "Matchmaking Ratio \n"
+            "Competitive Wins \n"
+            "Competitive Games played \n"
+            "Previous Ranks \n"
+            "Rank History\n"
+            ""
+        )
+        self.History.setText(
+            "Day, Date, Time | Match ID\n"
+            "REGION - CLUSTER\n"
+            " Map - Gamemode - Agent Played: Jett\n"
+            "0-0 \n"
+            "Kills Assists Deaths - KD |  Score"
+        )
 
 
 if __name__ == "__main__":
