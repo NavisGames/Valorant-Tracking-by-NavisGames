@@ -8,9 +8,13 @@ assignees:
 
 ## 🐞 Bug Report
 
-<!-- Tell us clear and concise about the problem. -->
+<!-- Mark with an 'x' if you're using the newest version of the programm (example: '[x]') -->
 
-### Screenshots
+- [ ] Using the newest version
+
+<!-- Tell me clear and concise about the problem. -->
+
+#### Screenshots
 
 <!-- If applicable, add screenshots to help explain your problem. -->
 
@@ -18,6 +22,6 @@ assignees:
 
 <!-- A clear and concise description of what you expected to happen. -->
 
-## 🙋🏻‍♂️ Additional context
+### 🙋🏻‍♂️ Additional context
 
 <!-- Add other context about the problem here. -->
