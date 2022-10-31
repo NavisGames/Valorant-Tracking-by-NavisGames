@@ -1,4 +1,19 @@
+name-template: "v$NEXT_PATCH_VERSION"
+tag-template: "v$NEXT_PATCH_VERSION"
+
+categories:
+  - title: "🚀 New features and requests"
+    labels: [enhancement]
+  - title: "🐞 Bugs and fixxes"
+    labels: [bugs, bugfix]
+  - title: "📝 Documentations and questions"
+    labels: [documentation, questions]
+  - title: "🔨 Dependencies updates"
+    labels: [dependencies]
+
+    
 template: |
-  ## What’s Changed
+  ## New Changes 
+
 
   $CHANGES
