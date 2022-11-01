@@ -2,7 +2,7 @@ name-template: "Version $NEXT_MINOR_VERSION"
 tag-template: "Version $NEXT_MINOR_VERSION"
 
 categories:
-  - title: "🚀 New features and requests"
+  - title: "🚀 New features"
     labels:
       - "enhancement"
   - title: "🔧 Fixed bugs"
