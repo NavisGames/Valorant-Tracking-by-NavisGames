@@ -18,6 +18,9 @@ categories:
     labels:
       - "documentation"
       - "questions"
+  - title: "🕸 Staled Issues & PRs"
+    labels:
+      - "stale"
   - title: "🔨 Dependencies updates"
     labels:
       - "dependencies"
