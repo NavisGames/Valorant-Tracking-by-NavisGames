@@ -5,10 +5,12 @@ categories:
   - title: "🚀 New features and requests"
     labels:
       - "enhancement"
-  - title: "🐞 Bugs and fixxes"
+  - title: "🔧 Fixed bugs"
+    labels:
+      - "bugfix"
+  - title: "🐞 known bugs"
     labels:
       - "bugs"
-      - "bugfix"
   - title: "📝 Documentations and questions"
     labels:
       - "documentation"
@@ -17,6 +19,5 @@ categories:
     labels:
       - "dependencies"
 template: |
-  ## New Changes 
 
   $CHANGES
