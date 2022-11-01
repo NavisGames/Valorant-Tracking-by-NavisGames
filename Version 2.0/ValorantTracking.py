@@ -2,19 +2,17 @@
 # license for more. If you want, please fork this program to share what you changed in this program ^^
 
 from itertools import accumulate
-from PyQt5.QtCore import Qt, QSettings
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QApplication
-from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QIcon
+from PyQt5.QtGui import QImage, QPixmap
 import traceback
 import valo_api
 import requests
 from pathlib import Path
 import httpx as http
 import concurrent.futures
-import time
 
 valo_api.set_api_key("")
+current_season = "E5A3"
 
 intervals = (
     ("Weeks", 604800),  # 60 * 60 * 24 * 7
@@ -535,6 +533,20 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.LeaderBoardRegion.setItemText(5, "BR")
             self.horizontalLayout_7.addWidget(self.LeaderBoardRegion)
 
+            # Create Playercount Box
+            self.Playercount = QtWidgets.QSpinBox(self.LeaderBoardInput)
+            self.Playercount.setWrapping(False)
+            self.Playercount.setFrame(True)
+            self.Playercount.setAlignment(QtCore.Qt.AlignCenter)
+            self.Playercount.setButtonSymbols(QtWidgets.QAbstractSpinBox.UpDownArrows)
+            self.Playercount.setSpecialValueText("")
+            self.Playercount.setProperty("showGroupSeparator", False)
+            self.Playercount.setPrefix("Players: ")
+            self.Playercount.setMinimum(1)
+            self.Playercount.setMaximum(3000)
+            self.Playercount.setObjectName("spinBox")
+            self.horizontalLayout_7.addWidget(self.Playercount)
+
             # Create Reload Button
             self.Reload = QtWidgets.QPushButton(self.LeaderBoardInput)
             self.Reload.setText("Reload")
@@ -565,36 +577,41 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.verticalLayout_8.setSpacing(5)
             self.verticalLayout_8.setObjectName("verticalLayout_8")
 
-            # Create Player Template (!!!!!! FOR LEADERBOARD FUNCTION)
-            # Player Template (INDEX!!)
-            self.PlayerTemplate = QtWidgets.QFrame(self.PlayerScrollAreaLayout)
-            self.PlayerTemplate.setEnabled(True)
-            self.PlayerTemplate.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            self.PlayerTemplate.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.PlayerTemplate.setObjectName("PlayerTemplate")
-            self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.PlayerTemplate)
-            self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-            self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+            # Create Leader Player Stuff for function
+            self.LeaderboardPlayerBanner = dict()
+            self.LeaderboardPlayerInformation = dict()
+            self.LeaderboardPlayer = dict()
+            self.LeaderboardPlayerLayout = dict()
 
-            # Player Banner (BANNER FUNCTION!!)
-            self.LeaderboardPlayerBanner = QtWidgets.QLabel(self.PlayerTemplate)
-            self.LeaderboardPlayerBanner.setText("")
-            self.LeaderboardPlayerBanner.setPixmap(QtGui.QPixmap("ExampleBanner.png"))
-            self.LeaderboardPlayerBanner.setScaledContents(False)
-            self.LeaderboardPlayerBanner.setObjectName("LeaderboardPlayerBanner")
-            self.horizontalLayout_5.addWidget(self.LeaderboardPlayerBanner)
-            self.LeaderboardPlayerInformation = QtWidgets.QLabel(self.PlayerTemplate)
+            # Player Template
+            self.LeaderboardPlayerTemplate = QtWidgets.QFrame(self.PlayerScrollAreaLayout)
+            self.LeaderboardPlayerTemplate.setEnabled(True)
+            self.LeaderboardPlayerTemplate.setFrameShape(QtWidgets.QFrame.StyledPanel)
+            self.LeaderboardPlayerTemplate.setFrameShadow(QtWidgets.QFrame.Raised)
+            self.LeaderboardPlayerTemplate.setObjectName("PlayerTemplate")
+            self.PlayerLayoutTemplate = QtWidgets.QHBoxLayout(self.LeaderboardPlayerTemplate)
+            self.PlayerLayoutTemplate.setContentsMargins(0, 0, 0, 0)
+            self.PlayerLayoutTemplate.setObjectName("PlayerLayoutTemplate")
 
-            # Stats (PLAYER STATS FROM FUNCTION!!!)
-            self.LeaderboardPlayerInformation.setText("#1 Player#Tag | Radiant 0rr | 0 Wins | puuid")
-            self.LeaderboardPlayerInformation.setAlignment(QtCore.Qt.AlignCenter)
-            self.LeaderboardPlayerInformation.setObjectName("LeaderboardPlayerInformation")
+            # Player Banner Template
+            self.LeaderboardPlayerBannerTemplate = QtWidgets.QLabel(self.LeaderboardPlayerTemplate)
+            self.LeaderboardPlayerBannerTemplate.setText("")
+            self.LeaderboardPlayerBannerTemplate.setPixmap(QtGui.QPixmap("ExampleBanner.png"))
+            self.LeaderboardPlayerBannerTemplate.setScaledContents(False)
+            self.LeaderboardPlayerBannerTemplate.setObjectName("LeaderboardPlayerBannerTemplate")
+            self.PlayerLayoutTemplate.addWidget(self.LeaderboardPlayerBannerTemplate)
+            self.LeaderboardPlayerInformationTemplate = QtWidgets.QLabel(self.LeaderboardPlayerTemplate)
 
-            # Layout Shit and Scrollarea Shit.. Also adding the Tab Leaderboard to Tabs
-            self.horizontalLayout_5.addWidget(self.LeaderboardPlayerInformation)
+            # Stats Template
+            self.LeaderboardPlayerInformationTemplate.setText("#1 Player#Tag | Radiant 0rr | 0 Wins | puuid")
+            self.LeaderboardPlayerInformationTemplate.setAlignment(QtCore.Qt.AlignCenter)
+            self.LeaderboardPlayerInformationTemplate.setObjectName("LeaderboardPlayerInformationTemplate")
+
+            # Layout Shit and Scroll area Shit. Also adding the Tab Leaderboard to Tabs
+            self.PlayerLayoutTemplate.addWidget(self.LeaderboardPlayerInformationTemplate)
             spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-            self.horizontalLayout_5.addItem(spacerItem)
-            self.verticalLayout_8.addWidget(self.PlayerTemplate)
+            self.PlayerLayoutTemplate.addItem(spacerItem)
+            self.verticalLayout_8.addWidget(self.LeaderboardPlayerTemplate)
             spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
             self.verticalLayout_8.addItem(spacerItem1)
             self.PlayerScrollArea.setWidget(self.PlayerScrollAreaLayout)
@@ -602,7 +619,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.verticalLayout_3.addLayout(self.Players)
             self.Tabs.addTab(self.Leaderboard, "LEADERBOARD")
 
-            # Create Dicts with Bundles and use Valo API to get all current bundles
+            # Create Dicts with Bundles and use Valorant API to get all current bundles
             current_Bundle = valo_api.get_store_featured_v2()
             self.Bundle = dict()
 
@@ -718,6 +735,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Functions
             self.getButton.clicked.connect(self.get_information)
             self.resetButton.clicked.connect(self.reset_information)
+            self.Reload.clicked.connect(self.leaderboard)
             QtCore.QMetaObject.connectSlotsByName(ValorantTrackerByNavisGames)
 
         except BaseException:
@@ -782,8 +800,8 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Wins, Games Played
             try:
-                wins = RankDetails.by_season["e5a3"].wins
-                games_played = RankDetails.by_season["e5a3"].number_of_games
+                wins = RankDetails.by_season[current_season.lower()].wins
+                games_played = RankDetails.by_season[current_season.lower()].number_of_games
             except AttributeError:
                 wins = 0
                 games_played = 0
@@ -801,7 +819,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             lastRank = RankDetails.by_season
             for x in lastRank:
                 try:
-                    if lastRank[x].final_rank_patched is not None:
+                    if lastRank[x].final_rank_patched is not None and x != current_season.lower():
                         previous_ranks.append(
                             f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n"
                         )
@@ -965,7 +983,39 @@ class Ui_ValorantTrackerByNavisGames(object):
             print(traceback.format_exc())
 
     def leaderboard(self):
-        pass
+        try:
+            # Get Values
+            season = self.Act.currentText()
+            region = self.LeaderBoardRegion.currentText()
+            player_limit = self.Playercount.value()
+            player_cards = {}
+
+            # Get API
+            if season == current_season:
+                leaderboard = valo_api.get_leaderboard(version="v2", region=region, player_limit=player_limit)
+            else:
+                leaderboard = valo_api.get_leaderboard(version="v2", region=region, season_id=season,
+                                                       player_limit=player_limit)
+
+            # Delete all old Leaderboard stuff
+            for i in range(player_limit):
+                try:
+                    self.LeaderboardPlayerTemplate.deleteLater()
+                    self.LeaderboardPlayerBannerTemplate.deleteLater()
+                    self.LeaderboardPlayerInformationTemplate.deleteLater()
+                    self.PlayerLayoutTemplate.deleteLater()
+
+                    self.LeaderboardPlayerBanner[i].deleteLater()
+                    self.LeaderboardPlayerInformation[i].deleteLater()
+                    self.LeaderboardPlayer[i].deleteLater()
+                    self.LeaderboardPlayerLayout[i].deleteLater()
+
+                    player_cards = {}
+                except KeyError:
+                    continue
+
+        except BaseException:
+            print(traceback.format_exc())
 
     def reset_information(self):
         self.PlayerName.setText("")
