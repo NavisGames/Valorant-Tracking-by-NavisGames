@@ -1048,7 +1048,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         self.LeaderboardPlayerLayout[i].addWidget(self.LeaderboardPlayerBanner[i])
                         self.LeaderboardPlayerInformation[i] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
 
-                        # I SHOULD REALLY FIX THIS SERIOUSLY!!
+                        # Getting changed later
                         if self.LeaderBoardRegion.currentText() == "E5A1" or "E5A2" or "E5A3":
                             if x.competitiveTier == 27:
                                 rank = "Radiant"
