@@ -544,7 +544,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Playercount.setProperty("showGroupSeparator", False)
             self.Playercount.setPrefix("Players: ")
             self.Playercount.setMinimum(1)
-            self.Playercount.setMaximum(3000)
+            self.Playercount.setMaximum(15000)
             self.Playercount.setObjectName("spinBox")
             self.horizontalLayout_7.addWidget(self.Playercount)
 
