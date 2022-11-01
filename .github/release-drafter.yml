@@ -5,6 +5,9 @@ categories:
   - title: "🚀 New features"
     labels:
       - "enhancement"
+  - title: "♻ Reworks"
+    labels:
+      - "rework"
   - title: "🔧 Fixed bugs"
     labels:
       - "bugfix"
