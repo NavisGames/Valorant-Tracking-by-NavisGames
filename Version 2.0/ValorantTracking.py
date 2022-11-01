@@ -45,6 +45,16 @@ def display_time(seconds, granularity=2):
     return " | ".join(result[:granularity])
 
 
+def clearLayout(layout):
+    if layout is not None:
+        while layout.count():
+            child = layout.takeAt(0)
+            if child.widget() is not None:
+                child.widget().deleteLater()
+            elif child.layout() is not None:
+                clearLayout(child.layout())
+
+
 class Ui_ValorantTrackerByNavisGames(object):
     def setupUi(self, ValorantTrackerByNavisGames):
         try:
@@ -573,56 +583,23 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerScrollAreaLayout = QtWidgets.QWidget()
             self.PlayerScrollAreaLayout.setGeometry(QtCore.QRect(0, 0, 486, 145))
             self.PlayerScrollAreaLayout.setObjectName("PlayerScrollAreaLayout")
-            self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.PlayerScrollAreaLayout)
-            self.verticalLayout_8.setContentsMargins(5, 5, 5, 5)
-            self.verticalLayout_8.setSpacing(5)
-            self.verticalLayout_8.setObjectName("verticalLayout_8")
+
+            self.PlayerScrollArea.setWidget(self.PlayerScrollAreaLayout)
+            self.Players.addWidget(self.PlayerScrollArea)
+            self.verticalLayout_3.addLayout(self.Players)
+            self.Tabs.addTab(self.Leaderboard, "LEADERBOARD")
 
             # Create Leader Player Stuff for function
             self.LeaderboardPlayerBanner = dict()
             self.LeaderboardPlayerInformation = dict()
             self.LeaderboardPlayer = dict()
             self.LeaderboardPlayerLayout = dict()
-            self.LeaderboardSpacer = dict()
+            self.LeaderboardPlayerSpacer = dict()
 
-            # Player Template
-            self.LeaderboardPlayerTemplate = QtWidgets.QFrame(self.PlayerScrollAreaLayout)
-            self.LeaderboardPlayerTemplate.setEnabled(True)
-            self.LeaderboardPlayerTemplate.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            self.LeaderboardPlayerTemplate.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.LeaderboardPlayerTemplate.setObjectName("PlayerTemplate")
-            self.PlayerLayoutTemplate = QtWidgets.QHBoxLayout(self.LeaderboardPlayerTemplate)
-            self.PlayerLayoutTemplate.setContentsMargins(0, 0, 0, 0)
-            self.PlayerLayoutTemplate.setObjectName("PlayerLayoutTemplate")
-
-            # Player Banner Template
-            self.LeaderboardPlayerBannerTemplate = QtWidgets.QLabel(self.LeaderboardPlayerTemplate)
-            self.LeaderboardPlayerBannerTemplate.setText("")
-            self.LeaderboardPlayerBannerTemplate.setPixmap(QtGui.QPixmap("ExampleBanner.png"))
-            self.LeaderboardPlayerBannerTemplate.setScaledContents(False)
-            self.LeaderboardPlayerBannerTemplate.setObjectName("LeaderboardPlayerBannerTemplate")
-            self.PlayerLayoutTemplate.addWidget(self.LeaderboardPlayerBannerTemplate)
-            self.LeaderboardPlayerInformationTemplate = QtWidgets.QLabel(self.LeaderboardPlayerTemplate)
-
-            # Stats Template
-            self.LeaderboardPlayerInformationTemplate.setText("#1 Player#Tag | Radiant 0rr | 0 Wins | puuid")
-            self.LeaderboardPlayerInformationTemplate.setAlignment(QtCore.Qt.AlignCenter)
-            self.LeaderboardPlayerInformationTemplate.setObjectName("LeaderboardPlayerInformationTemplate")
-
-            # Layout Shit and Scroll area Shit. Also adding the Tab Leaderboard to Tabs
-            self.PlayerLayoutTemplate.addWidget(self.LeaderboardPlayerInformationTemplate)
-            LeaderboardSpacerTemplate = QtWidgets.QSpacerItem(
-                40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-            )
-            self.PlayerLayoutTemplate.addItem(LeaderboardSpacerTemplate)
-
-            self.verticalLayout_8.addWidget(self.LeaderboardPlayerTemplate)
-            spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-            self.verticalLayout_8.addItem(spacerItem1)
-            self.PlayerScrollArea.setWidget(self.PlayerScrollAreaLayout)
-            self.Players.addWidget(self.PlayerScrollArea)
-            self.verticalLayout_3.addLayout(self.Players)
-            self.Tabs.addTab(self.Leaderboard, "LEADERBOARD")
+            self.verticalLayout_8 = QtWidgets.QVBoxLayout(self.PlayerScrollAreaLayout)
+            self.verticalLayout_8.setContentsMargins(5, 5, 5, 5)
+            self.verticalLayout_8.setSpacing(5)
+            self.verticalLayout_8.setObjectName("verticalLayout_8")
 
             # Create Dicts with Bundles and use Valorant API to get all current bundles
             current_Bundle = valo_api.get_store_featured_v2()
@@ -709,7 +686,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 self.verticalLayout_11.addWidget(self.BundleLast)
                 self.verticalLayout_10.addWidget(self.BundleMain)
 
-                # Get Every Item and Set A String (before a List!)
+                # Get every item and set a string (before a list!)
                 Prices = [f"Bundle Price - {current_Bundle[i].bundle_price} Valorant Points\n"]
                 for item in current_Bundle[i].items:
                     if item.amount > 1:
@@ -833,7 +810,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 except BaseException:
                     print(traceback.format_exc())
 
-            # If there is a rank, add a rank history)
+            # If there is a rank, add a rank history
             # For every last match in the detail get +RR or -RR and rank / rr
             # And if getting + add a + symbol else -
             if Rank is not None:
@@ -996,33 +973,16 @@ class Ui_ValorantTrackerByNavisGames(object):
             player_limit = int(self.Playercount.value())
             player_cards = {}
 
+            try:
+                clearLayout(self.verticalLayout_8)
+            except AttributeError:
+                pass
+
             # Get API
             if season == current_season:
                 leaderboard = valo_api.get_leaderboard(version="v2", region=region)
             else:
                 leaderboard = valo_api.get_leaderboard(version="v2", region=region, season_id=season)
-
-            try:
-                self.LeaderboardPlayerTemplate.deleteLater()
-                self.LeaderboardPlayerBannerTemplate.deleteLater()
-                self.LeaderboardPlayerInformationTemplate.deleteLater()
-                self.PlayerLayoutTemplate.deleteLater()
-            except RuntimeError:
-                pass
-
-            # Delete all old Leaderboard stuff
-            for i, x in enumerate(self.LeaderboardPlayer):
-                try:
-                    self.LeaderboardPlayerBanner[i].deleteLater()
-                    self.LeaderboardPlayerInformation[i].deleteLater()
-                    self.LeaderboardPlayer[i].deleteLater()
-                    self.LeaderboardPlayerLayout[i].deleteLater()
-
-                    player_cards = {}
-                except KeyError:
-                    continue
-                except RuntimeError:
-                    continue
 
             # Set all new Leaderboard stuff
             for i, x in enumerate(leaderboard.players):
@@ -1088,10 +1048,11 @@ class Ui_ValorantTrackerByNavisGames(object):
                         self.LeaderboardPlayerInformation[i].setAlignment(QtCore.Qt.AlignCenter)
                         self.LeaderboardPlayerInformation[i].setObjectName("LeaderboardPlayerInformation")
                         self.LeaderboardPlayerLayout[i].addWidget(self.LeaderboardPlayerInformation[i])
-                        self.LeaderboardSpacer[i] = QtWidgets.QSpacerItem(
+
+                        self.LeaderboardPlayerSpacer[i] = QtWidgets.QSpacerItem(
                             40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
                         )
-                        self.LeaderboardPlayerLayout[i].addItem(self.LeaderboardSpacer[i])
+                        self.LeaderboardPlayerLayout[i].addItem(self.LeaderboardPlayerSpacer[i])
                         self.verticalLayout_8.addWidget(self.LeaderboardPlayer[i])
 
                         # Getting players banner and add it to player_cards
@@ -1102,6 +1063,11 @@ class Ui_ValorantTrackerByNavisGames(object):
                         break
                 else:
                     break
+
+            self.LeaderboardSpacer = QtWidgets.QSpacerItem(
+                20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+            )
+            self.verticalLayout_8.addItem(self.LeaderboardSpacer)
 
             # Get & Set Banner
             with concurrent.futures.ThreadPoolExecutor() as executor:
