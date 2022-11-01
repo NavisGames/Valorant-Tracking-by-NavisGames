@@ -10,6 +10,7 @@ import requests
 from pathlib import Path
 import httpx as http
 import concurrent.futures
+import time
 
 valo_api.set_api_key("")
 current_season = "E5A3"
@@ -582,6 +583,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.LeaderboardPlayerInformation = dict()
             self.LeaderboardPlayer = dict()
             self.LeaderboardPlayerLayout = dict()
+            self.LeaderboardSpacer = dict()
 
             # Player Template
             self.LeaderboardPlayerTemplate = QtWidgets.QFrame(self.PlayerScrollAreaLayout)
@@ -609,8 +611,11 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Layout Shit and Scroll area Shit. Also adding the Tab Leaderboard to Tabs
             self.PlayerLayoutTemplate.addWidget(self.LeaderboardPlayerInformationTemplate)
-            spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-            self.PlayerLayoutTemplate.addItem(spacerItem)
+            LeaderboardSpacerTemplate = QtWidgets.QSpacerItem(
+                40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+            )
+            self.PlayerLayoutTemplate.addItem(LeaderboardSpacerTemplate)
+
             self.verticalLayout_8.addWidget(self.LeaderboardPlayerTemplate)
             spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
             self.verticalLayout_8.addItem(spacerItem1)
@@ -983,28 +988,31 @@ class Ui_ValorantTrackerByNavisGames(object):
             print(traceback.format_exc())
 
     def leaderboard(self):
+        start_time = time.time()
         try:
             # Get Values
             season = self.Act.currentText()
             region = self.LeaderBoardRegion.currentText()
-            player_limit = self.Playercount.value()
+            player_limit = int(self.Playercount.value())
             player_cards = {}
 
             # Get API
             if season == current_season:
-                leaderboard = valo_api.get_leaderboard(version="v2", region=region, player_limit=player_limit)
+                leaderboard = valo_api.get_leaderboard(version="v2", region=region)
             else:
-                leaderboard = valo_api.get_leaderboard(version="v2", region=region, season_id=season,
-                                                       player_limit=player_limit)
+                leaderboard = valo_api.get_leaderboard(version="v2", region=region, season_id=season)
+
+            try:
+                self.LeaderboardPlayerTemplate.deleteLater()
+                self.LeaderboardPlayerBannerTemplate.deleteLater()
+                self.LeaderboardPlayerInformationTemplate.deleteLater()
+                self.PlayerLayoutTemplate.deleteLater()
+            except RuntimeError:
+                pass
 
             # Delete all old Leaderboard stuff
-            for i in range(player_limit):
+            for i, x in enumerate(self.LeaderboardPlayer):
                 try:
-                    self.LeaderboardPlayerTemplate.deleteLater()
-                    self.LeaderboardPlayerBannerTemplate.deleteLater()
-                    self.LeaderboardPlayerInformationTemplate.deleteLater()
-                    self.PlayerLayoutTemplate.deleteLater()
-
                     self.LeaderboardPlayerBanner[i].deleteLater()
                     self.LeaderboardPlayerInformation[i].deleteLater()
                     self.LeaderboardPlayer[i].deleteLater()
@@ -1013,6 +1021,99 @@ class Ui_ValorantTrackerByNavisGames(object):
                     player_cards = {}
                 except KeyError:
                     continue
+                except RuntimeError:
+                    continue
+
+            # Set all new Leaderboard stuff
+            for i, x in enumerate(leaderboard.players):
+                if i < player_limit:
+                    try:
+
+                        # Setting player
+                        self.LeaderboardPlayer[i] = QtWidgets.QFrame(self.PlayerScrollAreaLayout)
+                        self.LeaderboardPlayer[i].setEnabled(True)
+                        self.LeaderboardPlayer[i].setFrameShape(QtWidgets.QFrame.StyledPanel)
+                        self.LeaderboardPlayer[i].setFrameShadow(QtWidgets.QFrame.Raised)
+                        self.LeaderboardPlayer[i].setObjectName("PlayerTemplate")
+                        self.LeaderboardPlayerLayout[i] = QtWidgets.QHBoxLayout(self.LeaderboardPlayer[i])
+                        self.LeaderboardPlayerLayout[i].setContentsMargins(0, 0, 0, 0)
+                        self.LeaderboardPlayerLayout[i].setObjectName("PlayerLayoutTemplate")
+
+                        # Setting Banner
+                        self.LeaderboardPlayerBanner[i] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
+                        self.LeaderboardPlayerBanner[i].setText("")
+                        self.LeaderboardPlayerBanner[i].setPixmap(QtGui.QPixmap("ExampleBanner.png"))
+                        self.LeaderboardPlayerBanner[i].setScaledContents(False)
+                        self.LeaderboardPlayerBanner[i].setObjectName("LeaderboardPlayerBanner")
+                        self.LeaderboardPlayerLayout[i].addWidget(self.LeaderboardPlayerBanner[i])
+                        self.LeaderboardPlayerInformation[i] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
+
+                        # I SHOULD REALLY FIX THIS SERIOUSLY!!
+                        if self.LeaderBoardRegion.currentText() == "E5A1" or "E5A2" or "E5A3":
+                            if x.competitiveTier == 27:
+                                rank = "Radiant"
+                            elif x.competitiveTier == 26:
+                                rank = "Immortal 3"
+                            elif x.competitiveTier == 25:
+                                rank = "Immortal 2"
+                            elif x.competitiveTier == 24:
+                                rank = "Immortal 1"
+                            elif x.competitiveTier == 23:
+                                rank = "Ascendant 3"
+                            elif x.competitiveTier == 22:
+                                rank = "Ascendant 2"
+                            elif x.competitiveTier == 21:
+                                rank = "Ascendant 1"
+                        else:
+                            if x.competitiveTier == 24:
+                                rank = "Radiant"
+                            elif x.competitiveTier == 23:
+                                rank = "Immortal 3"
+                            elif x.competitiveTier == 22:
+                                rank = "Immortal 2"
+                            elif x.competitiveTier == 21:
+                                rank = "Immortal 1"
+
+                        # If anonymous else stuff
+                        if x.IsAnonymized:
+                            self.LeaderboardPlayerInformation[i].setText(
+                                f"#{x.leaderboardRank} | Anonymous Player | {rank} {x.rankedRating}rr | {x.numberOfWins} Wins"
+                            )
+                        else:
+                            self.LeaderboardPlayerInformation[i].setText(
+                                f"#{x.leaderboardRank} | {x.gameName}#{x.tagLine} | {rank} {x.rankedRating}rr | {x.numberOfWins} Wins | {x.puuid}"
+                            )
+
+                        # blah blah layouts..
+                        self.LeaderboardPlayerInformation[i].setAlignment(QtCore.Qt.AlignCenter)
+                        self.LeaderboardPlayerInformation[i].setObjectName("LeaderboardPlayerInformation")
+                        self.LeaderboardPlayerLayout[i].addWidget(self.LeaderboardPlayerInformation[i])
+                        self.LeaderboardSpacer[i] = QtWidgets.QSpacerItem(
+                            40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+                        )
+                        self.LeaderboardPlayerLayout[i].addItem(self.LeaderboardSpacer[i])
+                        self.verticalLayout_8.addWidget(self.LeaderboardPlayer[i])
+
+                        # Getting players banner and add it to player_cards
+                        player_card = f"https://media.valorant-api.com/playercards/{x.PlayerCardID}/smallart.png"
+                        player_cards[i] = player_card
+
+                    except AttributeError:
+                        break
+                else:
+                    break
+
+            # Get & Set Banner
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                image = executor.map(requests.get, player_cards.values())
+                image = tuple(image)
+
+            for _ in player_cards:
+                img = QImage()
+                img.loadFromData(image[_].content)
+                self.LeaderboardPlayerBanner[_].setPixmap(QPixmap(img))
+
+            print(f"LEADERBOARD took --- %s seconds ---" % (time.time() - start_time))
 
         except BaseException:
             print(traceback.format_exc())
