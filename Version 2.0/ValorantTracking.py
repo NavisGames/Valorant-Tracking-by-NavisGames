@@ -61,6 +61,7 @@ class Ui_ValorantTrackerByNavisGames(object):
     def setupUi(self, ValorantTrackerByNavisGames):
         try:
             # Creating MainWindow
+            self.dark_mode = False
             ValorantTrackerByNavisGames.setObjectName("ValorantTrackerByNavisGames")
             ValorantTrackerByNavisGames.setEnabled(True)
             ValorantTrackerByNavisGames.resize(945, 922)
@@ -129,9 +130,23 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Player Input Layout
             self.horizontalLayout = QtWidgets.QHBoxLayout(self.PlayerInput)
-            self.horizontalLayout.setContentsMargins(5, 0, 5, 0)
+            self.horizontalLayout.setContentsMargins(5, 5, 5, 5)
             self.horizontalLayout.setSpacing(5)
             self.horizontalLayout.setObjectName("horizontalLayout")
+
+            # Light / Dark-mode switcher
+            self.modeSwitcher = QtWidgets.QPushButton(self.PlayerInput)
+            self.modeSwitcher.setAutoFillBackground(False)
+            self.modeSwitcher.setText("")
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap("Images/LightMode.webp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.modeSwitcher.setIcon(icon1)
+            self.modeSwitcher.setIconSize(QtCore.QSize(32, 32))
+            self.modeSwitcher.setAutoDefault(False)
+            self.modeSwitcher.setDefault(False)
+            self.modeSwitcher.setFlat(False)
+            self.modeSwitcher.setObjectName("modeSwitcher")
+            self.horizontalLayout.addWidget(self.modeSwitcher)
 
             # Create Player Name Input
             self.PlayerName = QtWidgets.QLineEdit(self.PlayerInput)
@@ -197,8 +212,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Layer
             # Stuff. IDC
             self.horizontalLayout.addWidget(self.DialogButton)
-            self.horizontalLayout.setStretch(0, 2)
-            self.horizontalLayout.setStretch(1, 1)
+            self.horizontalLayout.setStretch(1, 3)
+            self.horizontalLayout.setStretch(2, 2)
             self.verticalLayout.addWidget(self.PlayerInput)
 
             # Create Player Output Banner & Data etc. Frame
@@ -209,8 +224,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerInformation.setLineWidth(0)
             self.PlayerInformation.setObjectName("PlayerInformation")
             self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.PlayerInformation)
-            self.horizontalLayout_2.setContentsMargins(5, 0, 5, 0)
-            self.horizontalLayout_2.setSpacing(0)
+            self.horizontalLayout_2.setContentsMargins(5, 5, 5, 5)
+            self.horizontalLayout_2.setSpacing(5)
             self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
             # Create Player Banner PixMap
@@ -275,8 +290,12 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.GeneralStats.setLineWidth(1)
             self.GeneralStats.setObjectName("GeneralStats")
             self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.GeneralStats)
-            self.horizontalLayout_8.setContentsMargins(5, 0, 5, 5)
+            self.horizontalLayout_8.setContentsMargins(5, 5, 5, 5)
             self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+
+            # Spacer Item
+            spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            self.horizontalLayout_8.addItem(spacerItem1)
 
             # Creating Accuracy Stats
             self.AccuarcyStats = QtWidgets.QFrame(self.GeneralStats)
@@ -334,6 +353,10 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.verticalLayout_6.addWidget(self.Accuracy)
             self.horizontalLayout_8.addWidget(self.AccuarcyStats)
 
+            # Spacer Item
+            spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            self.horizontalLayout_8.addItem(spacerItem2)
+
             # Creating Average KD & Winrate Frame
             self.OtherStats = QtWidgets.QFrame(self.GeneralStats)
             # self.OtherStats.setFrameShape(QtWidgets.QFrame.Box)
@@ -354,9 +377,13 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.OtherStatsTexts.setObjectName("OtherStatsTexts")
             self.verticalLayout_9.addWidget(self.OtherStatsTexts)
             self.horizontalLayout_8.addWidget(self.OtherStats)
-            self.verticalLayout.addWidget(self.GeneralStats)
+
+            # Spacer Item
+            spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            self.horizontalLayout_8.addItem(spacerItem3)
 
             # Creating Stats Frame
+            self.verticalLayout.addWidget(self.GeneralStats)
             self.Stats = QtWidgets.QFrame(self.Home)
             # self.Stats.setFrameShape(QtWidgets.QFrame.StyledPanel)
             # self.Stats.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -719,6 +746,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.getButton.clicked.connect(self.get_information)
             self.resetButton.clicked.connect(self.reset_information)
             self.Reload.clicked.connect(self.leaderboard)
+            self.modeSwitcher.clicked.connect(self.modeSwitch)
             QtCore.QMetaObject.connectSlotsByName(ValorantTrackerByNavisGames)
 
         except BaseException:
@@ -1116,6 +1144,35 @@ class Ui_ValorantTrackerByNavisGames(object):
             "Kills Assists Deaths - KD |  Score"
         )
 
+    def modeSwitch(self):
+        if self.dark_mode:
+            self.dark_mode = False
+            self.modeSwitcher.setIcon(QtGui.QIcon("Images/LightMode.webp"))
+            QApplication.setPalette(QApplication.style().standardPalette())
+        else:
+            self.dark_mode = True
+            self.modeSwitcher.setIcon(QtGui.QIcon("Images/DarkMode.webp"))
+            dark_palette = QPalette()
+            dark_palette.setColor(QPalette.Window, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.WindowText, Qt.white)
+            dark_palette.setColor(QPalette.Base, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.AlternateBase, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.ToolTipBase, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.ToolTipText, Qt.white)
+            dark_palette.setColor(QPalette.Text, Qt.white)
+            dark_palette.setColor(QPalette.Button, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.ButtonText, Qt.white)
+            dark_palette.setColor(QPalette.BrightText, Qt.red)
+            dark_palette.setColor(QPalette.Link, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.Highlight, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.HighlightedText, QColor(97, 97, 97))
+            dark_palette.setColor(QPalette.Active, QPalette.Button, QColor(35, 35, 35))
+            dark_palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
+            dark_palette.setColor(QPalette.Disabled, QPalette.WindowText, Qt.darkGray)
+            dark_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
+            dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(35, 35, 35))
+            QApplication.setPalette(dark_palette)
+
 
 if __name__ == "__main__":
     import sys
@@ -1124,29 +1181,6 @@ if __name__ == "__main__":
     ValorantTrackerByNavisGames = QtWidgets.QMainWindow()
     ui = Ui_ValorantTrackerByNavisGames()
     ui.setupUi(ValorantTrackerByNavisGames)
-    dark_mode = True
-    if dark_mode:
-        QApplication.setStyle("Fusion")
-        dark_palette = QPalette()
-        dark_palette.setColor(QPalette.Window, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.WindowText, Qt.white)
-        dark_palette.setColor(QPalette.Base, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.AlternateBase, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.ToolTipBase, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.ToolTipText, Qt.white)
-        dark_palette.setColor(QPalette.Text, Qt.white)
-        dark_palette.setColor(QPalette.Button, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.ButtonText, Qt.white)
-        dark_palette.setColor(QPalette.BrightText, Qt.red)
-        dark_palette.setColor(QPalette.Link, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.Highlight, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.HighlightedText, QColor(97, 97, 97))
-        dark_palette.setColor(QPalette.Active, QPalette.Button, QColor(35, 35, 35))
-        dark_palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
-        dark_palette.setColor(QPalette.Disabled, QPalette.WindowText, Qt.darkGray)
-        dark_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
-        dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(35, 35, 35))
-        QApplication.setPalette(dark_palette)
-
+    QApplication.setStyle("Fusion")
     ValorantTrackerByNavisGames.show()
     sys.exit(app.exec_())
