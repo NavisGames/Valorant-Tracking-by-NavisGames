@@ -1,0 +1,119 @@
+*{
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0;
+}
+
+body{
+    background-color: #222831;
+}
+
+.navbar{
+    font-size: 18px;
+    background-color: #222831;
+    padding-bottom: 10px;
+}
+
+.hb-button{
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    background-color: #222831;
+    font-size: 25px;
+    padding: 5px 8px;
+    border-style: none;
+}
+
+.logo{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 45px;
+    margin-top: 15px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.nav-container{
+    text-align: center;
+    list-style-type: none;
+    display: none;
+}
+
+.nav-container li{
+    text-align: center;
+    margin: 15px auto;
+}
+
+a{
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    letter-spacing: 2px;
+    padding: 5px 20px;
+}
+
+.nav-container li a:hover{
+    color: rgb(100, 100, 100);
+}
+
+.active{
+    display: block;
+}
+
+.text-container{
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.text-container h1{
+    letter-spacing: 5px;
+    font-size: 50px;
+    color: white;
+}
+
+.text-container h2{
+    color: white
+}
+
+.text-container h4{
+    color: #2c3440;
+}
+
+@media screen and (min-width: 768px){
+
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0;
+        height: 70px;
+        align-items: center;
+    }
+    
+    .logo{
+        margin-top: 0;
+    }
+
+    .hb-button{
+        display: none;
+    }
+
+    .logo:hover,
+    .nav-links:hover{
+        color: rgba(100, 100, 100, 1);
+    }
+
+    .nav-container{
+        display: flex;
+        margin-right: 30px;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    
+    .nav-container li{
+        margin: 0px;
+    }
+}
