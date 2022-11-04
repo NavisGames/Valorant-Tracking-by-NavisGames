@@ -14,7 +14,6 @@ import httpx as http
 import concurrent.futures
 import time
 
-valo_api.set_api_key("")
 current_season = "E5A3"
 
 intervals = (
