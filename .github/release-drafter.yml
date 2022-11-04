@@ -27,3 +27,7 @@ categories:
 template: |
 
   $CHANGES
+  
+  
+  ## ✔ Contributors
+  $CONTRIBUTORS
