@@ -83,6 +83,12 @@ a{
     color: #2c3440;
 }
 
+.image{
+  width: auto ;
+  max-width: 100% ;
+  height: auto ;
+}
+
 @media screen and (min-width: 768px){
 
     .navbar{
