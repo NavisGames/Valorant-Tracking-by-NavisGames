@@ -37,7 +37,7 @@ Security programs react accordingly.
 To prove that this program is NOT A
 VIRUS, here is a VirusTotal Link:
 
-https://www.virustotal.com/gui/file/b89e392d5fffe65913b726e9df82c318ad17a153d4cfb85903fc6517e43b8b50?nocache=1
+https://www.virustotal.com/gui/file/800d49e06d053e677bd5320e0b2d41c9c43e3f0d30a390d33dd480b30e23d166
 > im currently working on a fix for this so no worries :)
 
 ### What if my Names have spaces
