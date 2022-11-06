@@ -67,7 +67,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             ValorantTrackerByNavisGames.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
             # Creating Font Standards
-            QFontDatabase.addApplicationFont("D:\Python\Tungsten-Bold.ttf")
+            QFontDatabase.addApplicationFont("Tungsten-Bold.ttf")
             font = QtGui.QFont()
             font.setFamily("Tungsten Bold")
             font.setPointSize(20)
