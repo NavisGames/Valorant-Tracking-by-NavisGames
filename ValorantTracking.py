@@ -4,7 +4,7 @@
 from itertools import accumulate
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap
+from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
 from PyQt5.QtWidgets import QApplication
 from pathlib import Path
 import traceback
@@ -67,6 +67,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             ValorantTrackerByNavisGames.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
             # Creating Font Standards
+            QFontDatabase.addApplicationFont("D:\Python\Tungsten-Bold.ttf")
             font = QtGui.QFont()
             font.setFamily("Tungsten Bold")
             font.setPointSize(20)
