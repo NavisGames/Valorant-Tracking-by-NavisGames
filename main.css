@@ -5,12 +5,12 @@
 }
 
 @font-face {
-    font-family: mainFont;
-    src: url("ValorantTracking/Tungsten-Bold.ttf");
+    font-family: 'mainFont';
+    src: url("ValorantTracking/Tungsten-Bold.ttf") format('truetype');
 }
 
 body{
-    font-family: mainFont;
+    font-family: 'mainFont';
     background-color: #222831;
 }
 
