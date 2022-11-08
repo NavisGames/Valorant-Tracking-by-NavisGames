@@ -4,7 +4,13 @@
     margin: 0;
 }
 
+@font-face {
+    font-family: mainFont;
+    src: url(ValorantTracking/Tungsten-Bold.ttf);
+}
+
 body{
+    font-family: mainFont;
     background-color: #222831;
 }
 
