@@ -1,5 +1,5 @@
-name-template: "Version $NEXT_MINOR_VERSION"
-tag-template: "Version $NEXT_MINOR_VERSION"
+name-template: "Version $NEXT_PATCH_VERSION"
+tag-template: "Version $NEXT_PATCH_VERSION"
 
 categories:
   - title: "🚀 New features"
