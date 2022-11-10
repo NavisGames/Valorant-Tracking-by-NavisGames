@@ -17,7 +17,7 @@ Use this Valorant Tracker made with Python and PYQT to check their stats very fa
 
 # Q&A
 
-### Why is the program detected/flagged as a virus?
+### Why is the program detected as a virus?
 
 IMPORTANT! Stay calm. The program is NOT a virus.  
 The program I used to make Python into an EXE file is called
@@ -36,9 +36,7 @@ Security programs react accordingly.
 
 To prove that this program is NOT A
 VIRUS, here is a VirusTotal Link:
-
 https://www.virustotal.com/gui/file/800d49e06d053e677bd5320e0b2d41c9c43e3f0d30a390d33dd480b30e23d166
-> im currently working on a fix for this so no worries :)
 
 ### What if my Names have spaces
 
