@@ -234,7 +234,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # self.PlayerBanner.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.PlayerBanner.setLineWidth(1)
             self.PlayerBanner.setText("")
-            self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/ExampleWideBanner.png"))
+            self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/Example/ExampleWideBanner.png"))
             self.PlayerBanner.setScaledContents(False)
             self.PlayerBanner.setAlignment(QtCore.Qt.AlignCenter)
             self.PlayerBanner.setWordWrap(False)
@@ -271,7 +271,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Player.setFont(font)
             # self.Player.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.Player.setText(
-                '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
+                '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
             )
             self.Player.setTextFormat(QtCore.Qt.RichText)
             self.Player.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -338,7 +338,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.AccuracyLogo = QtWidgets.QLabel(self.Accuracy)
             self.AccuracyLogo.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.AccuracyLogo.setText("")
-            self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Basic.png"))
+            self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Dummy/Basic.png"))
             self.AccuracyLogo.setAlignment(QtCore.Qt.AlignCenter)
             self.AccuracyLogo.setObjectName("AccuracyLogo")
             self.horizontalLayout_9.addWidget(self.AccuracyLogo)
@@ -898,9 +898,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 get_agent = findAgentOfPlayer(Details.name, players)
 
                 # Add Aim rates
-                headshots += get_stats.headshots
+                Headshots += get_stats.headshots
                 bodyshots += get_stats.bodyshots
-                legshots += get_stats.legshots
+                Legshots += get_stats.legshots
 
                 # Rounds to 0.00 <- 2 Decimals
                 try:
@@ -954,11 +954,11 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Set Dummy Prior
             if headshot_rate > bodyshot_rate and headshot_rate > legshot_rate:
-                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Headshot.png"))
+                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Dummy/Headshot.png"))
             elif bodyshot_rate > headshot_rate and bodyshot_rate > legshot_rate:
-                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Bodyshot.png"))
+                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Dummy/Bodyshot.png"))
             elif legshot_rate > headshot_rate and legshot_rate > bodyshot_rate:
-                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Legshot.png"))
+                self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Dummy/Legshot.png"))
 
             # Gets the current Rank AS TIER INDEX (int) and compares it with the index data, to get the RANK IMAGE
             tier_index = RankDetails.current_data.currenttier
@@ -1031,7 +1031,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         # Setting Banner
                         self.LeaderboardPlayerBanner[i] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
                         self.LeaderboardPlayerBanner[i].setText("")
-                        self.LeaderboardPlayerBanner[i].setPixmap(QtGui.QPixmap("Images/ExampleBanner.png"))
+                        self.LeaderboardPlayerBanner[i].setPixmap(QtGui.QPixmap("Images/Example/ExampleBanner.png"))
                         self.LeaderboardPlayerBanner[i].setScaledContents(False)
                         self.LeaderboardPlayerBanner[i].setObjectName("LeaderboardPlayerBanner")
                         self.LeaderboardPlayerLayout[i].addWidget(self.LeaderboardPlayerBanner[i])
@@ -1118,13 +1118,13 @@ class Ui_ValorantTrackerByNavisGames(object):
         self.PlayerName.setPlaceholderText("PLAYER NAME (16 characters)")
         self.PlayerTag.setText("")
         self.PlayerTag.setPlaceholderText("PLAYER TAG (5 characters)")
-        self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/ExampleWideBanner.png"))
+        self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/Example/ExampleWideBanner.png"))
         self.PlayerIDs.setText("puu-ID | EU")
         self.Player.setText(
-            '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
+            '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
         )
         self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
-        self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Basic.png"))
+        self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Dummy/Basic.png"))
         self.OtherStatsTexts.setText(
             '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">Average KD: 0.00</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html>'
         )
