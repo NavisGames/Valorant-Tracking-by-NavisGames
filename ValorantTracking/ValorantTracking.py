@@ -67,7 +67,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             ValorantTrackerByNavisGames.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
             # Creating Font Standards
-            QFontDatabase.addApplicationFont("Tungsten-Bold.ttf")
+            QFontDatabase.addApplicationFont("Images/Tungsten-Bold.ttf")
             font = QtGui.QFont()
             font.setFamily("Tungsten Bold")
             font.setPointSize(20)
@@ -234,7 +234,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # self.PlayerBanner.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.PlayerBanner.setLineWidth(1)
             self.PlayerBanner.setText("")
-            self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/StandardBanner.png"))
+            self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/ExampleWideBanner.png"))
             self.PlayerBanner.setScaledContents(False)
             self.PlayerBanner.setAlignment(QtCore.Qt.AlignCenter)
             self.PlayerBanner.setWordWrap(False)
@@ -271,7 +271,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Player.setFont(font)
             # self.Player.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.Player.setText(
-                '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/StandardRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
+                '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
             )
             self.Player.setTextFormat(QtCore.Qt.RichText)
             self.Player.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -1118,10 +1118,10 @@ class Ui_ValorantTrackerByNavisGames(object):
         self.PlayerName.setPlaceholderText("PLAYER NAME (16 characters)")
         self.PlayerTag.setText("")
         self.PlayerTag.setPlaceholderText("PLAYER TAG (5 characters)")
-        self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/StandardBanner.png"))
+        self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/ExampleWideBanner.png"))
         self.PlayerIDs.setText("puu-ID | EU")
         self.Player.setText(
-            '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/StandardRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
+            '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
         )
         self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
         self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Basic.png"))
