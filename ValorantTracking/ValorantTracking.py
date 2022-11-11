@@ -898,9 +898,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 get_agent = findAgentOfPlayer(Details.name, players)
 
                 # Add Aim rates
-                Headshots += get_stats.headshots
+                headshots += get_stats.headshots
                 bodyshots += get_stats.bodyshots
-                Legshots += get_stats.legshots
+                legshots += get_stats.legshots
 
                 # Rounds to 0.00 <- 2 Decimals
                 try:
