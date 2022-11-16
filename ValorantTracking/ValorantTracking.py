@@ -772,7 +772,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 self.BundleTitle.setText(f"{bundleJson['data']['displayName']}")
                 self.BundlePrices.setText(Prices)
                 self.BundleLast.setText(
-                    f"Bundle remaining in Shop: {display_time(bundles.seconds_remaining, 3)}s"
+                    f"Bundle remaining in Shop: {display_time(bundles.seconds_remaining, 3)}"
                 )
 
                 # Add Bundles
