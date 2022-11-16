@@ -19,9 +19,7 @@
 
 <!-- Mark with an 'x' if something applies (example: '[x]') -->
 
-- [ ] I've read
-  the [`CODE_OF_CONDUCT.md`](https://https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/blob/main/CODE_OF_CONDUCT.md)
-  .
+- [ ] I've read the [`CODE_OF_CONDUCT.md`](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/blob/main/CODE_OF_CONDUCT.md)
 - [ ] I've updated the code style with "BLACK" or "PEP8" (Python)
 - [ ] I've formatted the HTML, CSS or JS code correctly (HTML, CSS, JS)
 - [ ] I've tested the Functions, and they are working with no problems
