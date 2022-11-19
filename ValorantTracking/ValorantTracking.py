@@ -79,17 +79,12 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Set Font, WindowTitle and Icon
             ValorantTrackerByNavisGames.setFont(font)
             ValorantTrackerByNavisGames.setMouseTracking(False)
-            ValorantTrackerByNavisGames.setWindowTitle(
-                "Valorant Tracker 2.0 By NavisGames"
-            )
+            ValorantTrackerByNavisGames.setWindowTitle("Valorant Tracker 2.0 By NavisGames")
             icon = QtGui.QIcon()
-            icon.addPixmap(
-                QtGui.QPixmap("Images/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off
-            )
+            icon.addPixmap(QtGui.QPixmap("Images/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             ValorantTrackerByNavisGames.setWindowIcon(icon)
             ValorantTrackerByNavisGames.setDockOptions(
-                QtWidgets.QMainWindow.AllowTabbedDocks
-                | QtWidgets.QMainWindow.AnimatedDocks
+                QtWidgets.QMainWindow.AllowTabbedDocks | QtWidgets.QMainWindow.AnimatedDocks
             )
 
             # Create CENTRAL WIDGET (What is it? I still don't get it..)
@@ -215,12 +210,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.getButton.setDefault(True)
             self.resetButton = QtWidgets.QPushButton("&Reset")
             self.resetButton.setDefault(True)
-            self.DialogButton.addButton(
-                self.getButton, QtWidgets.QDialogButtonBox.ActionRole
-            )
-            self.DialogButton.addButton(
-                self.resetButton, QtWidgets.QDialogButtonBox.ActionRole
-            )
+            self.DialogButton.addButton(self.getButton, QtWidgets.QDialogButtonBox.ActionRole)
+            self.DialogButton.addButton(self.resetButton, QtWidgets.QDialogButtonBox.ActionRole)
 
             # Layer
             # Stuff. IDC
@@ -247,9 +238,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # self.PlayerBanner.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.PlayerBanner.setLineWidth(1)
             self.PlayerBanner.setText("")
-            self.PlayerBanner.setPixmap(
-                QtGui.QPixmap("Images/Example/ExampleWideBanner.png")
-            )
+            self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/Example/ExampleWideBanner.png"))
             self.PlayerBanner.setScaledContents(False)
             self.PlayerBanner.setAlignment(QtCore.Qt.AlignCenter)
             self.PlayerBanner.setWordWrap(False)
@@ -273,9 +262,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerIDs.setFont(font)
             # self.PlayerIDs.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.PlayerIDs.setText("puu-ID | EU")
-            self.PlayerIDs.setAlignment(
-                QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
-            )
+            self.PlayerIDs.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
             self.PlayerIDs.setObjectName("PlayerIDs")
             self.verticalLayout_5.addWidget(self.PlayerIDs)
 
@@ -291,9 +278,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
             )
             self.Player.setTextFormat(QtCore.Qt.RichText)
-            self.Player.setAlignment(
-                QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
-            )
+            self.Player.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
             self.Player.setTextInteractionFlags(QtCore.Qt.NoTextInteraction)
             self.Player.setObjectName("Player")
 
@@ -313,9 +298,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_8.setObjectName("horizontalLayout_8")
 
             # Spacer Item
-            spacerItem1 = QtWidgets.QSpacerItem(
-                40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-            )
+            spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             self.horizontalLayout_8.addItem(spacerItem1)
 
             # Creating Accuracy Stats
@@ -367,9 +350,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating Accuracy Texts for HS Rate etc.
             self.AccuracyText = QtWidgets.QLabel(self.Accuracy)
             self.AccuracyText.setLayoutDirection(QtCore.Qt.LeftToRight)
-            self.AccuracyText.setText(
-                "Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%"
-            )
+            self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
             self.AccuracyText.setAlignment(QtCore.Qt.AlignCenter)
             self.AccuracyText.setObjectName("AccuracyText")
             self.horizontalLayout_9.addWidget(self.AccuracyText)
@@ -377,9 +358,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_8.addWidget(self.AccuarcyStats)
 
             # Spacer Item
-            spacerItem2 = QtWidgets.QSpacerItem(
-                40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-            )
+            spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             self.horizontalLayout_8.addItem(spacerItem2)
 
             # Creating Average KD & Win rate Frame
@@ -398,17 +377,13 @@ class Ui_ValorantTrackerByNavisGames(object):
             )
             self.OtherStatsTexts.setTextFormat(QtCore.Qt.RichText)
             self.OtherStatsTexts.setScaledContents(False)
-            self.OtherStatsTexts.setAlignment(
-                QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
-            )
+            self.OtherStatsTexts.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
             self.OtherStatsTexts.setObjectName("OtherStatsTexts")
             self.verticalLayout_9.addWidget(self.OtherStatsTexts)
             self.horizontalLayout_8.addWidget(self.OtherStats)
 
             # Spacer Item
-            spacerItem3 = QtWidgets.QSpacerItem(
-                40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
-            )
+            spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             self.horizontalLayout_8.addItem(spacerItem3)
 
             # Creating Stats Frame
@@ -443,9 +418,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.CompScrollArea = QtWidgets.QScrollArea(self.CompInformation)
             self.CompScrollArea.setEnabled(True)
             self.CompScrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-            self.CompScrollArea.setHorizontalScrollBarPolicy(
-                QtCore.Qt.ScrollBarAlwaysOff
-            )
+            self.CompScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.CompScrollArea.setWidgetResizable(True)
             self.CompScrollArea.setAlignment(QtCore.Qt.AlignCenter)
             self.CompScrollArea.setObjectName("CompScrollArea")
@@ -503,9 +476,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # self.HistoryScrollArea.setFrameShape(QtWidgets.QFrame.Box)
             # self.HistoryScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
             self.HistoryScrollArea.setLineWidth(1)
-            self.HistoryScrollArea.setHorizontalScrollBarPolicy(
-                QtCore.Qt.ScrollBarAlwaysOff
-            )
+            self.HistoryScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.HistoryScrollArea.setWidgetResizable(True)
             self.HistoryScrollArea.setObjectName("HistoryScrollArea")
             self.HistoryScrollLayout = QtWidgets.QWidget()
@@ -638,12 +609,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             # self.PlayerScrollArea.setFrameShape(QtWidgets.QFrame.Box)
             # self.PlayerScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
             self.PlayerScrollArea.setLineWidth(3)
-            self.PlayerScrollArea.setHorizontalScrollBarPolicy(
-                QtCore.Qt.ScrollBarAlwaysOff
-            )
-            self.PlayerScrollArea.setSizeAdjustPolicy(
-                QtWidgets.QAbstractScrollArea.AdjustIgnored
-            )
+            self.PlayerScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+            self.PlayerScrollArea.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
             self.PlayerScrollArea.setWidgetResizable(True)
             self.PlayerScrollArea.setAlignment(QtCore.Qt.AlignCenter)
             self.PlayerScrollArea.setObjectName("PlayerScrollArea")
@@ -676,9 +643,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 bundleUuid = current_Bundle[i].bundle_uuid
 
                 # Getting Bundle Banner as PixMap
-                bundleJson = requests.get(
-                    url=f"https://valorant-api.com/v1/bundles/{bundleUuid}"
-                ).json()
+                bundleJson = requests.get(url=f"https://valorant-api.com/v1/bundles/{bundleUuid}").json()
                 with concurrent.futures.ThreadPoolExecutor() as executor:
                     img = executor.submit(get_image, bundleJson["data"]["displayIcon2"])
                     img = img.result()
@@ -754,9 +719,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 self.verticalLayout_10.addWidget(self.BundleMain)
 
                 # Get every item and set a string (before a list!)
-                Prices = [
-                    f"Bundle Price - {current_Bundle[i].bundle_price} Valorant Points\n"
-                ]
+                Prices = [f"Bundle Price - {current_Bundle[i].bundle_price} Valorant Points\n"]
                 for item in current_Bundle[i].items:
                     if item.amount > 1:
                         Prices.append(
@@ -771,14 +734,10 @@ class Ui_ValorantTrackerByNavisGames(object):
                 # Set Texts
                 self.BundleTitle.setText(f"{bundleJson['data']['displayName']}")
                 self.BundlePrices.setText(Prices)
-                self.BundleLast.setText(
-                    f"Bundle remaining in Shop: {display_time(bundles.seconds_remaining, 3)}"
-                )
+                self.BundleLast.setText(f"Bundle remaining in Shop: {display_time(bundles.seconds_remaining, 3)}")
 
                 # Add Bundles
-                self.Tabs.addTab(
-                    self.Bundle[i], f"{bundleJson['data']['displayName']} Bundle"
-                )
+                self.Tabs.addTab(self.Bundle[i], f"{bundleJson['data']['displayName']} Bundle")
 
             # Index, Layout shit. blah blah you get it.
             self.verticalLayout_7.addWidget(self.Tabs)
@@ -801,23 +760,15 @@ class Ui_ValorantTrackerByNavisGames(object):
         try:
             # Functions
             def findTeamOfPlayer(player, players):
-                team = list(
-                    accumulate(p.team for p in players.all_players if p.name == player)
-                )
+                team = list(accumulate(p.team for p in players.all_players if p.name == player))
                 return team[0] if team else None
 
             def findStatsOfPlayer(player, players):
-                stats = list(
-                    accumulate(p.stats for p in players.all_players if p.name == player)
-                )
+                stats = list(accumulate(p.stats for p in players.all_players if p.name == player))
                 return stats[0] if stats else None
 
             def findAgentOfPlayer(player, players):
-                agent = list(
-                    accumulate(
-                        p.character for p in players.all_players if p.name == player
-                    )
-                )
+                agent = list(accumulate(p.character for p in players.all_players if p.name == player))
                 return agent if agent else None
 
             # API functions
@@ -865,9 +816,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Wins, Games Played
             try:
                 wins = RankDetails.by_season[current_season.lower()].wins
-                games_played = RankDetails.by_season[
-                    current_season.lower()
-                ].number_of_games
+                games_played = RankDetails.by_season[current_season.lower()].number_of_games
             except AttributeError:
                 wins = 0
                 games_played = 0
@@ -885,10 +834,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             lastRank = RankDetails.by_season
             for x in lastRank:
                 try:
-                    if (
-                        lastRank[x].final_rank_patched is not None
-                        and x != current_season.lower()
-                    ):
+                    if lastRank[x].final_rank_patched is not None and x != current_season.lower():
                         previous_ranks.append(
                             f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n"
                         )
@@ -1039,9 +985,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Add Texts
             self.History.setText(match_History)  # <- List which got made to a string
             self.AccuracyText.setText(
-                f"Headshots: {headshot_rate}%\n"
-                f"Bodyshots: {bodyshot_rate}%\n"
-                f"Legshots: {legshot_rate}%"
+                f"Headshots: {headshot_rate}%\n" f"Bodyshots: {bodyshot_rate}%\n" f"Legshots: {legshot_rate}%"
             )
             self.OtherStatsTexts.setText(
                 f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span style=\" font-size:22pt; \">Winrate: {round(total_wins / total_matches * 100)}%</span></p></body></html>"
@@ -1057,7 +1001,7 @@ class Ui_ValorantTrackerByNavisGames(object):
         start_time = time.time()
         try:
             # Get Values
-            season = self.Act.currentText()
+            season = self.Act.currentText().lower()
             region = self.LeaderBoardRegion.currentText()
             player_limit = int(self.Playercount.value())
             player_cards = {}
@@ -1068,12 +1012,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 pass
 
             # Get API
-            if season == current_season:
-                leaderboard = valo_api.get_leaderboard(version="v2", region=region)
-            else:
-                leaderboard = valo_api.get_leaderboard(
-                    version="v2", region=region, season_id=season
-                )
+            leaderboard = valo_api.get_leaderboard(version="v2", region=region, season_id=season)
 
             # Set all new Leaderboard stuff
             for i, x in enumerate(leaderboard.players):
@@ -1081,46 +1020,26 @@ class Ui_ValorantTrackerByNavisGames(object):
                     try:
 
                         # Setting player
-                        self.LeaderboardPlayer[i] = QtWidgets.QFrame(
-                            self.PlayerScrollAreaLayout
-                        )
+                        self.LeaderboardPlayer[i] = QtWidgets.QFrame(self.PlayerScrollAreaLayout)
                         self.LeaderboardPlayer[i].setEnabled(True)
                         # self.LeaderboardPlayer[i].setFrameShape(QtWidgets.QFrame.StyledPanel)
                         # self.LeaderboardPlayer[i].setFrameShadow(QtWidgets.QFrame.Raised)
                         self.LeaderboardPlayer[i].setObjectName("PlayerTemplate")
-                        self.LeaderboardPlayerLayout[i] = QtWidgets.QHBoxLayout(
-                            self.LeaderboardPlayer[i]
-                        )
+                        self.LeaderboardPlayerLayout[i] = QtWidgets.QHBoxLayout(self.LeaderboardPlayer[i])
                         self.LeaderboardPlayerLayout[i].setContentsMargins(0, 0, 0, 0)
-                        self.LeaderboardPlayerLayout[i].setObjectName(
-                            "PlayerLayoutTemplate"
-                        )
+                        self.LeaderboardPlayerLayout[i].setObjectName("PlayerLayoutTemplate")
 
                         # Setting Banner
-                        self.LeaderboardPlayerBanner[i] = QtWidgets.QLabel(
-                            self.LeaderboardPlayer[i]
-                        )
+                        self.LeaderboardPlayerBanner[i] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
                         self.LeaderboardPlayerBanner[i].setText("")
-                        self.LeaderboardPlayerBanner[i].setPixmap(
-                            QtGui.QPixmap("Images/Example/ExampleBanner.png")
-                        )
+                        self.LeaderboardPlayerBanner[i].setPixmap(QtGui.QPixmap("Images/Example/ExampleBanner.png"))
                         self.LeaderboardPlayerBanner[i].setScaledContents(False)
-                        self.LeaderboardPlayerBanner[i].setObjectName(
-                            "LeaderboardPlayerBanner"
-                        )
-                        self.LeaderboardPlayerLayout[i].addWidget(
-                            self.LeaderboardPlayerBanner[i]
-                        )
-                        self.LeaderboardPlayerInformation[i] = QtWidgets.QLabel(
-                            self.LeaderboardPlayer[i]
-                        )
+                        self.LeaderboardPlayerBanner[i].setObjectName("LeaderboardPlayerBanner")
+                        self.LeaderboardPlayerLayout[i].addWidget(self.LeaderboardPlayerBanner[i])
+                        self.LeaderboardPlayerInformation[i] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
 
                         # Getting changed later
-                        if (
-                            self.LeaderBoardRegion.currentText() == "E5A1"
-                            or "E5A2"
-                            or "E5A3"
-                        ):
+                        if self.LeaderBoardRegion.currentText() == "E5A1" or "E5A2" or "E5A3":
                             if x.competitiveTier == 27:
                                 rank = "Radiant"
                             elif x.competitiveTier == 26:
@@ -1156,15 +1075,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                             )
 
                         # blah blah layouts..
-                        self.LeaderboardPlayerInformation[i].setAlignment(
-                            QtCore.Qt.AlignCenter
-                        )
-                        self.LeaderboardPlayerInformation[i].setObjectName(
-                            "LeaderboardPlayerInformation"
-                        )
-                        self.LeaderboardPlayerLayout[i].addWidget(
-                            self.LeaderboardPlayerInformation[i]
-                        )
+                        self.LeaderboardPlayerInformation[i].setAlignment(QtCore.Qt.AlignCenter)
+                        self.LeaderboardPlayerInformation[i].setObjectName("LeaderboardPlayerInformation")
+                        self.LeaderboardPlayerLayout[i].addWidget(self.LeaderboardPlayerInformation[i])
 
                         self.LeaderboardPlayerSpacer[i] = QtWidgets.QSpacerItem(
                             40,
@@ -1172,9 +1085,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                             QtWidgets.QSizePolicy.Expanding,
                             QtWidgets.QSizePolicy.Minimum,
                         )
-                        self.LeaderboardPlayerLayout[i].addItem(
-                            self.LeaderboardPlayerSpacer[i]
-                        )
+                        self.LeaderboardPlayerLayout[i].addItem(self.LeaderboardPlayerSpacer[i])
                         self.verticalLayout_8.addWidget(self.LeaderboardPlayer[i])
 
                         # Getting players banner and add it to player_cards
@@ -1211,9 +1122,7 @@ class Ui_ValorantTrackerByNavisGames(object):
         self.PlayerName.setPlaceholderText("PLAYER NAME (16 characters)")
         self.PlayerTag.setText("")
         self.PlayerTag.setPlaceholderText("PLAYER TAG (5 characters)")
-        self.PlayerBanner.setPixmap(
-            QtGui.QPixmap("Images/Example/ExampleWideBanner.png")
-        )
+        self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/Example/ExampleWideBanner.png"))
         self.PlayerIDs.setText("puu-ID | EU")
         self.Player.setText(
             '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
