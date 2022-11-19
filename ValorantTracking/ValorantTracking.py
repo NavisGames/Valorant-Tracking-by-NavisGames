@@ -123,8 +123,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating Player Input Frame
             self.PlayerInput = QtWidgets.QFrame(self.Home)
             self.PlayerInput.setEnabled(True)
-            # self.PlayerInput.setFrameShape(QtWidgets.QFrame.Box)
-            # self.PlayerInput.setFrameShadow(QtWidgets.QFrame.Plain)
             self.PlayerInput.setLineWidth(0)
             self.PlayerInput.setObjectName("PlayerInput")
 
@@ -223,8 +221,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Create Player Output Banner & Data etc. Frame
             self.PlayerInformation = QtWidgets.QFrame(self.Home)
             self.PlayerInformation.setEnabled(True)
-            # self.PlayerInformation.setFrameShape(QtWidgets.QFrame.Box)
-            # self.PlayerInformation.setFrameShadow(QtWidgets.QFrame.Plain)
             self.PlayerInformation.setLineWidth(0)
             self.PlayerInformation.setObjectName("PlayerInformation")
             self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.PlayerInformation)
@@ -235,7 +231,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Create Player Banner PixMap
             self.PlayerBanner = QtWidgets.QLabel(self.PlayerInformation)
             self.PlayerBanner.setEnabled(True)
-            # self.PlayerBanner.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.PlayerBanner.setLineWidth(1)
             self.PlayerBanner.setText("")
             self.PlayerBanner.setPixmap(QtGui.QPixmap("Images/Example/ExampleWideBanner.png"))
@@ -247,8 +242,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Create Player Information Frame
             self.PlayerDatas = QtWidgets.QFrame(self.PlayerInformation)
-            # self.PlayerDatas.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            # self.PlayerDatas.setFrameShadow(QtWidgets.QFrame.Raised)
             self.PlayerDatas.setObjectName("PlayerDatas")
             self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.PlayerDatas)
             self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -260,7 +253,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             font = QtGui.QFont()
             font.setPointSize(15)
             self.PlayerIDs.setFont(font)
-            # self.PlayerIDs.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.PlayerIDs.setText("puu-ID | EU")
             self.PlayerIDs.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
             self.PlayerIDs.setObjectName("PlayerIDs")
@@ -273,7 +265,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             font = QtGui.QFont()
             font.setPointSize(35)
             self.Player.setFont(font)
-            # self.Player.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.Player.setText(
                 '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
             )
@@ -289,8 +280,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Accuracy & Stats Frame
             self.GeneralStats = QtWidgets.QFrame(self.Home)
-            # self.GeneralStats.setFrameShape(QtWidgets.QFrame.NoFrame)
-            # self.GeneralStats.setFrameShadow(QtWidgets.QFrame.Plain)
             self.GeneralStats.setLineWidth(1)
             self.GeneralStats.setObjectName("GeneralStats")
             self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.GeneralStats)
@@ -303,8 +292,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Accuracy Stats
             self.AccuarcyStats = QtWidgets.QFrame(self.GeneralStats)
-            # self.AccuarcyStats.setFrameShape(QtWidgets.QFrame.Box)
-            # self.AccuarcyStats.setFrameShadow(QtWidgets.QFrame.Plain)
             self.AccuarcyStats.setLineWidth(1)
             self.AccuarcyStats.setObjectName("AccuarcyStats")
             self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.AccuarcyStats)
@@ -363,8 +350,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Average KD & Win rate Frame
             self.OtherStats = QtWidgets.QFrame(self.GeneralStats)
-            # self.OtherStats.setFrameShape(QtWidgets.QFrame.Box)
-            # self.OtherStats.setFrameShadow(QtWidgets.QFrame.Plain)
             self.OtherStats.setObjectName("OtherStats")
             self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.OtherStats)
             self.verticalLayout_9.setContentsMargins(5, 0, 5, 0)
@@ -389,8 +374,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating Stats Frame
             self.verticalLayout.addWidget(self.GeneralStats)
             self.Stats = QtWidgets.QFrame(self.Home)
-            # self.Stats.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            # self.Stats.setFrameShadow(QtWidgets.QFrame.Raised)
             self.Stats.setObjectName("Stats")
             self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.Stats)
             self.horizontalLayout_6.setContentsMargins(5, 5, 5, 5)
@@ -399,8 +382,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating CompetitiveStats Frame for Stats
             self.CompInformation = QtWidgets.QFrame(self.Stats)
             self.CompInformation.setEnabled(True)
-            # self.CompInformation.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            # self.CompInformation.setFrameShadow(QtWidgets.QFrame.Raised)
             self.CompInformation.setObjectName("CompInformation")
             self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.CompInformation)
             self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -435,7 +416,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             font = QtGui.QFont()
             font.setPointSize(14)
             self.CompHistory.setFont(font)
-            # self.CompHistory.setFrameShape(QtWidgets.QFrame.Box)
             self.CompHistory.setLineWidth(1)
             self.CompHistory.setText(
                 "Matchmaking Ratio \n"
@@ -455,8 +435,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating Match History Frame for Stats
             self.MatchHistory = QtWidgets.QFrame(self.Stats)
             self.MatchHistory.setEnabled(True)
-            # self.MatchHistory.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            # self.MatchHistory.setFrameShadow(QtWidgets.QFrame.Raised)
             self.MatchHistory.setObjectName("MatchHistory")
             self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.MatchHistory)
             self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -473,8 +451,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating ScrollArea for the Field of Match History
             self.HistoryScrollArea = QtWidgets.QScrollArea(self.MatchHistory)
             self.HistoryScrollArea.setEnabled(True)
-            # self.HistoryScrollArea.setFrameShape(QtWidgets.QFrame.Box)
-            # self.HistoryScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
             self.HistoryScrollArea.setLineWidth(1)
             self.HistoryScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.HistoryScrollArea.setWidgetResizable(True)
@@ -518,8 +494,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Leaderboard Input Frame
             self.LeaderBoardInput = QtWidgets.QFrame(self.Leaderboard)
-            # self.LeaderBoardInput.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            # self.LeaderBoardInput.setFrameShadow(QtWidgets.QFrame.Raised)
             self.LeaderBoardInput.setObjectName("LeaderBoardInput")
             self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.LeaderBoardInput)
             self.horizontalLayout_7.setContentsMargins(5, 0, 5, 0)
@@ -606,8 +580,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Players.setContentsMargins(5, 5, 5, 5)
             self.Players.setObjectName("Players")
             self.PlayerScrollArea = QtWidgets.QScrollArea(self.Leaderboard)
-            # self.PlayerScrollArea.setFrameShape(QtWidgets.QFrame.Box)
-            # self.PlayerScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
             self.PlayerScrollArea.setLineWidth(3)
             self.PlayerScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.PlayerScrollArea.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
@@ -658,8 +630,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # Creating Bundle MainFrame
                 self.BundleMain = QtWidgets.QFrame(self.Bundle[i])
-                # self.BundleMain.setFrameShape(QtWidgets.QFrame.StyledPanel)
-                # self.BundleMain.setFrameShadow(QtWidgets.QFrame.Raised)
                 self.BundleMain.setObjectName("BundleMain")
                 self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.BundleMain)
                 self.verticalLayout_11.setContentsMargins(0, 0, 0, 0)
@@ -701,7 +671,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                     "Weapon: 0 VP | 0 VP -> Whole Bundle\n"
                     "2x Buddy: 0 VP | 0 VP -> Whole Bundle\n"
                     "Player Card: 0 VP | 0 VP -> Whole Bundle\n"
-                    " Spray: 0 VP | 0 VP -> Whole Bundle"
+                    "Spray: 0 VP | 0 VP -> Whole Bundle"
                 )
                 self.BundlePrices.setAlignment(QtCore.Qt.AlignCenter)
                 self.BundlePrices.setObjectName("BundlePrices")
@@ -1022,8 +992,6 @@ class Ui_ValorantTrackerByNavisGames(object):
                         # Setting player
                         self.LeaderboardPlayer[i] = QtWidgets.QFrame(self.PlayerScrollAreaLayout)
                         self.LeaderboardPlayer[i].setEnabled(True)
-                        # self.LeaderboardPlayer[i].setFrameShape(QtWidgets.QFrame.StyledPanel)
-                        # self.LeaderboardPlayer[i].setFrameShadow(QtWidgets.QFrame.Raised)
                         self.LeaderboardPlayer[i].setObjectName("PlayerTemplate")
                         self.LeaderboardPlayerLayout[i] = QtWidgets.QHBoxLayout(self.LeaderboardPlayer[i])
                         self.LeaderboardPlayerLayout[i].setContentsMargins(0, 0, 0, 0)
