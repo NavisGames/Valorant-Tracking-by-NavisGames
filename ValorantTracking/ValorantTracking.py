@@ -13,47 +13,9 @@ import requests
 import httpx as http
 import concurrent.futures
 import time
+from functions import get_image, display_time, clearLayout
 
 current_season = "E5A3"
-
-intervals = (
-    ("Weeks", 604800),  # 60 * 60 * 24 * 7
-    ("Days", 86400),  # 60 * 60 * 24
-    ("Hours", 3600),  # 60 * 60
-    ("Minutes", 60),
-    ("Seconds", 1),
-)
-
-
-def get_image(url):
-    with http.Client() as client:
-        r = client.get(url)
-    img = QImage()
-    img.loadFromData(r.content)
-    return img
-
-
-def display_time(seconds, granularity=2):
-    result = []
-
-    for name, count in intervals:
-        value = seconds // count
-        if value:
-            seconds -= value * count
-            if value == 1:
-                name = name.rstrip("s")
-            result.append("{} {}".format(value, name))
-    return " ".join(result[:granularity])
-
-
-def clearLayout(layout):
-    if layout is not None:
-        while layout.count():
-            child = layout.takeAt(0)
-            if child.widget() is not None:
-                child.widget().deleteLater()
-            elif child.layout() is not None:
-                clearLayout(child.layout())
 
 
 class Ui_ValorantTrackerByNavisGames(object):
