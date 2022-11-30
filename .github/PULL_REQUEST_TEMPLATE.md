@@ -13,6 +13,7 @@
 - [ ] 🚀 New Feature
 - [ ] ♻ Rework (redesign, rework of a feature, remake of a website etc.)
 - [ ] 🐞 Bug fix (a non-breaking change to fix an issue)
+- [ ] ➕ Adding a function to an existing function (example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
 - [ ] 🔨 Any updates / dumps etc.
 
 ## "Terms of Service"
