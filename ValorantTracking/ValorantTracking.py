@@ -838,6 +838,13 @@ class Ui_ValorantTrackerByNavisGames(object):
                 bodyshots += get_stats.bodyshots
                 legshots += get_stats.legshots
 
+                try:
+                    HSR = round(
+                        get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
+                    )
+                except ZeroDivisionError:
+                    HSR = None
+
                 # Rounds to 0.00 <- 2 Decimals
                 try:
                     KD = format(kills / deaths, ".2f")
@@ -878,7 +885,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                     )
                 else:
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} Headshot-rate | {score} Score\n\n"
                     )
             # Set Match to Text
             match_History = "".join(match_History)
