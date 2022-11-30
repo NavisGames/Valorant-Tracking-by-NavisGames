@@ -838,6 +838,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 bodyshots += get_stats.bodyshots
                 legshots += get_stats.legshots
 
+                # Calculate Headshot-rate in the Match
                 try:
                     HSR = round(
                         get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
