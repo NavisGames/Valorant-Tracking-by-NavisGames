@@ -8,7 +8,7 @@
 [![LICENSE](https://img.shields.io/github/license/NavisGames/Valorant-Tracking-by-NavisGames)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/NavisGames/Valorant-Tracking-by-NavisGames/total)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/releases)
 
-[![Stars](https://img.shields.io/github/stars/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)]()
+[![Stars](https://img.shields.io/github/stars/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/stargazers)
 [![Issues](https://img.shields.io/github/issues-raw/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr-raw/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pulls)
   
