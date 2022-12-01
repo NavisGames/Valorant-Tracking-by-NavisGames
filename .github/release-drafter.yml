@@ -1,5 +1,5 @@
-name-template: "Version $NEXT_PATCH_VERSION"
-tag-template: "Version $NEXT_PATCH_VERSION"
+name-template: "Version $NEXT_MINOR_VERSION"
+tag-template: "v.$NEXT_MINOR_VERSION"
 
 categories:
   - title: "🚀 New features"
@@ -14,13 +14,14 @@ categories:
   - title: "🐞 known bugs"
     labels:
       - "bugs"
-  - title: "📝 Documentations and questions"
+  - title: "🕸 Staled Issues & PRs | Wont fix"
+    labels:
+      - "stale"
+  - title: "📝 Other"
     labels:
       - "documentation"
       - "questions"
-  - title: "🕸 Staled Issues & PRs"
-    labels:
-      - "stale"
+      - "other"
   - title: "🔨 Dependencies updates"
     labels:
       - "dependencies"
