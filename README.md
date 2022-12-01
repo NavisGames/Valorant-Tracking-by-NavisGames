@@ -1,12 +1,17 @@
 <div align="center">
 
+[![API](https://img.shields.io/badge/API-valo--api-red)](https://github.com/Henrik-3/unofficial-valorant-api)
 [![Dependencies](https://img.shields.io/librariesio/github/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pulls)
 [![Latest Commit](https://img.shields.io/github/last-commit/NavisGames/Valorant-Tracking-by-NavisGames/main?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/tree/main)
 [![Most used Langauge](https://img.shields.io/github/languages/top/NavisGames/Valorant-Tracking-by-NavisGames)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames)
 
 [![LICENSE](https://img.shields.io/github/license/NavisGames/Valorant-Tracking-by-NavisGames)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/blob/main/LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/NavisGames/Valorant-Tracking-by-NavisGames/total)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/releases)
-[![API](https://img.shields.io/badge/API-valo--api-red)](https://github.com/Henrik-3/unofficial-valorant-api)
+
+[![Stars](https://img.shields.io/github/stars/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)]()
+[![Issues](https://img.shields.io/github/issues-raw/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr-raw/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pulls)
+  
 </div>
 
 # Valorant Tracking by NavisGames
