@@ -156,6 +156,10 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerRegion.setItemText(4, "LATAM")
             self.PlayerRegion.addItem("")
             self.PlayerRegion.setItemText(5, "BR")
+            self.PlayerRegion.setEditable(True)
+            self.PlayerRegionEdit = self.PlayerRegion.lineEdit()
+            self.PlayerRegionEdit.setAlignment(Qt.AlignCenter)
+            self.PlayerRegionEdit.setReadOnly(True)
             self.horizontalLayout.addWidget(self.PlayerRegion)
 
             # Create Apply, Reset Buttons
@@ -489,7 +493,11 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Act.setItemText(10, "E2A2")
             self.Act.addItem("")
             self.Act.setItemText(11, "E2A2")
+            self.Act.setEditable(True)
             self.horizontalLayout_7.addWidget(self.Act)
+            self.ActEdit = self.Act.lineEdit()
+            self.ActEdit.setAlignment(Qt.AlignCenter)
+            self.ActEdit.setReadOnly(True)
 
             # Creating Leaderboard Regions
             self.LeaderBoardRegion = QtWidgets.QComboBox(self.LeaderBoardInput)
@@ -512,9 +520,13 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.LeaderBoardRegion.setItemText(4, "LATAM")
             self.LeaderBoardRegion.addItem("")
             self.LeaderBoardRegion.setItemText(5, "BR")
+            self.LeaderBoardRegion.setEditable(True)
             self.horizontalLayout_7.addWidget(self.LeaderBoardRegion)
+            self.LeaderboardEdit = self.LeaderBoardRegion.lineEdit()
+            self.LeaderboardEdit.setAlignment(Qt.AlignCenter)
+            self.LeaderboardEdit.setReadOnly(True)
 
-            # Create Playercount Box
+            # Create Player count Box
             self.Playercount = QtWidgets.QSpinBox(self.LeaderBoardInput)
             self.Playercount.setWrapping(False)
             self.Playercount.setFrame(True)
