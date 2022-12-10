@@ -13,7 +13,7 @@ import requests
 import httpx as http
 import concurrent.futures
 import time
-from functions import get_image, display_time, clearLayout
+from functions import get_image, display_time, clearLayout, findAgentOfPlayer, findStatsOfPlayer, findTeamOfPlayer
 
 current_season = "E5A3"
 
@@ -41,7 +41,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Set Font, WindowTitle and Icon
             ValorantTrackerByNavisGames.setFont(font)
             ValorantTrackerByNavisGames.setMouseTracking(False)
-            ValorantTrackerByNavisGames.setWindowTitle("Valorant Tracker 2.0 By NavisGames")
+            ValorantTrackerByNavisGames.setWindowTitle("Valorant Tracking 2.1 By NavisGames")
             icon = QtGui.QIcon()
             icon.addPixmap(QtGui.QPixmap("Images/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             ValorantTrackerByNavisGames.setWindowIcon(icon)
@@ -156,6 +156,10 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerRegion.setItemText(4, "LATAM")
             self.PlayerRegion.addItem("")
             self.PlayerRegion.setItemText(5, "BR")
+            self.PlayerRegion.setEditable(True)
+            self.PlayerRegionEdit = self.PlayerRegion.lineEdit()
+            self.PlayerRegionEdit.setAlignment(Qt.AlignCenter)
+            self.PlayerRegionEdit.setReadOnly(True)
             self.horizontalLayout.addWidget(self.PlayerRegion)
 
             # Create Apply, Reset Buttons
@@ -334,7 +338,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_8.addItem(spacerItem3)
 
             # Creating Stats Frame
-            self.verticalLayout.addWidget(self.GeneralStats)
             self.Stats = QtWidgets.QFrame(self.Home)
             self.Stats.setObjectName("Stats")
             self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.Stats)
@@ -379,6 +382,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             font.setPointSize(14)
             self.CompHistory.setFont(font)
             self.CompHistory.setLineWidth(1)
+            self.CompHistory.setWordWrap(True)
             self.CompHistory.setText(
                 "Matchmaking Ratio \n"
                 "Competitive Wins \n"
@@ -402,13 +406,49 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout_4.setObjectName("verticalLayout_4")
 
-            # Craeting History Title
+            # Creating History Title
             self.HistoryTitle = QtWidgets.QLabel(self.MatchHistory)
             self.HistoryTitle.setEnabled(True)
             self.HistoryTitle.setText("MATCH HISTORY")
             self.HistoryTitle.setAlignment(QtCore.Qt.AlignCenter)
             self.HistoryTitle.setObjectName("HistoryTitle")
             self.verticalLayout_4.addWidget(self.HistoryTitle)
+
+            # Creating GameModes Layout
+            self.GameModes = QtWidgets.QHBoxLayout()
+            self.GameModes.setContentsMargins(0, 0, 0, 0)
+            self.GameModes.setSpacing(0)
+            self.GameModes.setObjectName("GameModes")
+
+            # Creating all Modes to choose from
+            self.All = QtWidgets.QRadioButton(self.MatchHistory)
+            self.All.setText("All")
+            self.All.setChecked(True)
+            self.All.setAutoRepeat(False)
+            self.All.setObjectName("all")
+            self.GameModes.addWidget(self.All)
+            self.Competitive = QtWidgets.QRadioButton(self.MatchHistory)
+            self.Competitive.setText("Competitive")
+            self.Competitive.setAutoExclusive(True)
+            self.Competitive.setObjectName("Competitive")
+            self.GameModes.addWidget(self.Competitive)
+            self.Unrated = QtWidgets.QRadioButton(self.MatchHistory)
+            self.Unrated.setText("Unrated")
+            self.Unrated.setObjectName("Unrated")
+            self.GameModes.addWidget(self.Unrated)
+            self.Deathmatch = QtWidgets.QRadioButton(self.MatchHistory)
+            self.Deathmatch.setText("Deathmatch")
+            self.Deathmatch.setObjectName("Deathmatch")
+            self.GameModes.addWidget(self.Deathmatch)
+            self.Swiftplay = QtWidgets.QRadioButton(self.MatchHistory)
+            self.Swiftplay.setText("Swiftplay")
+            self.Swiftplay.setObjectName("Swiftplay")
+            self.GameModes.addWidget(self.Swiftplay)
+            self.Spikerush = QtWidgets.QRadioButton(self.MatchHistory)
+            self.Spikerush.setText("SpikeRush")
+            self.Spikerush.setObjectName("Spikerush")
+            self.GameModes.addWidget(self.Spikerush)
+            self.verticalLayout_4.addLayout(self.GameModes)
 
             # Creating ScrollArea for the Field of Match History
             self.HistoryScrollArea = QtWidgets.QScrollArea(self.MatchHistory)
@@ -429,6 +469,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             font = QtGui.QFont()
             font.setPointSize(14)
             self.History.setFont(font)
+            self.History.setWordWrap(True)
             self.History.setText(
                 "Day, Date, Time | Match ID\n"
                 "REGION - CLUSTER\n"
@@ -442,7 +483,10 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.HistoryScrollArea.setWidget(self.HistoryScrollLayout)
             self.verticalLayout_4.addWidget(self.HistoryScrollArea)
             self.horizontalLayout_6.addWidget(self.MatchHistory)
+
+            # Adding Widgets to HOME
             self.verticalLayout.addWidget(self.Stats)
+            self.verticalLayout.addWidget(self.GeneralStats)
 
             # Add HOME Tab to Tabs
             self.Tabs.addTab(self.Home, "HOME")
@@ -489,7 +533,11 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Act.setItemText(10, "E2A2")
             self.Act.addItem("")
             self.Act.setItemText(11, "E2A2")
+            self.Act.setEditable(True)
             self.horizontalLayout_7.addWidget(self.Act)
+            self.ActEdit = self.Act.lineEdit()
+            self.ActEdit.setAlignment(Qt.AlignCenter)
+            self.ActEdit.setReadOnly(True)
 
             # Creating Leaderboard Regions
             self.LeaderBoardRegion = QtWidgets.QComboBox(self.LeaderBoardInput)
@@ -512,9 +560,13 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.LeaderBoardRegion.setItemText(4, "LATAM")
             self.LeaderBoardRegion.addItem("")
             self.LeaderBoardRegion.setItemText(5, "BR")
+            self.LeaderBoardRegion.setEditable(True)
             self.horizontalLayout_7.addWidget(self.LeaderBoardRegion)
+            self.LeaderboardEdit = self.LeaderBoardRegion.lineEdit()
+            self.LeaderboardEdit.setAlignment(Qt.AlignCenter)
+            self.LeaderboardEdit.setReadOnly(True)
 
-            # Create Playercount Box
+            # Create Player count Box
             self.Playercount = QtWidgets.QSpinBox(self.LeaderBoardInput)
             self.Playercount.setWrapping(False)
             self.Playercount.setFrame(True)
@@ -683,6 +735,13 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.resetButton.clicked.connect(self.reset_information)
             self.Reload.clicked.connect(self.leaderboard)
             self.modeSwitcher.clicked.connect(self.modeSwitch)
+            self.All.clicked.connect(self.allGamemodes)
+            self.Competitive.clicked.connect(self.CompOnly)
+            self.Unrated.clicked.connect(self.UnratedOnly)
+            self.Deathmatch.clicked.connect(self.DeathMatchOnly)
+            self.Swiftplay.clicked.connect(self.SwiftOnly)
+            self.Spikerush.clicked.connect(self.SpikeOnly)
+
             QtCore.QMetaObject.connectSlotsByName(ValorantTrackerByNavisGames)
 
         except BaseException:
@@ -690,19 +749,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
     def get_information(self):
         try:
-            # Functions
-            def findTeamOfPlayer(player, players):
-                team = list(accumulate(p.team for p in players.all_players if p.name == player))
-                return team[0] if team else None
-
-            def findStatsOfPlayer(player, players):
-                stats = list(accumulate(p.stats for p in players.all_players if p.name == player))
-                return stats[0] if stats else None
-
-            def findAgentOfPlayer(player, players):
-                agent = list(accumulate(p.character for p in players.all_players if p.name == player))
-                return agent if agent else None
-
             # API functions
             Details = valo_api.get_account_details_by_name(
                 version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
@@ -838,7 +884,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 bodyshots += get_stats.bodyshots
                 legshots += get_stats.legshots
 
-                # Calculate Headshot-rate in the Match
+                # Calculate HS% in the Match
                 try:
                     HSR = round(
                         get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
@@ -886,7 +932,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                     )
                 else:
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} Headshot-rate | {score} Score\n\n"
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
                     )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -1114,6 +1160,622 @@ class Ui_ValorantTrackerByNavisGames(object):
             dark_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
             dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(35, 35, 35))
             QApplication.setPalette(dark_palette)
+
+    def allGamemodes(self):
+        self.All.setDisabled(True)
+        self.Competitive.setDisabled(False)
+        self.Unrated.setDisabled(False)
+        self.Deathmatch.setDisabled(False)
+        self.Swiftplay.setDisabled(False)
+        self.Spikerush.setDisabled(False)
+
+        try:
+            # Get Details
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
+            )
+
+            # Get Match History
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+                size=10,
+            )
+
+            # Get Match History as a List, and gets every current matches
+            match_History = []
+
+            headshots = 0
+            bodyshots = 0
+            legshots = 0
+
+            for x in HistoryDetails:
+
+                # Match, Team and Players
+                match = x.metadata
+                teams = x.teams
+                players = x.players
+
+                # Get Stats of Player with get_stats function
+                get_stats = findStatsOfPlayer(Details.name, players)
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                score = get_stats.score
+
+                # Get Agent of Player
+                get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Add Aim rates
+                headshots += get_stats.headshots
+                bodyshots += get_stats.bodyshots
+                legshots += get_stats.legshots
+
+                # Calculate HS% in the Match
+                try:
+                    HSR = round(
+                        get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
+                    )
+                except ZeroDivisionError:
+                    HSR = None
+
+                # Rounds to 0.00 <- 2 Decimals
+                try:
+                    KD = format(kills / deaths, ".2f")
+                except ZeroDivisionError:
+                    KD = format(kills, ".2f")
+
+                # Get Team and Team information of Player with get_team function
+                get_team = findTeamOfPlayer(Details.name, players)
+                if get_team == "Blue":
+                    get_team = teams.blue
+                else:
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
+
+                # If match lost, make text lost
+                if won:
+                    won = "WON"
+                else:
+                    won = "LOST"
+
+                # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
+                match_id = match.matchid
+                match_map = match.map
+                region = match.region.upper()
+                cluster = match.cluster
+                mode = match.mode
+
+                # If Deathmatch, remove Rounds and Won/Lost
+                if mode == "Deathmatch":
+                    match_History.append(
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                    )
+                else:
+                    match_History.append(
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                    )
+            # Set Match to Text
+            match_History = "".join(match_History)
+            self.History.setText(match_History)  # <- List which got made to a string
+        except BaseException:
+            print(traceback.format_exc())
+
+    def CompOnly(self):
+        self.All.setDisabled(False)
+        self.Competitive.setDisabled(True)
+        self.Unrated.setDisabled(False)
+        self.Deathmatch.setDisabled(False)
+        self.Swiftplay.setDisabled(False)
+        self.Spikerush.setDisabled(False)
+
+        try:
+            # Get Details
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
+            )
+
+            # Get Match History
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+                size=10,
+                game_mode="competitive",
+            )
+
+            # Get Match History as a List, and gets every current matches
+            match_History = []
+
+            headshots = 0
+            bodyshots = 0
+            legshots = 0
+
+            for x in HistoryDetails:
+
+                # Match, Team and Players
+                match = x.metadata
+                teams = x.teams
+                players = x.players
+
+                # Get Stats of Player with get_stats function
+                get_stats = findStatsOfPlayer(Details.name, players)
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                score = get_stats.score
+
+                # Get Agent of Player
+                get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Add Aim rates
+                headshots += get_stats.headshots
+                bodyshots += get_stats.bodyshots
+                legshots += get_stats.legshots
+
+                # Calculate HS% in the Match
+                try:
+                    HSR = round(
+                        get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
+                    )
+                except ZeroDivisionError:
+                    HSR = None
+
+                # Rounds to 0.00 <- 2 Decimals
+                try:
+                    KD = format(kills / deaths, ".2f")
+                except ZeroDivisionError:
+                    KD = format(kills, ".2f")
+
+                # Get Team and Team information of Player with get_team function
+                get_team = findTeamOfPlayer(Details.name, players)
+                if get_team == "Blue":
+                    get_team = teams.blue
+                else:
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
+
+                # If match lost, make text lost
+                if won:
+                    won = "WON"
+                else:
+                    won = "LOST"
+
+                # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
+                match_id = match.matchid
+                match_map = match.map
+                region = match.region.upper()
+                cluster = match.cluster
+                mode = match.mode
+
+                # If Deathmatch, remove Rounds and Won/Lost
+                match_History.append(
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                )
+            # Set Match to Text
+            match_History = "".join(match_History)
+            self.History.setText(match_History)  # <- List which got made to a string
+        except BaseException:
+            print(traceback.format_exc())
+
+    def UnratedOnly(self):
+        self.All.setDisabled(False)
+        self.Competitive.setDisabled(False)
+        self.Unrated.setDisabled(True)
+        self.Deathmatch.setDisabled(False)
+        self.Swiftplay.setDisabled(False)
+        self.Spikerush.setDisabled(False)
+
+        try:
+            # Get Details
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
+            )
+
+            # Get Match History
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+                size=10,
+                game_mode="unrated",
+            )
+
+            # Get Match History as a List, and gets every current matches
+            match_History = []
+
+            headshots = 0
+            bodyshots = 0
+            legshots = 0
+
+            for x in HistoryDetails:
+
+                # Match, Team and Players
+                match = x.metadata
+                teams = x.teams
+                players = x.players
+
+                # Get Stats of Player with get_stats function
+                get_stats = findStatsOfPlayer(Details.name, players)
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                score = get_stats.score
+
+                # Get Agent of Player
+                get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Add Aim rates
+                headshots += get_stats.headshots
+                bodyshots += get_stats.bodyshots
+                legshots += get_stats.legshots
+
+                # Calculate HS% in the Match
+                try:
+                    HSR = round(
+                        get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
+                    )
+                except ZeroDivisionError:
+                    HSR = None
+
+                # Rounds to 0.00 <- 2 Decimals
+                try:
+                    KD = format(kills / deaths, ".2f")
+                except ZeroDivisionError:
+                    KD = format(kills, ".2f")
+
+                # Get Team and Team information of Player with get_team function
+                get_team = findTeamOfPlayer(Details.name, players)
+                if get_team == "Blue":
+                    get_team = teams.blue
+                else:
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
+
+                # If match lost, make text lost
+                if won:
+                    won = "WON"
+                else:
+                    won = "LOST"
+
+                # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
+                match_id = match.matchid
+                match_map = match.map
+                region = match.region.upper()
+                cluster = match.cluster
+                mode = match.mode
+
+                # If Deathmatch, remove Rounds and Won/Lost
+                match_History.append(
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                )
+            # Set Match to Text
+            match_History = "".join(match_History)
+            self.History.setText(match_History)  # <- List which got made to a string
+        except BaseException:
+            print(traceback.format_exc())
+
+    def DeathMatchOnly(self):
+        self.All.setDisabled(False)
+        self.Competitive.setDisabled(False)
+        self.Unrated.setDisabled(False)
+        self.Deathmatch.setDisabled(True)
+        self.Swiftplay.setDisabled(False)
+        self.Spikerush.setDisabled(False)
+
+        try:
+            # Get Details
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
+            )
+
+            # Get Match History
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+                size=10,
+                game_mode="deathmatch",
+            )
+
+            # Get Match History as a List, and gets every current matches
+            match_History = []
+
+            headshots = 0
+            bodyshots = 0
+            legshots = 0
+
+            for x in HistoryDetails:
+
+                # Match, Team and Players
+                match = x.metadata
+                teams = x.teams
+                players = x.players
+
+                # Get Stats of Player with get_stats function
+                get_stats = findStatsOfPlayer(Details.name, players)
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                score = get_stats.score
+
+                # Get Agent of Player
+                get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Add Aim rates
+                headshots += get_stats.headshots
+                bodyshots += get_stats.bodyshots
+                legshots += get_stats.legshots
+
+                # Calculate HS% in the Match
+                try:
+                    HSR = round(
+                        get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
+                    )
+                except ZeroDivisionError:
+                    HSR = None
+
+                # Rounds to 0.00 <- 2 Decimals
+                try:
+                    KD = format(kills / deaths, ".2f")
+                except ZeroDivisionError:
+                    KD = format(kills, ".2f")
+
+                # Get Team and Team information of Player with get_team function
+                get_team = findTeamOfPlayer(Details.name, players)
+                if get_team == "Blue":
+                    get_team = teams.blue
+                else:
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
+
+                # If match lost, make text lost
+                if won:
+                    won = "WON"
+                else:
+                    won = "LOST"
+
+                # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
+                match_id = match.matchid
+                match_map = match.map
+                region = match.region.upper()
+                cluster = match.cluster
+                mode = match.mode
+
+                # If Deathmatch, remove Rounds and Won/Lost
+                match_History.append(
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                )
+            # Set Match to Text
+            match_History = "".join(match_History)
+            self.History.setText(match_History)  # <- List which got made to a string
+        except BaseException:
+            print(traceback.format_exc())
+
+    def SwiftOnly(self):
+        self.All.setDisabled(False)
+        self.Competitive.setDisabled(False)
+        self.Unrated.setDisabled(False)
+        self.Deathmatch.setDisabled(False)
+        self.Swiftplay.setDisabled(True)
+        self.Spikerush.setDisabled(False)
+
+        try:
+            # Get Details
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
+            )
+
+            # Get Match History
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+                size=10,
+                game_mode="swiftplay",
+            )
+
+            # Get Match History as a List, and gets every current matches
+            match_History = []
+
+            headshots = 0
+            bodyshots = 0
+            legshots = 0
+
+            for x in HistoryDetails:
+
+                # Match, Team and Players
+                match = x.metadata
+                teams = x.teams
+                players = x.players
+
+                # Get Stats of Player with get_stats function
+                get_stats = findStatsOfPlayer(Details.name, players)
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                score = get_stats.score
+
+                # Get Agent of Player
+                get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Add Aim rates
+                headshots += get_stats.headshots
+                bodyshots += get_stats.bodyshots
+                legshots += get_stats.legshots
+
+                # Calculate HS% in the Match
+                try:
+                    HSR = round(
+                        get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
+                    )
+                except ZeroDivisionError:
+                    HSR = None
+
+                # Rounds to 0.00 <- 2 Decimals
+                try:
+                    KD = format(kills / deaths, ".2f")
+                except ZeroDivisionError:
+                    KD = format(kills, ".2f")
+
+                # Get Team and Team information of Player with get_team function
+                get_team = findTeamOfPlayer(Details.name, players)
+                if get_team == "Blue":
+                    get_team = teams.blue
+                else:
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
+
+                # If match lost, make text lost
+                if won:
+                    won = "WON"
+                else:
+                    won = "LOST"
+
+                # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
+                match_id = match.matchid
+                match_map = match.map
+                region = match.region.upper()
+                cluster = match.cluster
+                mode = match.mode
+
+                # If Deathmatch, remove Rounds and Won/Lost
+                match_History.append(
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                )
+            # Set Match to Text
+            match_History = "".join(match_History)
+            self.History.setText(match_History)  # <- List which got made to a string
+        except BaseException:
+            print(traceback.format_exc())
+
+    def SpikeOnly(self):
+        self.All.setDisabled(False)
+        self.Competitive.setDisabled(False)
+        self.Unrated.setDisabled(False)
+        self.Deathmatch.setDisabled(False)
+        self.Swiftplay.setDisabled(False)
+        self.Spikerush.setDisabled(True)
+
+        try:
+            # Get Details
+            Details = valo_api.get_account_details_by_name(
+                version="v1", name=self.PlayerName.text(), tag=self.PlayerTag.text()
+            )
+
+            # Get Match History
+            HistoryDetails = valo_api.get_match_history_by_name(
+                version="v3",
+                region=self.PlayerRegion.currentText(),
+                name=self.PlayerName.text(),
+                tag=self.PlayerTag.text(),
+                size=10,
+                game_mode="spikerush",
+            )
+
+            # Get Match History as a List, and gets every current matches
+            match_History = []
+
+            headshots = 0
+            bodyshots = 0
+            legshots = 0
+
+            for x in HistoryDetails:
+
+                # Match, Team and Players
+                match = x.metadata
+                teams = x.teams
+                players = x.players
+
+                # Get Stats of Player with get_stats function
+                get_stats = findStatsOfPlayer(Details.name, players)
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                score = get_stats.score
+
+                # Get Agent of Player
+                get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Add Aim rates
+                headshots += get_stats.headshots
+                bodyshots += get_stats.bodyshots
+                legshots += get_stats.legshots
+
+                # Calculate HS% in the Match
+                try:
+                    HSR = round(
+                        get_stats.headshots / (get_stats.headshots + get_stats.bodyshots + get_stats.legshots) * 100
+                    )
+                except ZeroDivisionError:
+                    HSR = None
+
+                # Rounds to 0.00 <- 2 Decimals
+                try:
+                    KD = format(kills / deaths, ".2f")
+                except ZeroDivisionError:
+                    KD = format(kills, ".2f")
+
+                # Get Team and Team information of Player with get_team function
+                get_team = findTeamOfPlayer(Details.name, players)
+                if get_team == "Blue":
+                    get_team = teams.blue
+                else:
+                    get_team = teams.red
+
+                # Set when Won, Rounds Won, Lost.
+                won = get_team.has_won
+                rounds_won = get_team.rounds_won
+                rounds_lost = get_team.rounds_lost
+
+                # If match lost, make text lost
+                if won:
+                    won = "WON"
+                else:
+                    won = "LOST"
+
+                # Get Match ID, Map, Region, Cluster and Mode with Match Metadata
+                match_id = match.matchid
+                match_map = match.map
+                region = match.region.upper()
+                cluster = match.cluster
+                mode = match.mode
+
+                # If Deathmatch, remove Rounds and Won/Lost
+                match_History.append(
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                )
+            # Set Match to Text
+            match_History = "".join(match_History)
+            self.History.setText(match_History)  # <- List which got made to a string
+        except BaseException:
+            print(traceback.format_exc())
 
 
 if __name__ == "__main__":
