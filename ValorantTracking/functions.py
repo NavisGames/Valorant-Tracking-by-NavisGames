@@ -43,3 +43,18 @@ def clearLayout(layout):
                 child.widget().deleteLater()
             elif child.layout() is not None:
                 clearLayout(child.layout())
+
+
+def findTeamOfPlayer(player, players):
+    team = list(accumulate(p.team for p in players.all_players if p.name == player))
+    return team[0] if team else None
+
+
+def findStatsOfPlayer(player, players):
+    stats = list(accumulate(p.stats for p in players.all_players if p.name == player))
+    return stats[0] if stats else None
+
+
+def findAgentOfPlayer(player, players):
+    agent = list(accumulate(p.character for p in players.all_players if p.name == player))
+    return agent if agent else None
