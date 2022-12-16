@@ -46,7 +46,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Set Font, WindowTitle and Icon
             ValorantTrackerByNavisGames.setFont(font)
             ValorantTrackerByNavisGames.setMouseTracking(False)
-            ValorantTrackerByNavisGames.setWindowTitle("Valorant Tracking 2.1 By NavisGames")
+            ValorantTrackerByNavisGames.setWindowTitle("Valorant Tracking 2.1.1 By NavisGames")
             icon = QtGui.QIcon()
             icon.addPixmap(QtGui.QPixmap("Images/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             ValorantTrackerByNavisGames.setWindowIcon(icon)
