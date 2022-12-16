@@ -783,9 +783,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 tag=self.PlayerTag.text(),
             )
 
-            # DETAILS ~ Puuid, Region, Account Level and the PlayerCard
-            # RANKDETAILS ~ Rank, RR, MMR
-            Puuid = Details.puuid
+            # DETAILS ~ puuid, Region, Account Level and the PlayerCard
+            # RANK DETAILS ~ Rank, RR, MMR
+            puuid = Details.puuid
             Region = Details.region
             Account_level = Details.account_level
             Card = str(Details.card.wide)
@@ -794,7 +794,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             MMR = RankDetails.current_data.elo
 
             # Sets PUU-ID and Region
-            self.PlayerIDs.setText(f"{Puuid} | {Region}")
+            self.PlayerIDs.setText(f"{puuid} | {Region}")
 
             # Wins, Games Played
             try:
@@ -933,11 +933,15 @@ class Ui_ValorantTrackerByNavisGames(object):
                 # If Deathmatch, remove Rounds and Won/Lost
                 if mode == "Deathmatch":
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                        f"Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | "
+                        f"{score} Score\n\n "
                     )
                 else:
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                        f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} "
+                        f"Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
                     )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -979,11 +983,15 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"Headshots: {headshot_rate}%\n" f"Bodyshots: {bodyshot_rate}%\n" f"Legshots: {legshot_rate}%"
             )
             self.OtherStatsTexts.setText(
-                f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span style=\" font-size:22pt; \">Winrate: {round(total_wins / total_matches * 100)}%</span></p></body></html>"
+                f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span "
+                f"style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" "
+                f"font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span "
+                f"style=\" font-size:22pt; \">Winrate: "
+                f"{round(total_wins / total_matches * 100)}%</span></p></body></html> "
             )
-            self.Player.setText(
-                f'<html><head/><body><p><span style=" font-size:29pt;">{Details.name}#{Details.tag}<p>Account Level {Account_level} | {Rank} </span><img src="{tier_icon}"width="33"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>'
-            )
+            self.Player.setText(f'<html><head/><body><p><span style=" font-size:29pt;">{Details.name}#{Details.tag}<p'
+                                f'>Account Level {Account_level} | {Rank} </span><img src="{tier_icon}"width="33 '
+                                f'"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>')
 
         except BaseException:
             print(traceback.format_exc())
@@ -1260,11 +1268,15 @@ class Ui_ValorantTrackerByNavisGames(object):
                 # If Deathmatch, remove Rounds and Won/Lost
                 if mode == "Deathmatch":
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | {score} Score\n\n"
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                        f"Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | "
+                        f"{score} Score\n\n "
                     )
                 else:
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                        f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} "
+                        f"Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
                     )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -1366,7 +1378,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # If Deathmatch, remove Rounds and Won/Lost
                 match_History.append(
-                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                    f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists "
+                    f"{deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
                 )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -1468,7 +1482,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # If Deathmatch, remove Rounds and Won/Lost
                 match_History.append(
-                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                    f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists "
+                    f"{deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
                 )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -1570,7 +1586,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # If Deathmatch, remove Rounds and Won/Lost
                 match_History.append(
-                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                    f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists "
+                    f"{deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
                 )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -1672,7 +1690,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # If Deathmatch, remove Rounds and Won/Lost
                 match_History.append(
-                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                    f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists "
+                    f"{deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
                 )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -1774,7 +1794,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
                 # If Deathmatch, remove Rounds and Won/Lost
                 match_History.append(
-                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n"
+                    f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
+                    f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} Assists "
+                    f"{deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
                 )
             # Set Match to Text
             match_History = "".join(match_History)
