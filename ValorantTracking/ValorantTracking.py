@@ -30,7 +30,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.dark_mode = False
             ValorantTrackerByNavisGames.setObjectName("ValorantTrackerByNavisGames")
             ValorantTrackerByNavisGames.setEnabled(True)
-            ValorantTrackerByNavisGames.resize(1067, 922)
+            ValorantTrackerByNavisGames.resize(1124, 922)
             ValorantTrackerByNavisGames.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
             # Creating Font Standards
@@ -46,7 +46,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Set Font, WindowTitle and Icon
             ValorantTrackerByNavisGames.setFont(font)
             ValorantTrackerByNavisGames.setMouseTracking(False)
-            ValorantTrackerByNavisGames.setWindowTitle("Valorant Tracking 2.1.1 By NavisGames")
+            ValorantTrackerByNavisGames.setWindowTitle("Valorant Tracking 2.2 By NavisGames")
             icon = QtGui.QIcon()
             icon.addPixmap(QtGui.QPixmap("Images/icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             ValorantTrackerByNavisGames.setWindowIcon(icon)
