@@ -1,7 +1,6 @@
 # Credits for this program go to NavisGames, selling this program or saying it's yours is not allowed! Read the
 # license for more. If you want, please fork this program to share what you changed in this program ^^
 
-from itertools import accumulate
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
@@ -10,12 +9,18 @@ from pathlib import Path
 import traceback
 import valo_api
 import requests
-import httpx as http
 import concurrent.futures
 import time
-from functions import get_image, display_time, clearLayout, findAgentOfPlayer, findStatsOfPlayer, findTeamOfPlayer
-
-current_season = "E5A3"
+from functions import (
+    get_image,
+    display_time,
+    clearLayout,
+    findAgentOfPlayer,
+    findStatsOfPlayer,
+    findTeamOfPlayer,
+    current_season,
+    get_matches,
+)
 
 
 class Ui_ValorantTrackerByNavisGames(object):
