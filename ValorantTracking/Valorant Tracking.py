@@ -65,11 +65,11 @@ class Ui_ValorantTrackerByNavisGames(object):
                 | QtWidgets.QMainWindow.AnimatedDocks
             )
 
-            # Create CENTRAL WIDGET (What is it? I still don't get it..)
+            # Create CENTRAL WIDGET
             self.centralwidget = QtWidgets.QWidget(ValorantTrackerByNavisGames)
             self.centralwidget.setObjectName("centralwidget")
 
-            # Create Layout for WIDGET (Why for every widget.  I can't even rename them in QTDesigner..)
+            # Create Layout for WIDGET
             self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.centralwidget)
             self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout_7.setSpacing(0)
@@ -396,7 +396,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout_9.setObjectName("verticalLayout_9")
 
-            # Creating ANOTHER complicated HTML Code with Average KD, Win rate and the Title in it
+            # Creating HTML Code with Average KD, Win rate and the Title in it
             self.OtherStatsTexts = QtWidgets.QLabel(self.OtherStats)
             self.OtherStatsTexts.setText(
                 '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" '
@@ -813,7 +813,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                     f"{bundleJson['data']['displayName']} Bundle",
                 )
 
-            # Index, Layout shit. blah blah you get it.
+            # Index, Layout
             self.verticalLayout_7.addWidget(self.Tabs)
             ValorantTrackerByNavisGames.setCentralWidget(self.centralwidget)
             self.Tabs.setCurrentIndex(0)
@@ -1239,7 +1239,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                                 f"#{x.leaderboardRank} | {x.gameName}#{x.tagLine} | {rank} {x.rankedRating}rr | {x.numberOfWins} Wins | {x.puuid}"
                             )
 
-                        # blah blah layouts..
+                        # Layouts
                         self.LeaderboardPlayerInformation[i].setAlignment(
                             QtCore.Qt.AlignCenter
                         )
