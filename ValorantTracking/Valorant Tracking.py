@@ -54,8 +54,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "Valorant Tracking 2.2 By NavisGames"
             )
             icon = QtGui.QIcon()
+            iconImage = Path(__file__).parent.joinpath("Images/icon.png")
             icon.addPixmap(
-                QtGui.QPixmap("Images/icon.png"),
+                QtGui.QPixmap(str(iconImage)),
                 QtGui.QIcon.Normal,
                 QtGui.QIcon.Off,
             )
@@ -115,8 +116,9 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.modeSwitcher.setAutoFillBackground(False)
             self.modeSwitcher.setText("")
             icon1 = QtGui.QIcon()
+            LightMode = Path(__file__).parent.joinpath("Images/LightMode.webp")
             icon1.addPixmap(
-                QtGui.QPixmap("Images/LightMode.webp"),
+                QtGui.QPixmap(str(LightMode)),
                 QtGui.QIcon.Normal,
                 QtGui.QIcon.Off,
             )
@@ -243,13 +245,14 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
             # Create Player Banner PixMap
+            ExampleBanner = Path(__file__).parent.joinpath(
+                "Images/Example/ExampleWideBanner.png"
+            )
             self.PlayerBanner = QtWidgets.QLabel(self.PlayerInformation)
             self.PlayerBanner.setEnabled(True)
             self.PlayerBanner.setLineWidth(1)
             self.PlayerBanner.setText("")
-            self.PlayerBanner.setPixmap(
-                QtGui.QPixmap("Images/Example/ExampleWideBanner.png")
-            )
+            self.PlayerBanner.setPixmap(QtGui.QPixmap(str(ExampleBanner)))
             self.PlayerBanner.setScaledContents(False)
             self.PlayerBanner.setAlignment(QtCore.Qt.AlignCenter)
             self.PlayerBanner.setWordWrap(False)
@@ -278,17 +281,19 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerIDs.setObjectName("PlayerIDs")
             self.verticalLayout_5.addWidget(self.PlayerIDs)
 
-            # Creating Player, Add HTML Text wich is bigger than my Dick With AccountLevel, Player#Tag and Rank.
-            # Complicate Shit, I can't code HTML
+            # Creating Player, Add HTML Text with AccountLevel, Player#Tag and Rank.
+            tier_icon = Path(__file__).parent.joinpath(
+                "Images\Example\ExampleRank.png"
+            )
             self.Player = QtWidgets.QLabel(self.PlayerDatas)
             self.Player.setEnabled(True)
             font = QtGui.QFont()
             font.setPointSize(35)
             self.Player.setFont(font)
             self.Player.setText(
-                '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img '
-                'src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> '
-                "0rr</span></p></body></html> "
+                f'<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p'
+                f'>Account Level 0 | Iron 3 </span><img src="{tier_icon}"width="33 '
+                f'"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
             )
             self.Player.setTextFormat(QtCore.Qt.RichText)
             self.Player.setAlignment(
@@ -358,12 +363,11 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_9.setObjectName("horizontalLayout_9")
 
             # Creating Accuracy Pixmap
+            Basic = Path(__file__).parent.joinpath("Images/Dummy/Basic.png")
             self.AccuracyLogo = QtWidgets.QLabel(self.Accuracy)
             self.AccuracyLogo.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.AccuracyLogo.setText("")
-            self.AccuracyLogo.setPixmap(
-                QtGui.QPixmap("Images/Dummy/Basic.png")
-            )
+            self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(Basic)))
             self.AccuracyLogo.setAlignment(QtCore.Qt.AlignCenter)
             self.AccuracyLogo.setObjectName("AccuracyLogo")
             self.horizontalLayout_9.addWidget(self.AccuracyLogo)
@@ -1060,34 +1064,46 @@ class Ui_ValorantTrackerByNavisGames(object):
                 )
 
                 # Set Dummy Prior
+                HeadshotDummy = Path(__file__).parent.joinpath(
+                    "Images/Dummy/Headshot.png"
+                )
+                BodyshotDummy = Path(__file__).parent.joinpath(
+                    "Images/Dummy/Bodyshot.png"
+                )
+                LegshotDummy = Path(__file__).parent.joinpath(
+                    "Images/Dummy/Legshot.png"
+                )
+                BasicDummy = Path(__file__).parent.joinpath(
+                    "Images/Dummy/Basic.png"
+                )
+
                 if (
                     headshot_rate > bodyshot_rate
                     and headshot_rate > legshot_rate
                 ):
                     self.AccuracyLogo.setPixmap(
-                        QtGui.QPixmap("Images/Dummy/Headshot.png")
+                        QtGui.QPixmap(str(HeadshotDummy))
                     )
                 elif (
                     bodyshot_rate > headshot_rate
                     and bodyshot_rate > legshot_rate
                 ):
                     self.AccuracyLogo.setPixmap(
-                        QtGui.QPixmap("Images/Dummy/Bodyshot.png")
+                        QtGui.QPixmap(str(BodyshotDummy))
                     )
                 elif (
                     legshot_rate > headshot_rate
                     and legshot_rate > bodyshot_rate
                 ):
+
                     self.AccuracyLogo.setPixmap(
-                        QtGui.QPixmap("Images/Dummy/Legshot.png")
+                        QtGui.QPixmap(str(LegshotDummy))
                     )
             else:
                 headshot_rate = "-"
                 bodyshot_rate = "-"
                 legshot_rate = "-"
-                self.AccuracyLogo.setPixmap(
-                    QtGui.QPixmap("Images/Dummy/Basic.png")
-                )
+                self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(BasicDummy)))
 
             # Gets the current Rank AS TIER INDEX (int) and compares it with the index data, to get the RANK IMAGE
             tier_index = RankDetails.current_data.currenttier
@@ -1179,12 +1195,15 @@ class Ui_ValorantTrackerByNavisGames(object):
                         )
 
                         # Setting Banner
+                        ExampleBanner = Path(__file__).parent.joinpath(
+                            "Images/Example/ExampleBanner.png"
+                        )
                         self.LeaderboardPlayerBanner[i] = QtWidgets.QLabel(
                             self.LeaderboardPlayer[i]
                         )
                         self.LeaderboardPlayerBanner[i].setText("")
                         self.LeaderboardPlayerBanner[i].setPixmap(
-                            QtGui.QPixmap("Images/Example/ExampleBanner.png")
+                            QtGui.QPixmap(str(ExampleBanner))
                         )
                         self.LeaderboardPlayerBanner[i].setScaledContents(
                             False
@@ -1301,52 +1320,65 @@ class Ui_ValorantTrackerByNavisGames(object):
             print(traceback.format_exc())
 
     def reset_information(self):
-        self.PlayerName.setText("")
-        self.PlayerName.setPlaceholderText("PLAYER NAME (16 characters)")
-        self.PlayerTag.setText("")
-        self.PlayerTag.setPlaceholderText("PLAYER TAG (5 characters)")
-        self.PlayerBanner.setPixmap(
-            QtGui.QPixmap("Images/Example/ExampleWideBanner.png")
-        )
-        self.PlayerIDs.setText("puu-ID | EU")
-        self.Player.setText(
-            '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img '
-            'src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> '
-            "0rr</span></p></body></html> "
-        )
-        self.AccuracyText.setText(
-            "Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%"
-        )
-        self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Dummy/Basic.png"))
-        self.OtherStatsTexts.setText(
-            '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" '
-            'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">Average '
-            'KD: 0.00</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html> '
-        )
-        self.CompHistory.setText(
-            "Matchmaking Ratio \n"
-            "Competitive Wins \n"
-            "Competitive Games played \n"
-            "Previous Ranks \n"
-            "Rank History\n"
-            ""
-        )
-        self.History.setText(
-            "Day, Date, Time | Match ID\n"
-            "REGION - CLUSTER\n"
-            " Map - Gamemode - Agent Played: Jett\n"
-            "0-0 \n"
-            "Kills Assists Deaths - KD |  Score"
-        )
+        try:
+            tier_icon = Path(__file__).parent.joinpath(
+                "Images\Example\ExampleRank.png"
+            )
+            ExampleBanner = Path(__file__).parent.joinpath(
+                "Images/Example/ExampleWideBanner.png"
+            )
+            BasicDummy = Path(__file__).parent.joinpath(
+                "Images/Dummy/Basic.png"
+            )
+            self.PlayerName.setText("")
+            self.PlayerName.setPlaceholderText("PLAYER NAME (16 characters)")
+            self.PlayerTag.setText("")
+            self.PlayerTag.setPlaceholderText("PLAYER TAG (5 characters)")
+            self.PlayerBanner.setPixmap(QtGui.QPixmap(str(ExampleBanner)))
+            self.PlayerIDs.setText("puu-ID | EU")
+            self.Player.setText(
+                f'<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p'
+                f'>Account Level 0 | Iron 3 </span><img src="{tier_icon}"width="33 '
+                f'"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
+            )
+            self.AccuracyText.setText(
+                "Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%"
+            )
+            self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(BasicDummy)))
+            self.OtherStatsTexts.setText(
+                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" '
+                'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">Average '
+                'KD: 0.00</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html> '
+            )
+            self.CompHistory.setText(
+                "Matchmaking Ratio \n"
+                "Competitive Wins \n"
+                "Competitive Games played \n"
+                "Previous Ranks \n"
+                "Rank History\n"
+                ""
+            )
+            self.History.setText(
+                "Day, Date, Time | Match ID\n"
+                "REGION - CLUSTER\n"
+                " Map - Gamemode - Agent Played: Jett\n"
+                "0-0 \n"
+                "Kills Assists Deaths - KD |  Score"
+            )
+
+        except BaseException:
+            print(traceback.format_exc())
 
     def modeSwitch(self):
+        LightMode = Path(__file__).parent.joinpath("Images/LightMode.webp")
+        DarkMode = Path(__file__).parent.joinpath("Images/DarkMode.webp")
         if self.dark_mode:
             self.dark_mode = False
-            self.modeSwitcher.setIcon(QtGui.QIcon("Images/LightMode.webp"))
+            self.modeSwitcher.setIcon(QtGui.QIcon(str(LightMode)))
             QApplication.setPalette(QApplication.style().standardPalette())
         else:
             self.dark_mode = True
-            self.modeSwitcher.setIcon(QtGui.QIcon("Images/DarkMode.webp"))
+            self.modeSwitcher.setIcon(QtGui.QIcon(str(DarkMode)))
             dark_palette = QPalette()
             dark_palette.setColor(QPalette.Window, QColor(35, 35, 35))
             dark_palette.setColor(QPalette.WindowText, Qt.white)
