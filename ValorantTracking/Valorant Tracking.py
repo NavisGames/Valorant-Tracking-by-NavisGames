@@ -265,7 +265,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Player.setText(
                 '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img '
                 'src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> '
-                '0rr</span></p></body></html> '
+                "0rr</span></p></body></html> "
             )
             self.Player.setTextFormat(QtCore.Qt.RichText)
             self.Player.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
@@ -361,7 +361,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" '
                 'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" '
                 'font-size:22pt;">Average KD: 0.00</span></p><p><span style=" font-size:22pt; ">Winrate: '
-                '0%</span></p></body></html> '
+                "0%</span></p></body></html> "
             )
             self.OtherStatsTexts.setTextFormat(QtCore.Qt.RichText)
             self.OtherStatsTexts.setScaledContents(False)
@@ -763,7 +763,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                     name=self.PlayerName.text(),
                     tag=self.PlayerTag.text(),
                     size=10,
-                    game_mode=self.PlayerGamemode.currentText().lower()
+                    game_mode=self.PlayerGamemode.currentText().lower(),
                 )
             else:
                 HistoryDetails = valo_api.get_match_history_by_name(
@@ -988,15 +988,17 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"Headshots: {headshot_rate}%\n" f"Bodyshots: {bodyshot_rate}%\n" f"Legshots: {legshot_rate}%"
             )
             self.OtherStatsTexts.setText(
-                f"<html><head/><body><p align=\"center\"><span style=\" font-size:22pt;\">Other Stats </span><span "
-                f"style=\" font-size:18pt; color:#6a6a6a;\">(Last 10 Matches)</span></p><p><span style=\" "
+                f'<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span '
+                f'style=" font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" '
                 f"font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span "
-                f"style=\" font-size:22pt; \">Winrate: "
+                f'style=" font-size:22pt; ">Winrate: '
                 f"{round(total_wins / total_matches * 100)}%</span></p></body></html> "
             )
-            self.Player.setText(f'<html><head/><body><p><span style=" font-size:29pt;">{Details.name}#{Details.tag}<p'
-                                f'>Account Level {Account_level} | {Rank} </span><img src="{tier_icon}"width="33 '
-                                f'"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>')
+            self.Player.setText(
+                f'<html><head/><body><p><span style=" font-size:29pt;">{Details.name}#{Details.tag}<p'
+                f'>Account Level {Account_level} | {Rank} </span><img src="{tier_icon}"width="33 '
+                f'"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>'
+            )
 
         except BaseException:
             print(traceback.format_exc())
@@ -1129,7 +1131,7 @@ class Ui_ValorantTrackerByNavisGames(object):
         self.Player.setText(
             '<html><head/><body><p><span style=" font-size:29pt;">Player#Tag<p>Account Level 0 | Rank </span><img '
             'src="Images/Example/ExampleRank.png"width="33"height="33"/><span style=" font-size:20pt;"> '
-            '0rr</span></p></body></html> '
+            "0rr</span></p></body></html> "
         )
         self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
         self.AccuracyLogo.setPixmap(QtGui.QPixmap("Images/Dummy/Basic.png"))
@@ -1182,6 +1184,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             dark_palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
             dark_palette.setColor(QPalette.Disabled, QPalette.Light, QColor(35, 35, 35))
             QApplication.setPalette(dark_palette)
+
 
 if __name__ == "__main__":
     import sys
