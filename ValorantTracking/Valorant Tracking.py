@@ -1051,6 +1051,19 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Set Match to Text
             match_History = "".join(match_History)
 
+            HeadshotDummy = Path(__file__).parent.joinpath(
+                "Images/Dummy/Headshot.png"
+            )
+            BodyshotDummy = Path(__file__).parent.joinpath(
+                "Images/Dummy/Bodyshot.png"
+            )
+            LegshotDummy = Path(__file__).parent.joinpath(
+                "Images/Dummy/Legshot.png"
+            )
+            BasicDummy = Path(__file__).parent.joinpath(
+                "Images/Dummy/Basic.png"
+            )
+
             # Set Rates with Math
             if self.PlayerGamemode.currentText() != "DEATHMATCH":
                 headshot_rate = round(
@@ -1064,18 +1077,6 @@ class Ui_ValorantTrackerByNavisGames(object):
                 )
 
                 # Set Dummy Prior
-                HeadshotDummy = Path(__file__).parent.joinpath(
-                    "Images/Dummy/Headshot.png"
-                )
-                BodyshotDummy = Path(__file__).parent.joinpath(
-                    "Images/Dummy/Bodyshot.png"
-                )
-                LegshotDummy = Path(__file__).parent.joinpath(
-                    "Images/Dummy/Legshot.png"
-                )
-                BasicDummy = Path(__file__).parent.joinpath(
-                    "Images/Dummy/Basic.png"
-                )
 
                 if (
                     headshot_rate > bodyshot_rate
