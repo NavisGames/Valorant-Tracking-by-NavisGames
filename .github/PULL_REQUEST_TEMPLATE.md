@@ -27,6 +27,6 @@
 
 <!-- Mark with an 'x' if something applies (example: '[x]') -->
 
-- [ ] I've updated the code style with "BLACK" or "PEP8" (Python)
+- [ ] I've updated the code style with "BLACK" or "PEP8" !IMPORTANT TO USE MAX. 79 CHARACTERS PER LINE (Python)
 - [ ] I've formatted the HTML, CSS or JS code correctly (HTML, CSS, JS)
 
