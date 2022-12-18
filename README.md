@@ -51,9 +51,9 @@ https://www.virustotal.com/gui/file/800d49e06d053e677bd5320e0b2d41c9c43e3f0d30a3
 
 A: No problem! Just put the spaces in the program. The program recognizes the spaces ^^
 
-### What if there are any Bugs in the programm? How should I report them.
+### Q: What if there are any Bugs in the programm? How should I report them.
 
-Simply open an Issue :) I will look at it as soon as I have time.
+A: Simply open an Issue :) I will look at it as soon as I have time.
 
 # ➕ Credits
 
