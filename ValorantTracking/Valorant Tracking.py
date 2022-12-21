@@ -1,6 +1,6 @@
 # Credits for this program go to NavisGames, selling this program or saying it's yours is not allowed! Read the
 # license for more. If you want, please fork this program to share what you changed in this program ^^
-
+Test
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
