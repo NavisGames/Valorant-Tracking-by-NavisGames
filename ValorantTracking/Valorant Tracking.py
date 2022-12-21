@@ -18,6 +18,7 @@ from functions import (
     findAgentOfPlayer,
     findStatsOfPlayer,
     findTeamOfPlayer,
+    findRoundPlayer,
     current_season,
     get_matches,
 )
@@ -393,20 +394,19 @@ class Ui_ValorantTrackerByNavisGames(object):
             )
             self.horizontalLayout_8.addItem(spacerItem2)
 
-            # Creating Average KD & Win rate Frame
+            # Creating K/D & Win rate Frame
             self.OtherStats = QtWidgets.QFrame(self.GeneralStats)
             self.OtherStats.setObjectName("OtherStats")
             self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.OtherStats)
             self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout_9.setObjectName("verticalLayout_9")
 
-            # Creating HTML Code with Average KD, Win rate and the Title in it
+            # Creating HTML Code with K/D, Win rate and the Title in it
             self.OtherStatsTexts = QtWidgets.QLabel(self.OtherStats)
             self.OtherStatsTexts.setText(
-                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" '
-                'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" '
-                'font-size:22pt;">Average KD: 0.00</span></p><p><span style=" font-size:22pt; ">Winrate: '
-                "0%</span></p></body></html> "
+                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Stats </span><span style=" '
+                'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">'
+                'K/D: 0.00</span></p><p><span style=" font-size:22pt;">Average Combat Score: 0</span></p><p><span style=" font-size:22pt;">Average Damage per Round: 0</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html> '
             )
             self.OtherStatsTexts.setTextFormat(QtCore.Qt.RichText)
             self.OtherStatsTexts.setScaledContents(False)
@@ -955,38 +955,56 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Get Match History as a List, and gets every current matches
             match_History = []
 
+            # Some Variables
             headshots = 0
             bodyshots = 0
             legshots = 0
+            total_damage = 0
+            total_rounds = 0
+            total_combat_score = 0
             total_kills = 0
             total_deaths = 0
             total_wins = 0
             total_matches = 0
 
             for x in HistoryDetails:
-
-                # Match, Team and Players
+                # Match, Team, Players and Rounds played
                 match = x.metadata
                 teams = x.teams
                 players = x.players
+                rounds_played = match.rounds_played
 
                 # Get Stats of Player with get_stats function
                 get_stats = findStatsOfPlayer(Details.name, players)
-                kills = get_stats.kills
-                deaths = get_stats.deaths
-                assists = get_stats.assists
-                score = get_stats.score
-
-                total_kills += kills
-                total_deaths += deaths
 
                 # Get Agent of Player
                 get_agent = findAgentOfPlayer(Details.name, players)
+
+                # Some Variables
+                kills = get_stats.kills
+                deaths = get_stats.deaths
+                assists = get_stats.assists
+                total_score = get_stats.score
+                combat_score = total_score / rounds_played
+                damage = 0
+
+                for rounds in x.rounds:
+                    PlayerDamage = findRoundPlayer(
+                        f"{Details.name}#{Details.tag}", rounds
+                    )
+                    damage += PlayerDamage[0]
+                    total_rounds += 1
 
                 # Add Aim rates
                 headshots += get_stats.headshots
                 bodyshots += get_stats.bodyshots
                 legshots += get_stats.legshots
+
+                # Some Variables
+                total_kills += kills
+                total_deaths += deaths
+                total_combat_score += combat_score
+                total_damage += damage
 
                 # Calculate HS% in the Match
                 try:
@@ -1040,13 +1058,13 @@ class Ui_ValorantTrackerByNavisGames(object):
                     match_History.append(
                         f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
                         f"Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | "
-                        f"{score} Score\n\n "
+                        f"{total_score} Score\n\n "
                     )
                 else:
                     match_History.append(
                         f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
                         f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} "
-                        f"Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {score} Score\n\n "
+                        f"Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {total_score} Score\n\n "
                     )
             # Set Match to Text
             match_History = "".join(match_History)
@@ -1138,10 +1156,14 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"Legshots: {legshot_rate}%"
             )
             self.OtherStatsTexts.setText(
-                f'<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span '
+                f'<html><head/><body><p align="center"><span style=" font-size:22pt;">Stats </span><span '
                 f'style=" font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" '
-                f"font-size:22pt;\">Average KD: {format(total_kills / total_deaths, '.2f')}</span></p><p><span "
-                f'style=" font-size:22pt; ">Winrate: '
+                f"font-size:22pt;\">K/D: {format(total_kills / total_deaths, '.2f')}</span></p><p><span "
+                f'style=" font-size:22pt; ">Average Combat Score: '
+                f"{round(total_combat_score / total_matches)}</span></p>"
+                f'<p><span style=" font-size:22pt; ">Average Damage per Round: '
+                f"{round(total_damage / total_rounds)}</span></p>"
+                f'<p><span style=" font-size:22pt; ">Winrate: '
                 f"{round(total_wins / total_matches * 100)}%</span></p></body></html> "
             )
             self.Player.setText(
@@ -1347,9 +1369,9 @@ class Ui_ValorantTrackerByNavisGames(object):
             )
             self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(BasicDummy)))
             self.OtherStatsTexts.setText(
-                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Other Stats </span><span style=" '
-                'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">Average '
-                'KD: 0.00</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html> '
+                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Stats </span><span style=" '
+                'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">'
+                'K/D: 0.00</span></p><p><span style=" font-size:22pt;">Average Combat Score: 0</span></p><p><span style=" font-size:22pt;">Average Damage per Round: 0</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html> '
             )
             self.CompHistory.setText(
                 "Matchmaking Ratio \n"

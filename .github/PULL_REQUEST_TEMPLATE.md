@@ -13,8 +13,8 @@
 - [ ] 🚀 New Feature
 - [ ] ♻ Rework (redesign, rework of a feature, remake of a website etc.)
 - [ ] 🐞 Bug fix (a non-breaking change to fix an issue)
-- [ ] ➕ Adding a function to an existing function (example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
-- [ ] 🔨 Any updates / fixes / dumps etc.
+- [ ] ➕ Adding a function / update to an existing function (example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
+- [ ] 🔨 Other updates / fixes / dumps etc.
 
 ## "Terms of Service"
 
@@ -27,6 +27,6 @@
 
 <!-- Mark with an 'x' if something applies (example: '[x]') -->
 
-- [ ] I've updated the code style with "BLACK" or "PEP8" !IMPORTANT TO USE MAX. 79 CHARACTERS PER LINE (Python)
-- [ ] I've formatted the HTML, CSS or JS code correctly (HTML, CSS, JS)
+- [ ] I've updated the code style with "BLACK" !IMPORTANT TO USE MAX. 79 CHARACTERS PER LINE!
+- [ ] I've formatted the HTML, CSS or JS code correctly
 
