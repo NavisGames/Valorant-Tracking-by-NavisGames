@@ -484,7 +484,6 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "Competitive Games played \n"
                 "Previous Ranks \n"
                 "Rank History\n"
-                ""
             )
             self.CompHistory.setAlignment(
                 QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
@@ -542,7 +541,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "Map | Gamemode | Agent: Jett\n"
                 "0-0 WON\n"
                 "Kills Assists Deaths | 0.00 K/D\n"
-                "HS%: 0% | ACS: 0 | ADR: 0 | Total Score: 0\n"
+                "HS%: 0% | ACS: 0 | ADR: 0 | Total Score: 0\n\n"
             )
             self.History.setAlignment(
                 QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
@@ -602,8 +601,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Act.setItemText(9, "E2A3")
             self.Act.addItem("")
             self.Act.setItemText(10, "E2A2")
-            self.Act.addItem("")
-            self.Act.setItemText(11, "E2A2")
             self.Act.setEditable(True)
             self.horizontalLayout_7.addWidget(self.Act)
             self.ActEdit = self.Act.lineEdit()
@@ -907,7 +904,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"Matchmaking Ratio: {MMR}\n"
                 f"Competitive Wins: {wins}\n"
                 f"Competitive Games played: {games_played}\n"
-                "\nPrevious Ranks:\n"
+                f"Previous Ranks:\n"
             ]
 
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
@@ -920,7 +917,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         and x != current_season.lower()
                     ):
                         previous_ranks.append(
-                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n "
+                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n"
                         )
                     else:
                         continue
