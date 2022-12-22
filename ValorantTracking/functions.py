@@ -1,12 +1,10 @@
 from typing import List
-
 import httpx as http
 from itertools import accumulate
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
 from PyQt5.QtWidgets import QApplication
-
 import valo_api
 from valo_api.endpoints.raw import EndpointType
 from valo_api.responses.match_history import MatchHistoryPointV3
