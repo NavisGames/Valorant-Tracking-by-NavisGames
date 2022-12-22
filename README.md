@@ -1,6 +1,7 @@
 <div align="center">
 
 [![API](https://img.shields.io/badge/API-valo--api-red)](https://github.com/Henrik-3/unofficial-valorant-api)
+[![CODESTYLE](https://img.shields.io/badge/CODESTYLE-black-black)](https://github.com/psf/black)
 [![Dependencies](https://img.shields.io/librariesio/github/NavisGames/Valorant-Tracking-by-NavisGames?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pulls)
 [![Latest Commit](https://img.shields.io/github/last-commit/NavisGames/Valorant-Tracking-by-NavisGames/main?logo=Github)](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/tree/main)
   
