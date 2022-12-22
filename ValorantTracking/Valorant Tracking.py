@@ -484,7 +484,6 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "Competitive Games played \n"
                 "Previous Ranks \n"
                 "Rank History\n"
-                ""
             )
             self.CompHistory.setAlignment(
                 QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
@@ -536,11 +535,13 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.History.setFont(font)
             self.History.setWordWrap(True)
             self.History.setText(
-                "Day, Date, Time | Match ID\n"
-                "REGION - CLUSTER\n"
-                " Map - Gamemode - Agent Played: Jett\n"
-                "0-0 \n"
-                "Kills Assists Deaths - KD |  Score"
+                "Day, Date, Time\n"
+                "Match ID\n"
+                "Region - Cluster\n"
+                "Map | Gamemode | Agent: Jett\n"
+                "0-0 WON\n"
+                "Kills Assists Deaths | 0.00 K/D\n"
+                "HS%: 0% | ACS: 0 | ADR: 0 | Total Score: 0\n\n"
             )
             self.History.setAlignment(
                 QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
@@ -600,8 +601,6 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Act.setItemText(9, "E2A3")
             self.Act.addItem("")
             self.Act.setItemText(10, "E2A2")
-            self.Act.addItem("")
-            self.Act.setItemText(11, "E2A2")
             self.Act.setEditable(True)
             self.horizontalLayout_7.addWidget(self.Act)
             self.ActEdit = self.Act.lineEdit()
@@ -905,7 +904,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"Matchmaking Ratio: {MMR}\n"
                 f"Competitive Wins: {wins}\n"
                 f"Competitive Games played: {games_played}\n"
-                "\nPrevious Ranks:\n"
+                f"Previous Ranks:\n"
             ]
 
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
@@ -918,7 +917,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         and x != current_season.lower()
                     ):
                         previous_ranks.append(
-                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n "
+                            f"{x.upper()}: {lastRank[x].final_rank_patched} | {lastRank[x].wins} Wins - {lastRank[x].number_of_games}Game(s) played\n"
                         )
                     else:
                         continue
@@ -1053,19 +1052,27 @@ class Ui_ValorantTrackerByNavisGames(object):
                 cluster = match.cluster
                 mode = match.mode
 
-                # If Deathmatch, remove Rounds and Won/Lost
+                # If Deathmatch, remove Rounds, Won/Lost and Combat Score
                 if mode == "Deathmatch":
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
-                        f"Agent played: {get_agent[0]}\n{kills} Kills {assists} Assists {deaths} Deaths - {KD} KD | "
-                        f"{total_score} Score\n\n "
+                        f"{match.game_start_patched}\n"
+                        f"{match_id}\n"
+                        f"{region} - {cluster}\n"
+                        f"{match_map} | {mode} | Agent: {get_agent[0]}\n"
+                        f"{kills} Kills {assists} Assists {deaths} Deaths | {KD} K/D\n"
+                        f"CS: {round(combat_score)} | Total Score: {total_score}\n\n"
                     )
                 else:
                     match_History.append(
-                        f"{match.game_start_patched} | Match {match_id}\n{region} - {cluster}\n{match_map} - {mode} - "
-                        f"Agent played: {get_agent[0]}\n{rounds_won}-{rounds_lost} {won}\n{kills} Kills {assists} "
-                        f"Assists {deaths} Deaths - {KD} KD - {HSR} HS% | {total_score} Score\n\n "
+                        f"{match.game_start_patched}\n"
+                        f"{match_id}\n"
+                        f"{region} - {cluster}\n"
+                        f"{match_map} | {mode} | Agent: {get_agent[0]}\n"
+                        f"{rounds_won}-{rounds_lost} {won}\n"
+                        f"{kills} Kills {assists} Assists {deaths} Deaths | {KD} K/D\n"
+                        f"HS%: {HSR}% | CS: {round(combat_score)} | ADR: {round(damage / rounds_played)} | Total Score: {total_score}\n\n"
                     )
+
             # Set Match to Text
             match_History = "".join(match_History)
 
@@ -1382,11 +1389,13 @@ class Ui_ValorantTrackerByNavisGames(object):
                 ""
             )
             self.History.setText(
-                "Day, Date, Time | Match ID\n"
-                "REGION - CLUSTER\n"
-                " Map - Gamemode - Agent Played: Jett\n"
-                "0-0 \n"
-                "Kills Assists Deaths - KD |  Score"
+                "Day, Date, Time\n"
+                "Match ID\n"
+                "Region - Cluster\n"
+                "Map | Gamemode | Agent: Jett\n"
+                "0-0 WON\n"
+                "Kills Assists Deaths | 0.00 K/D\n"
+                "HS%: 0% | ACS: 0 | ADR: 0 | Total Score: 0\n"
             )
 
         except BaseException:
