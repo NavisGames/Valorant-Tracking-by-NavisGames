@@ -11,12 +11,12 @@
 
 body{
     font-family: 'mainFont';
-    background-color: #222831;
+    background-color: #302c2c;
 }
 
 .navbar{
     font-size: 18px;
-    background-color: #222831;
+    background-color: #302c2c;
     padding-bottom: 10px;
 }
 
@@ -26,7 +26,7 @@ body{
     right: 30px;
     cursor: pointer;
     color: rgb(255, 255, 255);
-    background-color: #222831;
+    background-color: #302c2c;
     font-size: 25px;
     padding: 5px 8px;
     border-style: none;
