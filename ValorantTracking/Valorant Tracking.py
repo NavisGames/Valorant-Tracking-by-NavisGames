@@ -988,10 +988,10 @@ class Ui_ValorantTrackerByNavisGames(object):
                 damage = 0
 
                 for rounds in x.rounds:
-                    PlayerDamage = findRoundPlayer(
+                    Player = findRoundPlayer(
                         f"{Details.name}#{Details.tag}", rounds
                     )
-                    damage += PlayerDamage[0]
+                    damage += Player.damage
                     total_rounds += 1
 
                 # Add Aim rates
@@ -1058,7 +1058,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         f"{match.game_start_patched}\n"
                         f"{match_id}\n"
                         f"{region} - {cluster}\n"
-                        f"{match_map} | {mode} | Agent: {get_agent[0]}\n"
+                        f"{match_map} | {mode} | Agent: {get_agent}\n"
                         f"{kills} Kills {assists} Assists {deaths} Deaths | {KD} K/D\n"
                         f"CS: {round(combat_score)} | Total Score: {total_score}\n\n"
                     )
@@ -1067,7 +1067,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         f"{match.game_start_patched}\n"
                         f"{match_id}\n"
                         f"{region} - {cluster}\n"
-                        f"{match_map} | {mode} | Agent: {get_agent[0]}\n"
+                        f"{match_map} | {mode} | Agent: {get_agent}\n"
                         f"{rounds_won}-{rounds_lost} {won}\n"
                         f"{kills} Kills {assists} Assists {deaths} Deaths | {KD} K/D\n"
                         f"HS%: {HSR}% | CS: {round(combat_score)} | ADR: {round(damage / rounds_played)} | Total Score: {total_score}\n\n"

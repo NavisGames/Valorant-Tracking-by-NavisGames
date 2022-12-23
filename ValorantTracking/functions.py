@@ -68,12 +68,12 @@ def findStatsOfPlayer(player, players):
 def findRoundPlayer(player, rounds):
     player = list(
         accumulate(
-            pl.damage
+            pl
             for pl in rounds.player_stats
             if pl.player_display_name == player
         )
     )
-    return player if player else None
+    return player[0] if player else None
 
 
 def findAgentOfPlayer(player, players):
@@ -82,7 +82,7 @@ def findAgentOfPlayer(player, players):
             p.character for p in players.all_players if p.name == player
         )
     )
-    return agent if agent else None
+    return agent[0] if agent else None
 
 
 def get_matches(region: str, puuid: str) -> List[MatchHistoryPointV3]:
