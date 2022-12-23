@@ -10,6 +10,6 @@ assignees: henryprobst
 
 <!-- A clear and concise description of the question. -->
 
-## ⭕ Additional context
+### ⭕ Additional context
 
 <!-- Add other context about the question here. -->
