@@ -3,7 +3,7 @@ name: ❔ Question
 about: Ask any question about this project 💯
 title: ''
 labels: question
-assignees: henryprobst, navisgames
+assignees: henryprobst
 ---
 
 # ❓ Question
