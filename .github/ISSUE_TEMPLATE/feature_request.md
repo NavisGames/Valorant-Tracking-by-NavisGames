@@ -7,11 +7,11 @@ assignees: navisgames
 ---
 
 
-## 💡 Feature Request
+# 💡 Feature Request
 
 <!-- A clear and concise description of the feature proposal. -->
 
-### 💥 Why should I add this to the programm?
+## 💥 Why should I add this to the programm?
 
 <!-- Motivating description why I should add this function to the program -->
 
