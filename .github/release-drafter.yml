@@ -17,6 +17,7 @@ categories:
   - title: "🕸 Staled Issues & PRs | Wont fix"
     labels:
       - "stale"
+      - "wontfix"
   - title: "📝 Other"
     labels:
       - "documentation"
