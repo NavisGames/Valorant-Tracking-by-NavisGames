@@ -52,36 +52,22 @@ def clearLayout(layout):
 
 
 def findTeamOfPlayer(player, players):
-    team = list(
-        accumulate(p.team for p in players.all_players if p.name == player)
-    )
+    team = [p.team for p in players if p.name == player]
     return team[0] if team else None
 
 
 def findStatsOfPlayer(player, players):
-    stats = list(
-        accumulate(p.stats for p in players.all_players if p.name == player)
-    )
+    stats = [p.stats for p in players if p.name == player]
     return stats[0] if stats else None
 
 
-def findRoundPlayer(player, rounds):
-    player = list(
-        accumulate(
-            pl
-            for pl in rounds.player_stats
-            if pl.player_display_name == player
-        )
-    )
+def findRoundPlayer(player, player_stats):
+    player = [p for p in player_stats if p.player_display_name == player]
     return player[0] if player else None
 
 
 def findAgentOfPlayer(player, players):
-    agent = list(
-        accumulate(
-            p.character for p in players.all_players if p.name == player
-        )
-    )
+    agent = [p.character for p in players if p.name == player]
     return agent[0] if agent else None
 
 
