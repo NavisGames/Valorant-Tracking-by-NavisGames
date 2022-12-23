@@ -6,10 +6,10 @@ labels: question
 assignees: henryprobst
 ---
 
-## ❓ Question
+# ❓ Question
 
 <!-- A clear and concise description of the question. -->
 
-### ⭕ Additional context
+#### ⭕ Additional context
 
 <!-- Add other context about the question here. -->
