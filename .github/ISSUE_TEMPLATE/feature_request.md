@@ -20,7 +20,7 @@ assignees: navisgames
 <!-- A clear and concise description of any alternative solutions or features you've considered. -->
 
 
-### Type of Request
+### ❓ Type of Request
 
 <!-- Mark with an 'x' if you're using the newest version of the programm (example: '[x]') -->
 
