@@ -3,7 +3,7 @@ name: ❔ Question
 about: Ask any question about this project 💯
 title: ''
 labels: question
-assignees:
+assignees: henryprobst
 ---
 
 ## ❓ Question
