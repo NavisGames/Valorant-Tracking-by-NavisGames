@@ -1,7 +1,7 @@
 ---
 name: ❓ Feature request
 about: Suggest an idea for this project to add 🌟
-title: 'Test'
+title: ' '
 labels: enhancement
 assignees: navisgames
 ---
