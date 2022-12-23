@@ -1,12 +1,12 @@
-## Description
+# 🆔 Description
 
 <!-- Detailed Description of the changes you recommend in the pull request -->
 
-## Related Issue
+#### ❓ Related Issue
 
 <!-- If this PR refers to an issue, link it here. -->
 
-## Type of Change
+# 🚀 Type of Change
 
 <!-- Mark with an 'x' if something applies (example: '[x]') -->
 
@@ -16,14 +16,14 @@
 - [ ] ➕ Adding a function / update to an existing function (example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
 - [ ] 🔨 Other updates / fixes / dumps etc.
 
-## "Terms of Service"
+## 🔱 "Terms of Service"
 
 <!-- Mark with an 'x' if something applies (example: '[x]') -->
 
 - [ ] I've read the [`CODE_OF_CONDUCT.md`](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/blob/main/CODE_OF_CONDUCT.md)
 - [ ] I've tested the Functions, and they are working with no problems
 
-## Optimization
+## ♻ Optimization
 
 <!-- Mark with an 'x' if something applies (example: '[x]') -->
 
