@@ -1,6 +1,7 @@
 # Credits for this program go to NavisGames, selling this program or saying it's yours is not allowed! Read the
 # license for more. If you want, please fork this program to share what you changed in this program ^^
 
+from pickle import FALSE
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
@@ -12,6 +13,7 @@ import requests
 import concurrent.futures
 import time
 from functions import (
+    get_matches,
     get_image,
     display_time,
     clearLayout,
@@ -20,7 +22,7 @@ from functions import (
     findTeamOfPlayer,
     findRoundPlayer,
     current_season,
-    get_matches,
+    ranklist,
 )
 
 
@@ -1252,35 +1254,18 @@ class Ui_ValorantTrackerByNavisGames(object):
                             i
                         ] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
 
-                        # Getting changed later
-                        if (
-                            self.LeaderBoardRegion.currentText() == "E5A1"
-                            or "E5A2"
-                            or "E5A3"
-                        ):
-                            if x.competitiveTier == 27:
-                                rank = "Radiant"
-                            elif x.competitiveTier == 26:
-                                rank = "Immortal 3"
-                            elif x.competitiveTier == 25:
-                                rank = "Immortal 2"
-                            elif x.competitiveTier == 24:
-                                rank = "Immortal 1"
-                            elif x.competitiveTier == 23:
-                                rank = "Ascendant 3"
-                            elif x.competitiveTier == 22:
-                                rank = "Ascendant 2"
-                            elif x.competitiveTier == 21:
-                                rank = "Ascendant 1"
+                        # Get LeaderboardPlayers Rank, watching out if Episode is under 5
+                        tier = x.competitiveTier
+                        if int(self.Act.currentText()[1]) >= 5:
+                            season_has_ascendant = True
                         else:
-                            if x.competitiveTier == 24:
-                                rank = "Radiant"
-                            elif x.competitiveTier == 23:
-                                rank = "Immortal 3"
-                            elif x.competitiveTier == 22:
-                                rank = "Immortal 2"
-                            elif x.competitiveTier == 21:
-                                rank = "Immortal 1"
+                            season_has_ascendant = False
+
+                        if not season_has_ascendant and tier >= 21:
+                            tier += 3
+                            rank = ranklist[tier]
+                        else:
+                            rank = ranklist[tier]
 
                         # If anonymous else stuff
                         if x.IsAnonymized:
