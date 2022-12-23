@@ -1255,11 +1255,8 @@ class Ui_ValorantTrackerByNavisGames(object):
                         ] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
 
                         # Get LeaderboardPlayers Rank, watching out if Episode is under 5
-                        season_has_ascendant = (
-                            int(self.Act.currentText()[1]) >= 5
-                        )
                         tier = x.competitiveTier
-                        if not season_has_ascendant and tier >= 21:
+                        if int(self.Act.currentText()[1]) < 5 and tier >= 21:
                             tier += 3
                         rank = ranklist[tier]
 
