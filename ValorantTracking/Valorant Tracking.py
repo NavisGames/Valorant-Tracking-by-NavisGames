@@ -1255,17 +1255,13 @@ class Ui_ValorantTrackerByNavisGames(object):
                         ] = QtWidgets.QLabel(self.LeaderboardPlayer[i])
 
                         # Get LeaderboardPlayers Rank, watching out if Episode is under 5
+                        season_has_ascendant = (
+                            int(self.Act.currentText()[1]) >= 5
+                        )
                         tier = x.competitiveTier
-                        if int(self.Act.currentText()[1]) >= 5:
-                            season_has_ascendant = True
-                        else:
-                            season_has_ascendant = False
-
                         if not season_has_ascendant and tier >= 21:
                             tier += 3
-                            rank = ranklist[tier]
-                        else:
-                            rank = ranklist[tier]
+                        rank = ranklist[tier]
 
                         # If anonymous else stuff
                         if x.IsAnonymized:
