@@ -3,7 +3,7 @@ name: 🐞 Bug report
 about: If there's a bug (like programm crashing, problem getting the Player/Leaderboard etc.) 🐞
 title: ''
 labels: bug
-assignees:
+assignees: NavisGames
 ---
 
 ## 🐞 Bug Report
