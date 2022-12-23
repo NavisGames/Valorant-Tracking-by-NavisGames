@@ -3,7 +3,7 @@ name: ❓ Feature request
 about: Suggest an idea for this project to add 🌟
 title: ''
 labels: enhancement
-assignees:
+assignees: navisgames
 ---
 
 ## 💡 Feature Request
