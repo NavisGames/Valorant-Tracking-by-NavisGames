@@ -974,10 +974,14 @@ class Ui_ValorantTrackerByNavisGames(object):
                 rounds_played = match.rounds_played
 
                 # Get Stats of Player with get_stats function
-                get_stats = findStatsOfPlayer(Details.name, players.all_players)
+                get_stats = findStatsOfPlayer(
+                    Details.name, players.all_players
+                )
 
                 # Get Agent of Player
-                get_agent = findAgentOfPlayer(Details.name, players.all_players)
+                get_agent = findAgentOfPlayer(
+                    Details.name, players.all_players
+                )
 
                 # Some Variables
                 kills = get_stats.kills
@@ -988,7 +992,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 damage = 0
 
                 for rounds in x.rounds:
-                    Player = findRoundPlayer(f"{Details.name}#{Details.tag}", rounds.player_stats)
+                    Player = findRoundPlayer(
+                        f"{Details.name}#{Details.tag}", rounds.player_stats
+                    )
                     damage += Player.damage
                     total_rounds += 1
 
