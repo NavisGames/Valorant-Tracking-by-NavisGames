@@ -6,27 +6,27 @@ labels: bug
 assignees: NavisGames
 ---
 
-# 🐞 Bug Report
+# 🐞 Bug report
 
-<!-- Mark with an 'x' if something applies (example: '[x]') -->
+<!-- Mark where applicable with 'x' (example: '[x]') -->
 
-- [ ] Using the newest version
+- [ ] Using the latest version
   - [ ] Using the HOME Menu
-  - [ ] Using the LEADERBOARD Menu
-  - [ ] Using the newest BUNDLE
+  - [ ] Using the LEADERBOARD menu
+  - [ ] Using the latest BUNDLE
   - [ ] Other
-- [ ] Using an older Version
+- [ ] Use of an older version
 
-<!-- Tell me clear and concise about the problem. -->
+<!-- Tell me clearly and concisely what the problem is. -->
 
 ##### Screenshots
 
-<!-- If applicable, add screenshots to help explain your problem. -->
+<!-- If necessary, include screenshots to explain your problem. -->
 
 ## 📈 Expected behavior
 
-<!-- A clear and concise description of what you expected to happen. -->
+<!-- A clear and concise description of what you expected. -->
 
 ### 🙋🏻‍♂️ Additional context
 
-<!-- Add other context about the problem here. -->
+<!-- Add more context to the problem here. -->
