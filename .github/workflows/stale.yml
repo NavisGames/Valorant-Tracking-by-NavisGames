@@ -21,11 +21,11 @@ jobs:
     - uses: actions/stale@v7
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'This issue got marked as stale. Reason: No activity'
-        stale-pr-message: 'This pull request got marked as stale. Reason: No activity'
+        stale-issue-message: 'This issue got marked as stale. Reason: No activity after 14 Days'
+        stale-pr-message: 'This pull request got marked as stale. Reason: No activity after 14 Days'
         stale-issue-label: 'stale'
         stale-pr-label: 'stale'
-        days-before-stale: 14
+        days-before-stale: 14.0
         days-before-close: -1
         remove-stale-when-updated: true
         
