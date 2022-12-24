@@ -1,32 +1,31 @@
 # 🆔 Description
 
-<!-- Detailed Description of the changes you recommend in the pull request -->
+<!-- Detailed description of the changes you recommend in the pull request -->
 
-#### ❓ Related Issue
+#### ❓ Related issue
 
-<!-- If this PR refers to an issue, link it here. -->
+<!-- If this PR relates to an issue, link it here. -->
 
-# 🚀 Type of Change
+# 🚀 Type of change
 
-<!-- Mark with an 'x' if something applies (example: '[x]') -->
+<!-- Mark where applicable with 'x' (example: '[x]') -->
 
-- [ ] 🚀 New Feature
-- [ ] ♻ Rework (redesign, rework of a feature, remake of a website etc.)
-- [ ] 🐞 Bug fix (a non-breaking change to fix an issue)
-- [ ] ➕ Adding a function / update to an existing function (example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
-- [ ] 🔨 Other updates / fixes / dumps etc.
+- [ ] 🚀 New feature
+- [ ] ♻ Rework (redesign, revision of a feature, remake of a website etc.)
+- [ ] 🐞 Bug fix (a non-breaking change to fix a problem)
+- [ ] ➕ Adding a feature / updating an existing feature (Example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
+- [ ] 🔨 Other updates / fixes / improvements/ dumps etc.
 
 ## 🔱 "Terms of Service"
 
-<!-- Mark with an 'x' if something applies (example: '[x]') -->
+<!-- Mark where applicable with 'x' (example: '[x]') -->
 
-- [ ] I've read the [`CODE_OF_CONDUCT.md`](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/blob/main/CODE_OF_CONDUCT.md)
-- [ ] I've tested the Functions, and they are working with no problems
+- [ ] I read [`CODE_OF_CONDUCT.md`](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/blob/main/CODE_OF_CONDUCT.md)
+- [ ] I tested the functions and they work without problems
 
 ## ♻ Optimization
 
-<!-- Mark with an 'x' if something applies (example: '[x]') -->
+<!-- Mark where applicable with 'x' (example: '[x]') -->
 
-- [ ] I've updated the code style with "BLACK" !IMPORTANT TO USE MAX. 79 CHARACTERS PER LINE!
-- [ ] I've formatted the HTML, CSS or JS code correctly
-
+- [ ] I updated the code style with "BLACK"! IMPORTANT, MAX. 79 CHARACTERS PER LINE!
+- [ ] I formatted the HTML, CSS or JS code correctly

@@ -7,23 +7,23 @@ assignees: navisgames
 ---
 
 
-# 💡 Feature Request
+# 💡 Feature request
 
 <!-- A clear and concise description of the feature proposal. -->
 
-## 💥 Why should I add this to the programm?
+## 💥 Why should I add this to the program?
 
-<!-- Motivating description why I should add this function to the program -->
+<!-- Motivating description why I should build this function into the program -->
 
-### ↪ Alternatives
+### ↪ alternatives
 
-<!-- A clear and concise description of any alternative solutions or features you've considered. -->
+<!-- A clear and concise description of any alternative solution or feature you have considered. -->
 
-### ❓ Type of Request
+### ❓ Type of request
 
-<!-- Mark with an 'x' if you're using the newest version of the programm (example: '[x]') -->
+<!-- Mark with an 'x' if you are using the latest version of the program (example: '[x]') -->
 
-- [ ] 🚀 New Feature
-- [ ] ♻ Rework (redesign, rework of a feature, remake of a website etc.)
-- [ ] ➕ Adding a function / update to an existing function (example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
+- [ ] 🚀 New feature
+- [ ] ♻ Rework (redesign, revision of a feature, remake of a website etc.)
+- [ ] ➕ Adding a feature / updating an existing feature (Example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
 - [ ] ⭕ Other
