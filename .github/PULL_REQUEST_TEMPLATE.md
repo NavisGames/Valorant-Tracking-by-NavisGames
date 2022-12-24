@@ -2,7 +2,7 @@
 
 <!-- Detailed description of the changes you recommend in the pull request -->
 
-#### ❓ Related edition
+#### ❓ Related issue
 
 <!-- If this PR relates to an issue, link it here. -->
 
