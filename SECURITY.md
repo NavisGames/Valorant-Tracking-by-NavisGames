@@ -3,7 +3,7 @@
 ## Supported / unsupported versions
 These are the current versions supported with security updates:
 
-| Execution | Supported |
+| Version | Supported |
 | ------- | ------------------ |
 | 2.0.x | :white_check_mark: |
 | 1.0.x | :question: |
