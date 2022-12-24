@@ -1,25 +1,25 @@
 # Security
 
-## Supported / Unsupported Versions
-This are the current Versions which are supported with security updates:
+## Supported / unsupported versions
+These are the current versions supported with security updates:
 
-| Version | Supported          |
+| Execution | Supported |
 | ------- | ------------------ |
-| 2.0.x   | :white_check_mark: |
-| 1.0.x   | :question:                |
-| >1.0.x  | :question:         |
+| 2.0.x | :white_check_mark: |
+| 1.0.x | :question: |
+| >1.0.x | :question: |
 
-:white_check_mark: means the version is secure and there should be no problems!
+:white_check_mark: means the version is safe and there shouldn't be any problems!
 
-:x: means there is NO GUARANTEE that the version is secure!
+:x: means there is NO GUARANTEE that the version is safe!
 
-:question: means i dont know if its secure or not!
+:question: means I don't know if it's safe or not!
 
-## Reporting a Vulnerability
+## Report a vulnerability
 
-If there are any vulnerability's then just open an [Issue](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/issues)
-I will check it as soon i am online!
+If there are any vulnerabilities, just open an [Issue](https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/issues)
+I'll check it out once I'm online!
 
-## Preferred Languages
+## Preferred languages
 
-We prefer all communications to be in English or in German.
+We prefer all communication in English or German.
