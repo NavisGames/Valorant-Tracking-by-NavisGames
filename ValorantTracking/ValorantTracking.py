@@ -320,54 +320,44 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
             self.horizontalLayout_8.setObjectName("horizontalLayout_8")
 
-            # Spacer Item
-            spacerItem1 = QtWidgets.QSpacerItem(
-                40,
-                20,
-                QtWidgets.QSizePolicy.Expanding,
-                QtWidgets.QSizePolicy.Minimum,
-            )
-            self.horizontalLayout_8.addItem(spacerItem1)
-
-            # Creating Accuracy Stats
-            self.AccuarcyStats = QtWidgets.QFrame(self.GeneralStats)
-            self.AccuarcyStats.setLineWidth(1)
-            self.AccuarcyStats.setObjectName("AccuarcyStats")
-            self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.AccuarcyStats)
+            # Creating Stats
+            self.StatsFrame = QtWidgets.QFrame(self.GeneralStats)
+            self.StatsFrame.setLineWidth(1)
+            self.StatsFrame.setObjectName("StatsFrame")
+            self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.StatsFrame)
             self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout_6.setSpacing(0)
             self.verticalLayout_6.setObjectName("verticalLayout_6")
 
-            # Creating Accuracy Title
-            self.AccuracyTitle = QtWidgets.QLabel(self.AccuarcyStats)
+            # Creating Stats Title
+            self.StatsTitle = QtWidgets.QLabel(self.StatsFrame)
             font = QtGui.QFont()
             font.setUnderline(False)
             font.setStrikeOut(False)
-            self.AccuracyTitle.setFont(font)
-            self.AccuracyTitle.setText(
-                '<html><head/><body><p><span style=" font-size:22pt;">Accuracy </span><span style=" font-size:18pt; '
+            self.StatsTitle.setFont(font)
+            self.StatsTitle.setText(
+                '<html><head/><body><p><span style=" font-size:22pt;">General Stats </span><span style=" font-size:18pt; '
                 'color:#6a6a6a;">(Last 10 Matches)</span></p></body></html> '
             )
-            self.AccuracyTitle.setTextFormat(QtCore.Qt.RichText)
-            self.AccuracyTitle.setAlignment(QtCore.Qt.AlignCenter)
-            self.AccuracyTitle.setObjectName("AccuracyTitle")
-            self.verticalLayout_6.addWidget(self.AccuracyTitle)
+            self.StatsTitle.setTextFormat(QtCore.Qt.RichText)
+            self.StatsTitle.setAlignment(QtCore.Qt.AlignCenter)
+            self.StatsTitle.setObjectName("StatsTitle")
+            self.verticalLayout_6.addWidget(self.StatsTitle)
 
-            # Creating Accuracy Frame for Pixmap and Info's
-            self.Accuracy = QtWidgets.QFrame(self.AccuarcyStats)
-            self.Accuracy.setFrameShape(QtWidgets.QFrame.NoFrame)
-            self.Accuracy.setFrameShadow(QtWidgets.QFrame.Plain)
-            self.Accuracy.setLineWidth(5)
-            self.Accuracy.setObjectName("Accuracy")
-            self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.Accuracy)
+            # Creating Stats for Pixmap and Info's
+            self.GStats = QtWidgets.QFrame(self.StatsFrame)
+            self.GStats.setFrameShape(QtWidgets.QFrame.NoFrame)
+            self.GStats.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.GStats.setLineWidth(5)
+            self.GStats.setObjectName("GStats")
+            self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.GStats)
             self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
-            self.horizontalLayout_9.setSpacing(0)
-            self.horizontalLayout_9.setStretch(0, 3)
+            self.horizontalLayout_9.setSpacing(15)
             self.horizontalLayout_9.setObjectName("horizontalLayout_9")
 
             # Creating Accuracy Pixmap
             Basic = Path(__file__).parent.joinpath("Images/Dummy/Basic.png")
-            self.AccuracyLogo = QtWidgets.QLabel(self.Accuracy)
+            self.AccuracyLogo = QtWidgets.QLabel(self.GStats)
             self.AccuracyLogo.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.AccuracyLogo.setText("")
             self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(Basic)))
@@ -376,7 +366,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.horizontalLayout_9.addWidget(self.AccuracyLogo)
 
             # Creating Accuracy Texts for HS Rate etc.
-            self.AccuracyText = QtWidgets.QLabel(self.Accuracy)
+            self.AccuracyText = QtWidgets.QLabel(self.GStats)
             self.AccuracyText.setLayoutDirection(QtCore.Qt.LeftToRight)
             self.AccuracyText.setText(
                 "Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%"
@@ -384,40 +374,19 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.AccuracyText.setAlignment(QtCore.Qt.AlignCenter)
             self.AccuracyText.setObjectName("AccuracyText")
             self.horizontalLayout_9.addWidget(self.AccuracyText)
-            self.verticalLayout_6.addWidget(self.Accuracy)
-            self.horizontalLayout_8.addWidget(self.AccuarcyStats)
-
-            # Spacer Item
-            spacerItem2 = QtWidgets.QSpacerItem(
-                40,
-                20,
-                QtWidgets.QSizePolicy.Expanding,
-                QtWidgets.QSizePolicy.Minimum,
-            )
-            self.horizontalLayout_8.addItem(spacerItem2)
-
-            # Creating K/D & Win rate Frame
-            self.OtherStats = QtWidgets.QFrame(self.GeneralStats)
-            self.OtherStats.setObjectName("OtherStats")
-            self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.OtherStats)
-            self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
-            self.verticalLayout_9.setObjectName("verticalLayout_9")
 
             # Creating HTML Code with K/D, Win rate and the Title in it
-            self.OtherStatsTexts = QtWidgets.QLabel(self.OtherStats)
-            self.OtherStatsTexts.setText(
-                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Stats </span><span style=" '
-                'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">'
-                'K/D: 0.00</span></p><p><span style=" font-size:22pt;">Average Combat Score: 0</span></p><p><span style=" font-size:22pt;">Average Damage per Round: 0</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html> '
+            self.StatsText = QtWidgets.QLabel(self.GStats)
+            self.StatsText.setText(
+                "K/D: 0.00\n"
+                "Average Combat Score: 0\n"
+                "Average Damage per Round: 0\n"
+                "Winrate: 0%"
             )
-            self.OtherStatsTexts.setTextFormat(QtCore.Qt.RichText)
-            self.OtherStatsTexts.setScaledContents(False)
-            self.OtherStatsTexts.setAlignment(
-                QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop
-            )
-            self.OtherStatsTexts.setObjectName("OtherStatsTexts")
-            self.verticalLayout_9.addWidget(self.OtherStatsTexts)
-            self.horizontalLayout_8.addWidget(self.OtherStats)
+            self.StatsText.setAlignment(QtCore.Qt.AlignCenter)
+            self.StatsText.setObjectName("StatsText")
+            self.horizontalLayout_9.addWidget(self.StatsText)
+            self.verticalLayout_6.addWidget(self.GStats)
 
             # Spacer Item
             spacerItem3 = QtWidgets.QSpacerItem(
@@ -427,6 +396,16 @@ class Ui_ValorantTrackerByNavisGames(object):
                 QtWidgets.QSizePolicy.Minimum,
             )
             self.horizontalLayout_8.addItem(spacerItem3)
+            self.horizontalLayout_8.addWidget(self.StatsFrame)
+
+            # Spacer Item
+            spacerItem2 = QtWidgets.QSpacerItem(
+                40,
+                20,
+                QtWidgets.QSizePolicy.Expanding,
+                QtWidgets.QSizePolicy.Minimum,
+            )
+            self.horizontalLayout_8.addItem(spacerItem2)
 
             # Creating Stats Frame
             self.Stats = QtWidgets.QFrame(self.Home)
@@ -795,11 +774,11 @@ class Ui_ValorantTrackerByNavisGames(object):
                 for item in current_Bundle[i].items:
                     if item.amount > 1:
                         Prices.append(
-                            f"{item.amount}x {item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n"
+                            f"{item.amount}x {item.name} - {item.base_price} VP | {item.discounted_price} VP for whole Bundle\n"
                         )
                     else:
                         Prices.append(
-                            f"{item.name} - {item.base_price} VP | {item.discounted_price} VP -> whole Bundle\n"
+                            f"{item.name} - {item.base_price} VP | {item.discounted_price} VP for whole Bundle\n"
                         )
                 Prices = "".join(Prices)
 
@@ -928,9 +907,8 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # If there is a rank, add a rank history
             # For every last match in the detail get +RR or -RR and rank / rr
-            # And if getting + add a + symbol else -
             if Rank is not None:
-                previous_ranks.append(f"\nRank History:\n")
+                previous_ranks.append(f"Rank History:\n")
                 for x in MMRDetails:
                     if x.mmr_change_to_last_game >= 0:
                         previous_ranks.append(
@@ -1066,7 +1044,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         f"{region} - {cluster}\n"
                         f"{match_map} | {mode} | Agent: {get_agent}\n"
                         f"{kills} Kills {assists} Assists {deaths} Deaths | {KD} K/D\n"
-                        f"CS: {round(combat_score)} | Total Score: {total_score}\n\n"
+                        f"Total Score: {total_score}\n\n"
                     )
                 else:
                     match_History.append(
@@ -1168,16 +1146,11 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"Bodyshots: {bodyshot_rate}%\n"
                 f"Legshots: {legshot_rate}%"
             )
-            self.OtherStatsTexts.setText(
-                f'<html><head/><body><p align="center"><span style=" font-size:22pt;">Stats </span><span '
-                f'style=" font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" '
-                f"font-size:22pt;\">K/D: {format(total_kills / total_deaths, '.2f')}</span></p><p><span "
-                f'style=" font-size:22pt; ">Average Combat Score: '
-                f"{round(total_combat_score / total_matches)}</span></p>"
-                f'<p><span style=" font-size:22pt; ">Average Damage per Round: '
-                f"{round(total_damage / total_rounds)}</span></p>"
-                f'<p><span style=" font-size:22pt; ">Winrate: '
-                f"{round(total_wins / total_matches * 100)}%</span></p></body></html> "
+            self.StatsText.setText(
+                f"K/D: {format(total_kills / total_deaths, '.2f')}\n"
+                f"Average Combat Score: {round(total_combat_score / total_matches)}\n"
+                f"Average Damage per Round: {round(total_damage / total_rounds)}\n"
+                f"Winrate: {round(total_wins / total_matches * 100)}%"
             )
             self.Player.setText(
                 f'<html><head/><body><p><span style=" font-size:29pt;">{Details.name}#{Details.tag}<p'
@@ -1357,10 +1330,11 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%"
             )
             self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(BasicDummy)))
-            self.OtherStatsTexts.setText(
-                '<html><head/><body><p align="center"><span style=" font-size:22pt;">Stats </span><span style=" '
-                'font-size:18pt; color:#6a6a6a;">(Last 10 Matches)</span></p><p><span style=" font-size:22pt;">'
-                'K/D: 0.00</span></p><p><span style=" font-size:22pt;">Average Combat Score: 0</span></p><p><span style=" font-size:22pt;">Average Damage per Round: 0</span></p><p><span style=" font-size:22pt;">Winrate: 0%</span></p></body></html> '
+            self.StatsText.setText(
+                "K/D: 0.00\n"
+                "Average Combat Score: 0\n"
+                "Average Damage per Round: 0\n"
+                "Winrate: 0%"
             )
             self.CompHistory.setText(
                 "Matchmaking Ratio \n"
