@@ -83,23 +83,19 @@ def clearLayout(layout):
 
 
 def findTeamOfPlayer(player, players):
-    team = [p.team for p in players if p.name == player]
-    return team[0] if team else None
+    return {p.name: p.team for p in players}.get(player)
 
 
 def findStatsOfPlayer(player, players):
-    stats = [p.stats for p in players if p.name == player]
-    return stats[0] if stats else None
+    return {p.name: p.stats for p in players}.get(player)
 
 
 def findRoundPlayer(player, player_stats):
-    player = [p for p in player_stats if p.player_display_name == player]
-    return player[0] if player else None
+    return {p.player_display_name: p for p in player_stats}.get(player)
 
 
 def findAgentOfPlayer(player, players):
-    agent = [p.character for p in players if p.name == player]
-    return agent[0] if agent else None
+    return {p.name: p.character for p in players}.get(player)
 
 
 def get_matches(region: str, puuid: str) -> List[MatchHistoryPointV3]:
