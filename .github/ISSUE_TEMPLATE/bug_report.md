@@ -3,7 +3,7 @@ name: 🐞 Bug report
 about: If there's a bug 🐞
 title: ''
 labels: bug
-assignees: NavisGames
+assignees:
 ---
 
 # 🐞 Bug report
