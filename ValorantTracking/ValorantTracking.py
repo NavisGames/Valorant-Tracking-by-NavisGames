@@ -1,6 +1,7 @@
 # Credits for this program go to NavisGames, selling this program or saying it's yours is not allowed! Read the
 # license for more. If you want, please fork this program to share what you changed in this program ^^
 
+import asyncio
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
@@ -26,7 +27,7 @@ from functions import (
 
 
 class Ui_ValorantTrackerByNavisGames(object):
-    def setupUi(self, ValorantTrackerByNavisGames):
+    async def setupUi(self, ValorantTrackerByNavisGames):
         try:
             # Creating MainWindow
             self.dark_mode = False
@@ -690,11 +691,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 bundleJson = requests.get(
                     url=f"https://valorant-api.com/v1/bundles/{bundleUuid}"
                 ).json()
-                with concurrent.futures.ThreadPoolExecutor() as executor:
-                    img = executor.submit(
-                        get_image, bundleJson["data"]["displayIcon2"]
-                    )
-                    img = img.result()
+                img = await get_image(bundleJson["data"]["displayIcon2"])
 
                 # Creating Bundle
                 self.Bundle[i] = QtWidgets.QWidget()
@@ -813,7 +810,7 @@ class Ui_ValorantTrackerByNavisGames(object):
         except BaseException:
             print(traceback.format_exc())
 
-    def get_information(self):
+    async def get_information(self):
         try:
             # API functions
             Details = valo_api.get_account_details_by_name(
@@ -923,11 +920,9 @@ class Ui_ValorantTrackerByNavisGames(object):
             previous_ranks = "".join(previous_ranks)
             self.CompHistory.setText(previous_ranks)
 
-            # Makes a ThreadPool for getting an QImage for the Player Card.
+            # getting an QImage for the Player Card.
             # Sets Banner
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                img = executor.submit(get_image, Card)
-                img = img.result()
+            img = await get_image(Card)
             self.PlayerBanner.setPixmap(QPixmap(img))
 
             # Get Match History as a List, and gets every current matches
@@ -1398,13 +1393,16 @@ class Ui_ValorantTrackerByNavisGames(object):
             QApplication.setPalette(dark_palette)
 
 
-if __name__ == "__main__":
+async def main():
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
     ValorantTrackerByNavisGames = QtWidgets.QMainWindow()
     ui = Ui_ValorantTrackerByNavisGames()
-    ui.setupUi(ValorantTrackerByNavisGames)
+    await ui.setupUi(ValorantTrackerByNavisGames)
     QApplication.setStyle("Fusion")
     ValorantTrackerByNavisGames.show()
     sys.exit(app.exec_())
+
+
+asyncio.run(main())
