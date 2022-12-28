@@ -1,13 +1,10 @@
 from typing import List
-import httpx as http
-from itertools import accumulate
-from PyQt5.QtCore import Qt
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtGui import QImage
 import valo_api
 from valo_api.endpoints.raw import EndpointType
 from valo_api.responses.match_history import MatchHistoryPointV3
+import aiohttp
+import asyncio
 
 current_season = "E5A3"
 
@@ -51,12 +48,11 @@ ranklist = [
 ]
 
 
-def get_image(url):
-    with http.Client() as client:
-        r = client.get(url)
-    img = QImage()
-    img.loadFromData(r.content)
-    return img
+async def get_image(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            img_data = await response.read()
+            return QImage.fromData(img_data)
 
 
 def display_time(seconds, granularity=2):
