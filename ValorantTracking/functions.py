@@ -49,19 +49,19 @@ ranklist = [
 ]
 
 
-async def get_image_async(url):
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as response:
-            img_data = await response.read()
-            return QImage.fromData(img_data)
-
-
 def get_image(url):
     with http.Client() as client:
         r = client.get(url)
     img = QImage()
     img.loadFromData(r.content)
     return img
+
+
+async def get_image_async(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            img_data = await response.read()
+            return QImage.fromData(img_data)
 
 
 def display_time(seconds, granularity=2):
