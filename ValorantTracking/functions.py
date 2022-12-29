@@ -1,4 +1,5 @@
 from typing import List
+import httpx as http
 from PyQt5.QtGui import QImage
 import valo_api
 from valo_api.endpoints.raw import EndpointType
@@ -48,11 +49,19 @@ ranklist = [
 ]
 
 
-async def get_image(url):
+async def get_image_async(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             img_data = await response.read()
             return QImage.fromData(img_data)
+
+
+def get_image(url):
+    with http.Client() as client:
+        r = client.get(url)
+    img = QImage()
+    img.loadFromData(r.content)
+    return img
 
 
 def display_time(seconds, granularity=2):

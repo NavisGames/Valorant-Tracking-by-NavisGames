@@ -2,7 +2,7 @@
 # license for more. If you want, please fork this program to share what you changed in this program ^^
 
 import asyncio
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QThread, QEventLoop
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
 from PyQt5.QtWidgets import QApplication
@@ -23,6 +23,7 @@ from functions import (
     findRoundPlayer,
     current_season,
     ranklist,
+    get_image_async,
 )
 
 
@@ -54,7 +55,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             ValorantTrackerByNavisGames.setFont(font)
             ValorantTrackerByNavisGames.setMouseTracking(False)
             ValorantTrackerByNavisGames.setWindowTitle(
-                "Valorant Tracking 2.2 By NavisGames"
+                "Valorant Tracking 2.3 By NavisGames"
             )
             icon = QtGui.QIcon()
             iconImage = Path(__file__).parent.joinpath("Images/icon.png")
@@ -691,7 +692,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 bundleJson = requests.get(
                     url=f"https://valorant-api.com/v1/bundles/{bundleUuid}"
                 ).json()
-                img = await get_image(bundleJson["data"]["displayIcon2"])
+                img = await get_image_async(bundleJson["data"]["displayIcon2"])
 
                 # Creating Bundle
                 self.Bundle[i] = QtWidgets.QWidget()
@@ -810,7 +811,7 @@ class Ui_ValorantTrackerByNavisGames(object):
         except BaseException:
             print(traceback.format_exc())
 
-    async def get_information(self):
+    def get_information(self):
         try:
             # API functions
             Details = valo_api.get_account_details_by_name(
@@ -922,7 +923,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # getting an QImage for the Player Card.
             # Sets Banner
-            img = await get_image(Card)
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                img = executor.submit(get_image, Card)
+                img = img.result()
             self.PlayerBanner.setPixmap(QPixmap(img))
 
             # Get Match History as a List, and gets every current matches
