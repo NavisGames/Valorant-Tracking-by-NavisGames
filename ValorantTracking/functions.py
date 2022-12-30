@@ -1,11 +1,12 @@
+import asyncio
 from typing import List
+
+import aiohttp
 import httpx as http
-from PyQt5.QtGui import QImage
 import valo_api
+from PyQt5.QtGui import QImage
 from valo_api.endpoints.raw import EndpointType
 from valo_api.responses.match_history import MatchHistoryPointV3
-import aiohttp
-import asyncio
 
 current_season = "E5A3"
 

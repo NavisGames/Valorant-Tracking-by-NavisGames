@@ -2,29 +2,30 @@
 # license for more. If you want, please fork this program to share what you changed in this program ^^
 
 import asyncio
-from PyQt5.QtCore import Qt, QThread, QEventLoop
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
-from PyQt5.QtWidgets import QApplication
-from pathlib import Path
-import traceback
-import valo_api
-import requests
 import concurrent.futures
 import time
+import traceback
+from pathlib import Path
+
+import requests
+import valo_api
 from functions import (
-    get_matches,
-    get_image,
-    display_time,
     clearLayout,
+    current_season,
+    display_time,
     findAgentOfPlayer,
+    findRoundPlayer,
     findStatsOfPlayer,
     findTeamOfPlayer,
-    findRoundPlayer,
-    current_season,
-    ranklist,
+    get_image,
     get_image_async,
+    get_matches,
+    ranklist,
 )
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QEventLoop, Qt, QThread
+from PyQt5.QtGui import QColor, QFontDatabase, QImage, QPalette, QPixmap
+from PyQt5.QtWidgets import QApplication
 
 
 class Ui_ValorantTrackerByNavisGames(object):
