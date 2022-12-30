@@ -23,7 +23,7 @@ from functions import (
     ranklist,
 )
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QEventLoop, Qt, QThread
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QFontDatabase, QImage, QPalette, QPixmap
 from PyQt5.QtWidgets import QApplication
 
