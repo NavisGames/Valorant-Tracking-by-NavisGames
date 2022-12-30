@@ -103,6 +103,16 @@ def findAgentOfPlayer(player, players):
     return {p.name: p.character for p in players}.get(player)
 
 
+def highestRank(puuID, region):
+    mmr_details = valo_api.get_mmr_details_by_puuid(
+        version="v2", region=region, puuid=puuID
+    )
+    return max(
+        (season.act_rank_wins for season in mmr_details.by_season.values()),
+        key=lambda x: x[0].tier if x else -1,
+    )[0].patched_tier
+
+
 def get_matches(region: str, puuid: str) -> List[MatchHistoryPointV3]:
     step_size = 20  # maximum is 20
 
