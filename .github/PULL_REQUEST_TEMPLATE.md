@@ -11,7 +11,7 @@
 <!-- Mark where applicable with 'x' (example: '[x]') -->
 
 - [ ] 🚀 New feature
-- [ ] ♻ Rework (redesign, revision of a feature, remake of a website etc.)
+- [ ] ♻ Rework (redesign, rework of a feature, remake of a website etc.)
 - [ ] 🐞 Bug fix (a non-breaking change to fix a problem)
 - [ ] ➕ Adding a feature / updating an existing feature (Example: https://github.com/NavisGames/Valorant-Tracking-by-NavisGames/pull/28)
 - [ ] 🔨 Other updates / fixes / improvements/ dumps etc.
@@ -27,5 +27,5 @@
 
 <!-- Mark where applicable with 'x' (example: '[x]') -->
 
-- [ ] I updated the code style with "BLACK"! IMPORTANT, MAX. 79 CHARACTERS PER LINE!
+- [ ] I updated the code style with "BLACK" and "isort" (MAX. 92 CHARACTERS PER LINE!)
 - [ ] I formatted the HTML, CSS or JS code correctly
