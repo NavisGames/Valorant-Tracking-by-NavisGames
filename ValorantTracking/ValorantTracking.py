@@ -20,6 +20,7 @@ from functions import (
     get_image,
     get_image_async,
     get_matches,
+    highestRank,
     ranklist,
 )
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -821,6 +822,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             Account_level = Details.account_level
             Card = str(Details.card.wide)
             Rank = RankDetails.current_data.currenttierpatched
+            PeakRank = highestRank(puuID=puuid, region=Region)
             RR = RankDetails.current_data.ranking_in_tier
             MMR = RankDetails.current_data.elo
 
@@ -837,10 +839,11 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creates List with MMR, Comp Wins, Comp Games
             previous_ranks = [
-                f"Matchmaking Ratio: {MMR}\n"
+                f"Rank: {Rank} {RR}rr\n"
+                f"Peak Rank: {PeakRank}\n"
+                f"Matchmaking Ratio: {MMR}\n\n"
                 f"Competitive Wins: {wins}\n"
-                f"Competitive Games played: {games_played}\n"
-                f"Previous Ranks:\n"
+                f"Competitive Games played: {games_played}\n\n"
             ]
 
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
@@ -849,7 +852,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             for x in lastRank:
                 try:
                     if (
-                        lastRank[x].final_rank_patched is not None
+                        lastRank[x].final_rank_patched not in (None, "Unrated")
                         and x != current_season.lower()
                     ):
                         previous_ranks.append(
@@ -863,7 +866,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # If there is a rank, add a rank history
             # For every last match in the detail get +RR or -RR and rank / rr
             if Rank is not None:
-                previous_ranks.append(f"Rank History:\n")
+                previous_ranks.append("\n")
                 for x in MMRDetails:
                     if x.mmr_change_to_last_game >= 0:
                         previous_ranks.append(
