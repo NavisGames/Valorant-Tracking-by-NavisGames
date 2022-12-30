@@ -1,11 +1,9 @@
 from typing import List
+
+import aiohttp
 import httpx as http
-from itertools import accumulate
-from PyQt5.QtCore import Qt
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import QPalette, QColor, QImage, QPixmap, QFontDatabase
-from PyQt5.QtWidgets import QApplication
 import valo_api
+from PyQt5.QtGui import QImage
 from valo_api.endpoints.raw import EndpointType
 from valo_api.responses.match_history import MatchHistoryPointV3
 
@@ -57,6 +55,13 @@ def get_image(url):
     img = QImage()
     img.loadFromData(r.content)
     return img
+
+
+async def get_image_async(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            img_data = await response.read()
+            return QImage.fromData(img_data)
 
 
 def display_time(seconds, granularity=2):
@@ -125,7 +130,4 @@ def get_matches(region: str, puuid: str) -> List[MatchHistoryPointV3]:
             query_args["endIndex"] + step_size, match_history.Total
         )
 
-    return [
-        valo_api.get_match_details_v2(match_id=match_id)
-        for match_id in match_ids
-    ]
+    return [valo_api.get_match_details_v2(match_id=match_id) for match_id in match_ids]
