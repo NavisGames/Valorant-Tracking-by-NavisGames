@@ -131,7 +131,4 @@ def get_matches(region: str, puuid: str) -> List[MatchHistoryPointV3]:
             query_args["endIndex"] + step_size, match_history.Total
         )
 
-    return [
-        valo_api.get_match_details_v2(match_id=match_id)
-        for match_id in match_ids
-    ]
+    return [valo_api.get_match_details_v2(match_id=match_id) for match_id in match_ids]
