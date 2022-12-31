@@ -38,7 +38,7 @@ And many more functions!
 ### Q: Why is the program detected as a virus?
 
 A: Usally this program should not be detected as a virus. PyInstaller is the program I used to convert Python into an EXE file. PyInstaller is also often used to create viruses, keyloggers, and other malicious software. In other words, Py to Exe is not a true compiler, but rather a container in EXE format that runs at startup in addition to your Py file. It also secretly writes the necessary runtime to the disk and runs it automatically. This behavior is similar to that of trojans and other malware, as evidenced by the VirusTotal link provided to show that this program will not harm your computer:
-https://www.virustotal.com/gui/file/800d49e06d053e677bd5320e0b2d41c9c43e3f0d30a390d33dd480b30e23d166
+https://www.virustotal.com/gui/file/e9075b5b7ebe456c4cf759873b97cb21bf8ba1706c4fdc1c35d8fe3d188ea548
 
 ### Q: What if my names contain spaces?
 
