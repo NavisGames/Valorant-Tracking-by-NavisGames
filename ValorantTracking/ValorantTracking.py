@@ -755,7 +755,46 @@ class Ui_ValorantTrackerByNavisGames(object):
                     f"{bundleJson['data']['displayName']} Bundle",
                 )
 
-            # Index, Layout
+            # Create MatchTracker Widget
+            self.MatchTracker = QtWidgets.QWidget()
+            self.MatchTracker.setObjectName("MatchTracker")
+
+            # Create Layout
+            self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.MatchTracker)
+            self.verticalLayout_9.setContentsMargins(5, 5, 5, 5)
+            self.verticalLayout_9.setObjectName("verticalLayout_9")
+
+            # Create MatchInputLayout
+            self.MatchInputs = QtWidgets.QHBoxLayout()
+            self.MatchInputs.setObjectName("MatchInputs")
+
+            # Create MatchID Input
+            self.MatchIDInput = QtWidgets.QLineEdit(self.MatchTracker)
+            self.MatchIDInput.setInputMask("")
+            self.MatchIDInput.setMaxLength(16)
+            self.MatchIDInput.setAlignment(QtCore.Qt.AlignCenter)
+            self.MatchIDInput.setObjectName("MatchIDInput")
+            self.MatchIDInput.setPlaceholderText("ENTER MATCH ID (16 characters)")
+
+            # Add widget
+            self.MatchInputs.addWidget(self.MatchIDInput)
+
+            # Create Execute Button
+            self.ExecuteButton = QtWidgets.QPushButton(self.MatchTracker)
+            self.ExecuteButton.setObjectName("ExecuteButton")
+            self.ExecuteButton.setText("EXECUTE")
+
+            # Add Widget & Layout stuff
+            self.MatchInputs.addWidget(self.ExecuteButton)
+            self.MatchInputs.setStretch(0, 1)
+            self.verticalLayout_9.addLayout(self.MatchInputs)
+            spacerItem2 = QtWidgets.QSpacerItem(
+                20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+            )
+            self.verticalLayout_9.addItem(spacerItem2)
+            self.Tabs.addTab(self.MatchTracker, "MATCH")
+
+            # Index, Layout, adding Match Tracker
             self.verticalLayout_7.addWidget(self.Tabs)
             ValorantTrackerByNavisGames.setCentralWidget(self.centralwidget)
             self.Tabs.setCurrentIndex(0)
