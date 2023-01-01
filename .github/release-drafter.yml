@@ -27,9 +27,11 @@ categories:
     labels:
       - "dependencies"
 template: |
-
+  ## ➕ Changes
+  
   $CHANGES
   
   
   ## ✔ Contributors
+  
   $CONTRIBUTORS
