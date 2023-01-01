@@ -765,10 +765,10 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchIDInput = QtWidgets.QLineEdit(self.MatchTracker)
             self.MatchIDInput.setInputMask("")
             self.MatchIDInput.setText("")
-            self.MatchIDInput.setMaxLength(16)
+            self.MatchIDInput.setMaxLength(36)
             self.MatchIDInput.setAlignment(QtCore.Qt.AlignCenter)
             self.MatchIDInput.setObjectName("MatchIDInput")
-            self.MatchIDInput.setPlaceholderText("ENTER MATCH ID (16 characters)")
+            self.MatchIDInput.setPlaceholderText("ENTER MATCH ID (36 characters)")
             self.MatchInputs.addWidget(self.MatchIDInput)
 
             # Create Execute Button
@@ -826,6 +826,7 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Functions
             self.getButton.clicked.connect(self.get_information)
+            self.ExecuteButton.clicked.connect(self.get_match_information)
             self.resetButton.clicked.connect(self.reset_information)
             self.Reload.clicked.connect(self.leaderboard)
             self.modeSwitcher.clicked.connect(self.modeSwitch)
@@ -1265,6 +1266,29 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             print(f"LEADERBOARD took --- %s seconds ---" % (time.time() - start_time))
 
+        except BaseException:
+            print(traceback.format_exc())
+
+    def get_match_information(self):
+        try:
+            # Get Match Details
+            Match = valo_api.get_match_details_v2(match_id=self.MatchIDInput.text())
+
+            # Variables
+            match_id = Match.metadata.matchid
+            game_date = Match.metadata.game_start_patched
+            game_last = Match.metadata.game_length
+            region = Match.metadata.region.upper()
+            cluster = Match.metadata.cluster
+            gamemode = Match.metadata.mode
+            game_map = Match.metadata.map
+
+            self.MatchInformations.setText(
+                f"{match_id}\n"
+                f"{game_date} - {game_last}\n"
+                f"{region} - {cluster}\n"
+                f"{gamemode} - {game_map}"
+            )
         except BaseException:
             print(traceback.format_exc())
 
