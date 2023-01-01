@@ -675,16 +675,6 @@ class Ui_ValorantTrackerByNavisGames(object):
                 self.verticalLayout_11.setSpacing(0)
                 self.verticalLayout_11.setObjectName("verticalLayout_11")
 
-                # Creating Bundle Title
-                self.BundleTitle = QtWidgets.QLabel(self.BundleMain)
-                font = QtGui.QFont()
-                font.setPointSize(35)
-                self.BundleTitle.setFont(font)
-                self.BundleTitle.setText("BUNDLE NAME")
-                self.BundleTitle.setAlignment(QtCore.Qt.AlignCenter)
-                self.BundleTitle.setObjectName("BundleTitle")
-                self.verticalLayout_11.addWidget(self.BundleTitle)
-
                 # Creating Bundle Banner
                 self.BundleBanner = QtWidgets.QLabel(self.BundleMain)
                 self.BundleBanner.setMinimumSize(QtCore.QSize(1, 1))
@@ -743,7 +733,6 @@ class Ui_ValorantTrackerByNavisGames(object):
                 Prices = "".join(Prices)
 
                 # Set Texts
-                self.BundleTitle.setText(f"{bundleJson['data']['displayName']}")
                 self.BundlePrices.setText(Prices)
                 self.BundleLast.setText(
                     f"Bundle remaining in Shop: {display_time(bundles.seconds_remaining, 3)}"
@@ -752,10 +741,83 @@ class Ui_ValorantTrackerByNavisGames(object):
                 # Add Bundles
                 self.Tabs.addTab(
                     self.Bundle[i],
-                    f"{bundleJson['data']['displayName']} Bundle",
+                    f"{bundleJson['data']['displayName'].upper()}",
                 )
 
-            # Index, Layout
+            # Create MatchTracker Widget
+            self.MatchTracker = QtWidgets.QWidget()
+            self.MatchTracker.setObjectName("MatchTracker")
+
+            # Create Layout
+            self.verticalLayout_9 = QtWidgets.QVBoxLayout(self.MatchTracker)
+            self.verticalLayout_9.setContentsMargins(5, 5, 5, 5)
+            self.verticalLayout_9.setObjectName("verticalLayout_9")
+
+            # Create MatchInputLayout
+            self.MatchInputs = QtWidgets.QHBoxLayout()
+            self.MatchInputs.setObjectName("MatchInputs")
+
+            # Create MatchID Input
+            spacerItem2 = QtWidgets.QSpacerItem(
+                40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+            )
+            self.MatchInputs.addItem(spacerItem2)
+            self.MatchIDInput = QtWidgets.QLineEdit(self.MatchTracker)
+            self.MatchIDInput.setInputMask("")
+            self.MatchIDInput.setText("")
+            self.MatchIDInput.setMaxLength(16)
+            self.MatchIDInput.setAlignment(QtCore.Qt.AlignCenter)
+            self.MatchIDInput.setObjectName("MatchIDInput")
+            self.MatchIDInput.setPlaceholderText("ENTER MATCH ID (16 characters)")
+            self.MatchInputs.addWidget(self.MatchIDInput)
+
+            # Create Execute Button
+            self.ExecuteButton = QtWidgets.QPushButton(self.MatchTracker)
+            self.ExecuteButton.setText("EXECUTE")
+            self.ExecuteButton.setObjectName("ExecuteButton")
+            self.MatchInputs.addWidget(self.ExecuteButton)
+
+            # Spacer
+            spacerItem3 = QtWidgets.QSpacerItem(
+                40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum
+            )
+            self.MatchInputs.addItem(spacerItem3)
+            self.verticalLayout_9.addLayout(self.MatchInputs)
+
+            # Create Match Informations
+            self.MatchInformations = QtWidgets.QLabel(self.MatchTracker)
+            font = QtGui.QFont()
+            font.setPointSize(18)
+            self.MatchInformations.setFont(font)
+            self.MatchInformations.setText(
+                "f727f8be-2b13-458c-8a7c-fabae93f13e4\n"
+                "30.12.2022 6:21 PM - 30m 41s\n"
+                "EU - Frankfurt\n"
+                "Competitive - Icebox"
+            )
+            self.MatchInformations.setTextFormat(QtCore.Qt.PlainText)
+            self.MatchInformations.setAlignment(QtCore.Qt.AlignCenter)
+            self.MatchInformations.setObjectName("MatchInformations")
+            self.verticalLayout_9.addWidget(self.MatchInformations)
+
+            # Create Match Results
+            self.MatchResult = QtWidgets.QLabel(self.MatchTracker)
+            self.MatchResult.setText(
+                '<html><head/><body><p align="center"><span style=" font-size:18pt; color:#00ba82;">TEAM A</span><span style=" font-size:18pt; color:#00ffb3;">⠀</span><span style=" font-size:18pt; color:#000000;">:</span><span style=" font-size:18pt; color:#00ffb3;">⠀</span><span style=" font-size:18pt; color:#ff0000;">TEAM B</span></p><p align="center"><span style=" font-size:18pt; color:#00ba82;">13</span><span style=" font-size:18pt; color:#00ffb3;">⠀</span><span style=" font-size:18pt; color:#000000;">:</span><span style=" font-size:18pt; color:#00ffb3;">⠀</span><span style=" font-size:18pt; color:#ff0000;">5</span></p></body></html>'
+            )
+            self.MatchResult.setTextFormat(QtCore.Qt.RichText)
+            self.MatchResult.setAlignment(QtCore.Qt.AlignCenter)
+            self.MatchResult.setObjectName("MatchResult")
+            self.verticalLayout_9.addWidget(self.MatchResult)
+
+            # Add Widget & Layout stuff
+            spacerItem2 = QtWidgets.QSpacerItem(
+                20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+            )
+            self.verticalLayout_9.addItem(spacerItem2)
+            self.Tabs.addTab(self.MatchTracker, "MATCH")
+
+            # Index, Layout, adding Match Tracker
             self.verticalLayout_7.addWidget(self.Tabs)
             ValorantTrackerByNavisGames.setCentralWidget(self.centralwidget)
             self.Tabs.setCurrentIndex(0)
