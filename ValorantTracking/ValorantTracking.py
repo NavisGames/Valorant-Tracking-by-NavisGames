@@ -1325,6 +1325,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         continue
                 except BaseException as error:
                     print(traceback.format_exc())
+                    self.HomeError.setText(f"{format(error)}")
 
             # If there is a rank, add a rank history
             # For every last match in the detail get +RR or -RR and rank / rr
