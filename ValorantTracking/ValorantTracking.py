@@ -1229,11 +1229,11 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.modeSwitcher.clicked.connect(self.modeSwitch)
             QtCore.QMetaObject.connectSlotsByName(ValorantTrackerByNavisGames)
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
             msgBox = QMessageBox()
             msgBox.setIcon(QMessageBox.Information)
-            msgBox.setText(f"{traceback.format_exc()}")
+            msgBox.setText(f"{format(error)}")
             msgBox.setWindowTitle("an error occurred")
             msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             returnValue = msgBox.exec()
@@ -1326,7 +1326,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                         )
                     else:
                         continue
-                except BaseException:
+                except BaseException as error:
                     print(traceback.format_exc())
 
             # If there is a rank, add a rank history
@@ -1539,9 +1539,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f'"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>'
             )
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
-            self.HomeError.setText(f"{traceback.format_exc()}")
+            self.HomeError.setText(f"{format(error)}")
 
     def leaderboard(self):
         start_time = time.time()
@@ -1670,7 +1670,7 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             print(f"LEADERBOARD took --- %s seconds ---" % (time.time() - start_time))
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
 
     def get_match_information(self):
@@ -1693,9 +1693,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"{region} - {cluster}\n"
                 f"{gamemode} - {game_map}"
             )
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
-            self.MatchError.setText(f"{traceback.format_exc()}")
+            self.MatchError.setText(f"{format(error)}")
 
     def reset_information(self):
         try:
@@ -1743,7 +1743,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "HS%: 0% | ACS: 0 | ADR: 0 | Total Score: 0\n"
             )
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
 
     def modeSwitch(self):
