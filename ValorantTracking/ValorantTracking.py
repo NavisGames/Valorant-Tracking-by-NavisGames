@@ -26,7 +26,7 @@ from functions import (
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QFontDatabase, QImage, QPalette, QPixmap
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 
 class Ui_ValorantTrackerByNavisGames(object):
@@ -1231,6 +1231,12 @@ class Ui_ValorantTrackerByNavisGames(object):
 
         except BaseException:
             print(traceback.format_exc())
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setText(f"{traceback.format_exc()}")
+            msgBox.setWindowTitle("an error occurred")
+            msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            returnValue = msgBox.exec()
 
     def get_information(self):
         try:
