@@ -1712,6 +1712,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f'>Account Level 0 | Iron 3 </span><img src="{tier_icon}"width="33 '
                 f'"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
             )
+            self.MatchInformations.setText(
+                "Match ID\n" "Date - Match Duration\n" "Region - Cluster\n" "Gamemode - Map"
+            )
             self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
             self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(BasicDummy)))
             self.StatsText.setText(
