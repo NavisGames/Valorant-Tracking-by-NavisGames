@@ -799,10 +799,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             font.setPointSize(18)
             self.MatchInformations.setFont(font)
             self.MatchInformations.setText(
-                "f727f8be-2b13-458c-8a7c-fabae93f13e4\n"
-                "30.12.2022 6:21 PM - 30m 41s\n"
-                "EU - Frankfurt\n"
-                "Competitive - Icebox"
+                "Match ID\n" "Date - Match Duration\n" "Region - Cluster\n" "Gamemode - Map"
             )
             self.MatchInformations.setTextFormat(QtCore.Qt.PlainText)
             self.MatchInformations.setAlignment(QtCore.Qt.AlignCenter)
