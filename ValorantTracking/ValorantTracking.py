@@ -897,7 +897,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchTeamA.setColumnCount(9)
             self.MatchTeamA.setRowCount(5)
 
-            # Player 1 - 5
+            # Players
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 1")
             font = QtGui.QFont()
@@ -1060,7 +1060,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchTeamB.setColumnCount(9)
             self.MatchTeamB.setRowCount(5)
 
-            # Player 1 - 5
+            # Players
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 1")
             font = QtGui.QFont()
