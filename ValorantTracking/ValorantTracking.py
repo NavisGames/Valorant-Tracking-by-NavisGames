@@ -26,7 +26,7 @@ from functions import (
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QFontDatabase, QImage, QPalette, QPixmap
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 
 class Ui_ValorantTrackerByNavisGames(object):
@@ -36,7 +36,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.dark_mode = False
             ValorantTrackerByNavisGames.setObjectName("ValorantTrackerByNavisGames")
             ValorantTrackerByNavisGames.setEnabled(True)
-            ValorantTrackerByNavisGames.resize(1124, 922)
+            ValorantTrackerByNavisGames.resize(1049, 890)
             ValorantTrackerByNavisGames.setMaximumSize(QtCore.QSize(16777215, 16777215))
 
             # Creating Font Standards
@@ -53,7 +53,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             ValorantTrackerByNavisGames.setFont(font)
             ValorantTrackerByNavisGames.setMouseTracking(False)
             ValorantTrackerByNavisGames.setWindowTitle(
-                "Valorant Tracking 2.3 By NavisGames"
+                "Valorant Tracking 2.5 By NavisGames"
             )
             icon = QtGui.QIcon()
             iconImage = Path(__file__).parent.joinpath("Images/icon.png")
@@ -229,8 +229,8 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Layers
             self.horizontalLayout.addWidget(self.DialogButton)
-            self.horizontalLayout.setStretch(1, 7)
-            self.horizontalLayout.setStretch(2, 6)
+            self.horizontalLayout.setStretch(1, 4)
+            self.horizontalLayout.setStretch(2, 3)
             self.verticalLayout.addWidget(self.PlayerInput)
 
             # Create Player Output Banner & Data etc. Frame
@@ -239,8 +239,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerInformation.setLineWidth(0)
             self.PlayerInformation.setObjectName("PlayerInformation")
             self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.PlayerInformation)
-            self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
-            self.horizontalLayout_2.setSpacing(5)
+            self.horizontalLayout_2.setContentsMargins(5, 5, 5, 5)
+            self.horizontalLayout_2.setSpacing(15)
             self.horizontalLayout_2.setObjectName("horizontalLayout_2")
 
             # Create Player Banner PixMap
@@ -252,9 +252,11 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerBanner.setLineWidth(1)
             self.PlayerBanner.setText("")
             self.PlayerBanner.setPixmap(QtGui.QPixmap(str(ExampleBanner)))
-            self.PlayerBanner.setScaledContents(False)
+            self.PlayerBanner.setScaledContents(True)
             self.PlayerBanner.setAlignment(QtCore.Qt.AlignCenter)
             self.PlayerBanner.setWordWrap(False)
+            self.PlayerBanner.setFrameShape(QtWidgets.QFrame.Box)
+            self.PlayerBanner.setLineWidth(2)
             self.PlayerBanner.setObjectName("PlayerBanner")
             self.horizontalLayout_2.addWidget(self.PlayerBanner)
 
@@ -304,7 +306,6 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Accuracy & Stats Frame
             self.GeneralStats = QtWidgets.QFrame(self.Home)
-            self.GeneralStats.setLineWidth(1)
             self.GeneralStats.setObjectName("GeneralStats")
             self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.GeneralStats)
             self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
@@ -312,10 +313,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Stats
             self.StatsFrame = QtWidgets.QFrame(self.GeneralStats)
-            self.StatsFrame.setLineWidth(1)
             self.StatsFrame.setObjectName("StatsFrame")
             self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.StatsFrame)
-            self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
+            self.verticalLayout_6.setContentsMargins(5, 0, 5, 0)
             self.verticalLayout_6.setSpacing(0)
             self.verticalLayout_6.setObjectName("verticalLayout_6")
 
@@ -336,9 +336,9 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Stats for Pixmap and Info's
             self.GStats = QtWidgets.QFrame(self.StatsFrame)
-            self.GStats.setFrameShape(QtWidgets.QFrame.NoFrame)
+            self.GStats.setFrameShape(QtWidgets.QFrame.Box)
             self.GStats.setFrameShadow(QtWidgets.QFrame.Plain)
-            self.GStats.setLineWidth(5)
+            self.GStats.setLineWidth(2)
             self.GStats.setObjectName("GStats")
             self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.GStats)
             self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
@@ -377,23 +377,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.verticalLayout_6.addWidget(self.GStats)
 
             # Spacer Item
-            spacerItem3 = QtWidgets.QSpacerItem(
-                40,
-                20,
-                QtWidgets.QSizePolicy.Expanding,
-                QtWidgets.QSizePolicy.Minimum,
-            )
-            self.horizontalLayout_8.addItem(spacerItem3)
             self.horizontalLayout_8.addWidget(self.StatsFrame)
-
-            # Spacer Item
-            spacerItem2 = QtWidgets.QSpacerItem(
-                40,
-                20,
-                QtWidgets.QSizePolicy.Expanding,
-                QtWidgets.QSizePolicy.Minimum,
-            )
-            self.horizontalLayout_8.addItem(spacerItem2)
 
             # Creating Stats Frame
             self.Stats = QtWidgets.QFrame(self.Home)
@@ -426,6 +410,9 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.CompScrollArea.setWidgetResizable(True)
             self.CompScrollArea.setAlignment(QtCore.Qt.AlignCenter)
             self.CompScrollArea.setObjectName("CompScrollArea")
+            self.CompScrollArea.setFrameShape(QtWidgets.QFrame.Box)
+            self.CompScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.CompScrollArea.setLineWidth(2)
             self.CompScrollLayout = QtWidgets.QWidget()
             self.CompScrollLayout.setGeometry(QtCore.QRect(0, 0, 519, 355))
             self.CompScrollLayout.setObjectName("CompScrollLayout")
@@ -449,6 +436,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "Rank History\n"
             )
             self.CompHistory.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
+            self.CompHistory.setWordWrap(True)
             self.CompHistory.setObjectName("CompHistory")
             self.horizontalLayout_3.addWidget(self.CompHistory)
             self.CompScrollArea.setWidget(self.CompScrollLayout)
@@ -458,6 +446,9 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Creating Match History Frame for Stats
             self.MatchHistory = QtWidgets.QFrame(self.Stats)
             self.MatchHistory.setEnabled(True)
+            self.MatchHistory.setFrameShape(QtWidgets.QFrame.NoFrame)
+            self.MatchHistory.setFrameShadow(QtWidgets.QFrame.Raised)
+            self.MatchHistory.setLineWidth(2)
             self.MatchHistory.setObjectName("MatchHistory")
             self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.MatchHistory)
             self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -483,6 +474,9 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.HistoryScrollLayout = QtWidgets.QWidget()
             self.HistoryScrollLayout.setGeometry(QtCore.QRect(0, 0, 519, 355))
             self.HistoryScrollLayout.setObjectName("HistoryScrollLayout")
+            self.HistoryScrollArea.setFrameShape(QtWidgets.QFrame.Box)
+            self.HistoryScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.HistoryScrollArea.setLineWidth(2)
             self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.HistoryScrollLayout)
             self.horizontalLayout_4.setObjectName("horizontalLayout_4")
 
@@ -512,6 +506,19 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Adding Widgets to HOME
             self.verticalLayout.addWidget(self.Stats)
             self.verticalLayout.addWidget(self.GeneralStats)
+
+            # Adding HomeError to find Errors better
+            self.HomeError = QtWidgets.QLabel(self.Home)
+            font = QtGui.QFont()
+            font.setPointSize(12)
+            self.HomeError.setFont(font)
+            self.HomeError.setText("")
+            self.HomeError.setAlignment(
+                QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
+            )
+            self.HomeError.setWordWrap(True)
+            self.HomeError.setObjectName("HomeError")
+            self.verticalLayout.addWidget(self.HomeError)
 
             # Add HOME Tab to Tabs
             self.Tabs.addTab(self.Home, "HOME")
@@ -617,6 +624,8 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.Players.setContentsMargins(0, 0, 0, 0)
             self.Players.setObjectName("Players")
             self.PlayerScrollArea = QtWidgets.QScrollArea(self.Leaderboard)
+            self.PlayerScrollArea.setFrameShape(QtWidgets.QFrame.Box)
+            self.PlayerScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
             self.PlayerScrollArea.setLineWidth(3)
             self.PlayerScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.PlayerScrollArea.setSizeAdjustPolicy(
@@ -790,10 +799,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             font.setPointSize(18)
             self.MatchInformations.setFont(font)
             self.MatchInformations.setText(
-                "f727f8be-2b13-458c-8a7c-fabae93f13e4\n"
-                "30.12.2022 6:21 PM - 30m 41s\n"
-                "EU - Frankfurt\n"
-                "Competitive - Icebox"
+                "Match ID\n" "Date - Match Duration\n" "Region - Cluster\n" "Gamemode - Map"
             )
             self.MatchInformations.setTextFormat(QtCore.Qt.PlainText)
             self.MatchInformations.setAlignment(QtCore.Qt.AlignCenter)
@@ -815,9 +821,397 @@ class Ui_ValorantTrackerByNavisGames(object):
                 20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
             )
             self.verticalLayout_9.addItem(spacerItem2)
-            self.Tabs.addTab(self.MatchTracker, "MATCH")
+
+            # Create MatchScoreBoard
+            self.MatchScoreboard = QtWidgets.QTableWidget(self.MatchTracker)
+            self.MatchScoreboard.setFrameShape(QtWidgets.QFrame.WinPanel)
+            self.MatchScoreboard.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.MatchScoreboard.setSizeAdjustPolicy(
+                QtWidgets.QAbstractScrollArea.AdjustToContents
+            )
+            self.MatchScoreboard.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+            self.MatchScoreboard.setAlternatingRowColors(True)
+            self.MatchScoreboard.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+            self.MatchScoreboard.setCornerButtonEnabled(False)
+            self.MatchScoreboard.setRowCount(2)
+            self.MatchScoreboard.setObjectName("MatchScoreboard")
+            self.MatchScoreboard.setColumnCount(2)
+
+            # Team A Vertical Header
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Team A")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            brush = QtGui.QBrush(QtGui.QColor(0, 186, 130))
+            brush.setStyle(QtCore.Qt.SolidPattern)
+            item.setForeground(brush)
+            self.MatchScoreboard.setVerticalHeaderItem(0, item)
+            item = QtWidgets.QTableWidgetItem()
+
+            # Team B Vertical Header
+            item.setText("Team B")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            brush = QtGui.QBrush(QtGui.QColor(255, 0, 0))
+            brush.setStyle(QtCore.Qt.SolidPattern)
+            item.setForeground(brush)
+            self.MatchScoreboard.setVerticalHeaderItem(1, item)
+            self.MatchScoreboard.horizontalHeader().setDefaultSectionSize(25)
+            self.MatchScoreboard.horizontalHeader().setHighlightSections(False)
+            self.MatchScoreboard.horizontalHeader().setMinimumSectionSize(25)
+            self.MatchScoreboard.horizontalHeader().setStretchLastSection(False)
+            self.MatchScoreboard.verticalHeader().setDefaultSectionSize(33)
+            self.MatchScoreboard.verticalHeader().setHighlightSections(False)
+            self.MatchScoreboard.verticalHeader().setMinimumSectionSize(33)
+            self.verticalLayout_9.addWidget(self.MatchScoreboard)
+
+            # Create Team A for Match
+            self.MatchTeamA = QtWidgets.QTableWidget(self.MatchTracker)
+            sizePolicy = QtWidgets.QSizePolicy(
+                QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum
+            )
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(self.MatchTeamA.sizePolicy().hasHeightForWidth())
+            self.MatchTeamA.setSizePolicy(sizePolicy)
+            self.MatchTeamA.setFrameShape(QtWidgets.QFrame.WinPanel)
+            self.MatchTeamA.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.MatchTeamA.setLineWidth(1)
+            self.MatchTeamA.setSizeAdjustPolicy(
+                QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow
+            )
+            self.MatchTeamA.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+            self.MatchTeamA.setAlternatingRowColors(True)
+            self.MatchTeamA.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+            self.MatchTeamA.setCornerButtonEnabled(False)
+            self.MatchTeamA.setObjectName("MatchTeamA")
+            self.MatchTeamA.setColumnCount(9)
+            self.MatchTeamA.setRowCount(5)
+
+            # Players
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 1")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setVerticalHeaderItem(0, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 2")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setVerticalHeaderItem(1, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 3")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setVerticalHeaderItem(2, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 4")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setVerticalHeaderItem(3, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 5")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setVerticalHeaderItem(4, item)
+
+            # Agents, Ranks etc.
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Agent")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(0, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Rank")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(1, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Kills")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(2, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Deaths")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(3, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Assists")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(4, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("K/D")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(5, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("ACS")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(6, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("ADR")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(7, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("HS%")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamA.setHorizontalHeaderItem(8, item)
+
+            # Variables
+            self.MatchTeamA.horizontalHeader().setDefaultSectionSize(106)
+            self.MatchTeamA.horizontalHeader().setHighlightSections(False)
+            self.MatchTeamA.horizontalHeader().setMinimumSectionSize(106)
+            self.MatchTeamA.horizontalHeader().setStretchLastSection(False)
+            self.MatchTeamA.verticalHeader().setDefaultSectionSize(31)
+            self.MatchTeamA.verticalHeader().setHighlightSections(False)
+            self.MatchTeamA.verticalHeader().setMinimumSectionSize(31)
+            self.MatchTeamA.verticalHeader().setStretchLastSection(False)
+            self.verticalLayout_9.addWidget(self.MatchTeamA)
+
+            # Create Team B from match
+            self.MatchTeamB = QtWidgets.QTableWidget(self.MatchTracker)
+            sizePolicy = QtWidgets.QSizePolicy(
+                QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum
+            )
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(self.MatchTeamB.sizePolicy().hasHeightForWidth())
+            self.MatchTeamB.setSizePolicy(sizePolicy)
+            self.MatchTeamB.setFrameShape(QtWidgets.QFrame.WinPanel)
+            self.MatchTeamB.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.MatchTeamB.setLineWidth(1)
+            self.MatchTeamB.setSizeAdjustPolicy(
+                QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow
+            )
+            self.MatchTeamB.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+            self.MatchTeamB.setAlternatingRowColors(True)
+            self.MatchTeamB.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+            self.MatchTeamB.setShowGrid(True)
+            self.MatchTeamB.setCornerButtonEnabled(False)
+            self.MatchTeamB.setObjectName("MatchTeamB")
+            self.MatchTeamB.setColumnCount(9)
+            self.MatchTeamB.setRowCount(5)
+
+            # Players
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 1")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setVerticalHeaderItem(0, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 2")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setVerticalHeaderItem(1, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 3")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setVerticalHeaderItem(2, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 4")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setVerticalHeaderItem(3, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Player 5")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setVerticalHeaderItem(4, item)
+
+            # Agents, Ranks etc.
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Agent")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(0, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Rank")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(1, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Kills")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(2, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Deaths")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(3, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("Assists")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(4, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("K/D")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(5, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("ACS")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(6, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("ADR")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(7, item)
+
+            item = QtWidgets.QTableWidgetItem()
+            item.setText("HS%")
+            font = QtGui.QFont()
+            font.setPointSize(16)
+            font.setBold(False)
+            font.setWeight(50)
+            item.setFont(font)
+            self.MatchTeamB.setHorizontalHeaderItem(8, item)
+
+            # Variables
+            self.MatchTeamB.horizontalHeader().setDefaultSectionSize(106)
+            self.MatchTeamB.horizontalHeader().setHighlightSections(False)
+            self.MatchTeamB.horizontalHeader().setMinimumSectionSize(106)
+            self.MatchTeamB.horizontalHeader().setStretchLastSection(False)
+            self.MatchTeamB.verticalHeader().setDefaultSectionSize(31)
+            self.MatchTeamB.verticalHeader().setHighlightSections(False)
+            self.MatchTeamB.verticalHeader().setMinimumSectionSize(31)
+            self.MatchTeamB.verticalHeader().setStretchLastSection(False)
+            self.verticalLayout_9.addWidget(self.MatchTeamB)
+            spacerItem4 = QtWidgets.QSpacerItem(
+                20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding
+            )
+            self.verticalLayout_9.addItem(spacerItem4)
+
+            # Create Match Error
+            self.MatchError = QtWidgets.QLabel(self.MatchTracker)
+            font = QtGui.QFont()
+            font.setPointSize(12)
+            self.MatchError.setFont(font)
+            self.MatchError.setText("")
+            self.MatchError.setWordWrap(True)
+            self.MatchError.setObjectName("MatchError")
+            self.verticalLayout_9.addWidget(self.MatchError)
 
             # Index, Layout, adding Match Tracker
+            self.Tabs.addTab(self.MatchTracker, "MATCH")
             self.verticalLayout_7.addWidget(self.Tabs)
             ValorantTrackerByNavisGames.setCentralWidget(self.centralwidget)
             self.Tabs.setCurrentIndex(0)
@@ -832,8 +1226,14 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.modeSwitcher.clicked.connect(self.modeSwitch)
             QtCore.QMetaObject.connectSlotsByName(ValorantTrackerByNavisGames)
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setText(f"{format(error)}")
+            msgBox.setWindowTitle("an error occurred")
+            msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            returnValue = msgBox.exec()
 
     def get_information(self):
         try:
@@ -923,8 +1323,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                         )
                     else:
                         continue
-                except BaseException:
+                except BaseException as error:
                     print(traceback.format_exc())
+                    self.HomeError.setText(f"{format(error)}")
 
             # If there is a rank, add a rank history
             # For every last match in the detail get +RR or -RR and rank / rr
@@ -1136,8 +1537,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f'"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>'
             )
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
+            self.HomeError.setText(f"{format(error)}")
 
     def leaderboard(self):
         start_time = time.time()
@@ -1266,7 +1668,7 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             print(f"LEADERBOARD took --- %s seconds ---" % (time.time() - start_time))
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
 
     def get_match_information(self):
@@ -1289,8 +1691,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f"{region} - {cluster}\n"
                 f"{gamemode} - {game_map}"
             )
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
+            self.MatchError.setText(f"{format(error)}")
 
     def reset_information(self):
         try:
@@ -1310,6 +1713,9 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f'>Account Level 0 | Iron 3 </span><img src="{tier_icon}"width="33 '
                 f'"height="33"/><span style=" font-size:20pt;"> 0rr</span></p></body></html>'
             )
+            self.MatchInformations.setText(
+                "Match ID\n" "Date - Match Duration\n" "Region - Cluster\n" "Gamemode - Map"
+            )
             self.AccuracyText.setText("Headshots: 0%\n" "Bodyshots: 0%\n" "Legshots: 0%")
             self.AccuracyLogo.setPixmap(QtGui.QPixmap(str(BasicDummy)))
             self.StatsText.setText(
@@ -1318,6 +1724,8 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "Average Damage per Round: 0\n"
                 "Winrate: 0%"
             )
+            self.HomeError.setText(f"")
+            self.MatchError.setText(f"")
             self.CompHistory.setText(
                 "Matchmaking Ratio \n"
                 "Competitive Wins \n"
@@ -1336,7 +1744,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 "HS%: 0% | ACS: 0 | ADR: 0 | Total Score: 0\n"
             )
 
-        except BaseException:
+        except BaseException as error:
             print(traceback.format_exc())
 
     def modeSwitch(self):
