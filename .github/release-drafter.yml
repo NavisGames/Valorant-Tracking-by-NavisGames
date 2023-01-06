@@ -11,9 +11,6 @@ categories:
   - title: "🔧 Fixed bugs"
     labels:
       - "bugfix"
-  - title: "🐞 known bugs"
-    labels:
-      - "bugs"
   - title: "🕸 Staled Issues & PRs | Wont fix"
     labels:
       - "stale"
@@ -23,6 +20,9 @@ categories:
       - "documentation"
       - "questions"
       - "other"
+  - title: "🐞 Known bugs"
+    labels:
+      - "bugs"
   - title: "🔨 Dependencies updates"
     labels:
       - "dependencies"
