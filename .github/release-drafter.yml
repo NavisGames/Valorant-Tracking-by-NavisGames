@@ -31,8 +31,9 @@ prerelease: true
 sort-by: "title"
 
 template: |
-  ## ➕ Changes
+  # ➕ Changes
   
+  ## ❌ Uncategorized 
   $CHANGES
   
   
