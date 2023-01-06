@@ -33,7 +33,7 @@ sort-by: "title"
 template: |
   # ➕ Changes
   
-  ## ❌ Uncategorized 
+  ## 📜 Uncategorized 
   $CHANGES
   
   
