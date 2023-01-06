@@ -26,6 +26,10 @@ categories:
   - title: "🔨 Dependencies updates"
     labels:
       - "dependencies"
+
+prerelease: true
+sort-by: "title"
+
 template: |
   ## ➕ Changes
   
