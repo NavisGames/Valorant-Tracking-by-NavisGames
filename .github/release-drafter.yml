@@ -31,8 +31,6 @@ prerelease: true
 sort-by: "title"
 
 template: |
-  ## ➕ Changes
-  
   $CHANGES
   
   ## ✔ Contributors
