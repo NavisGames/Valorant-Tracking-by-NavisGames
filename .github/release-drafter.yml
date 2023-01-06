@@ -15,17 +15,17 @@ categories:
     labels:
       - "stale"
       - "wontfix"
-  - title: "📝 Other"
-    labels:
-      - "documentation"
-      - "questions"
-      - "other"
   - title: "🐞 Known bugs"
     labels:
       - "bugs"
   - title: "🔨 Dependencies updates"
     labels:
       - "dependencies"
+  - title: "📝 Other"
+    labels:
+      - "documentation"
+      - "questions"
+      - "other"
 
 prerelease: true
 sort-by: "title"
