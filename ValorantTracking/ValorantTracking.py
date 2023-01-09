@@ -9,11 +9,6 @@ from pathlib import Path
 
 import requests
 import valo_api
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QImage, QPalette, QPixmap
-from PyQt5.QtWidgets import QApplication, QMessageBox
-
 from functions import (
     clearLayout,
     current_season,
@@ -28,6 +23,10 @@ from functions import (
     highestRank,
     ranklist,
 )
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QImage, QPalette, QPixmap
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
 
 class Ui_ValorantTrackerByNavisGames(object):
@@ -54,7 +53,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             ValorantTrackerByNavisGames.setFont(font)
             ValorantTrackerByNavisGames.setMouseTracking(False)
             ValorantTrackerByNavisGames.setWindowTitle(
-                "Valorant Tracking 2.5 BETA 1 By NavisGames"
+                "Valorant Tracking 2.5 By NavisGames"
             )
             icon = QtGui.QIcon()
             iconImage = Path(__file__).parent.joinpath("Images/icon.png")
