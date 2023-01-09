@@ -9,6 +9,11 @@ from pathlib import Path
 
 import requests
 import valo_api
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor, QImage, QPalette, QPixmap
+from PyQt5.QtWidgets import QApplication, QMessageBox
+
 from functions import (
     clearLayout,
     current_season,
@@ -23,10 +28,6 @@ from functions import (
     highestRank,
     ranklist,
 )
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QColor, QFontDatabase, QImage, QPalette, QPixmap
-from PyQt5.QtWidgets import QApplication, QMessageBox
 
 
 class Ui_ValorantTrackerByNavisGames(object):
@@ -894,7 +895,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchTeamA.setColumnCount(9)
             self.MatchTeamA.setRowCount(5)
 
-            # Players
+            # Player 1A
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 1")
             font = QtGui.QFont()
@@ -904,6 +905,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamA.setVerticalHeaderItem(0, item)
 
+            # Player 2A
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 2")
             font = QtGui.QFont()
@@ -913,6 +915,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamA.setVerticalHeaderItem(1, item)
 
+            # Player 3A
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 3")
             font = QtGui.QFont()
@@ -922,6 +925,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamA.setVerticalHeaderItem(2, item)
 
+            # Player 4A
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 4")
             font = QtGui.QFont()
@@ -931,6 +935,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamA.setVerticalHeaderItem(3, item)
 
+            # Player 5A
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 5")
             font = QtGui.QFont()
@@ -1057,7 +1062,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchTeamB.setColumnCount(9)
             self.MatchTeamB.setRowCount(5)
 
-            # Players
+            # Player 1B
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 1")
             font = QtGui.QFont()
@@ -1067,6 +1072,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamB.setVerticalHeaderItem(0, item)
 
+            # Player 2B
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 2")
             font = QtGui.QFont()
@@ -1076,6 +1082,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamB.setVerticalHeaderItem(1, item)
 
+            # Player 3B
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 3")
             font = QtGui.QFont()
@@ -1085,6 +1092,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamB.setVerticalHeaderItem(2, item)
 
+            # Player 4B
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 4")
             font = QtGui.QFont()
@@ -1094,6 +1102,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             item.setFont(font)
             self.MatchTeamB.setVerticalHeaderItem(3, item)
 
+            # Player 5B
             item = QtWidgets.QTableWidgetItem()
             item.setText("Player 5")
             font = QtGui.QFont()
@@ -1342,12 +1351,10 @@ class Ui_ValorantTrackerByNavisGames(object):
                         )
 
             # Makes Ranks to str and makes it to Text
-            # Sets CompHistory to Ranks
             previous_ranks = "".join(previous_ranks)
             self.CompHistory.setText(previous_ranks)
 
             # getting an QImage for the Player Card.
-            # Sets Banner
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 img = executor.submit(get_image, Card)
                 img = img.result()
@@ -1474,6 +1481,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Set Match to Text
             match_History = "".join(match_History)
 
+            # Dummys
             HeadshotDummy = Path(__file__).parent.joinpath("Images/Dummy/Headshot.png")
             BodyshotDummy = Path(__file__).parent.joinpath("Images/Dummy/Bodyshot.png")
             LegshotDummy = Path(__file__).parent.joinpath("Images/Dummy/Legshot.png")
