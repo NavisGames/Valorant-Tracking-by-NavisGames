@@ -49,7 +49,7 @@ ranklist = [
 ]
 
 
-def get_image(url):
+def get_image(url: str):
     with http.Client() as client:
         r = client.get(url)
     img = QImage()
@@ -57,14 +57,14 @@ def get_image(url):
     return img
 
 
-async def get_image_async(url):
+async def get_image_async(url: str):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             img_data = await response.read()
             return QImage.fromData(img_data)
 
 
-def display_time(seconds, granularity=2):
+def display_time(seconds: int, granularity=2):
     result = []
 
     for name, count in intervals:
@@ -87,23 +87,23 @@ def clearLayout(layout):
                 clearLayout(child.layout())
 
 
-def findTeamOfPlayer(player, players):
+def findTeamOfPlayer(player: str, players: list):
     return {p.name: p.team for p in players}.get(player)
 
 
-def findStatsOfPlayer(player, players):
+def findStatsOfPlayer(player: str, players: list):
     return {p.name: p.stats for p in players}.get(player)
 
 
-def findRoundPlayer(player, player_stats):
+def findRoundPlayer(player: str, player_stats: list):
     return {p.player_display_name: p for p in player_stats}.get(player)
 
 
-def findAgentOfPlayer(player, players):
+def findAgentOfPlayer(player: str, players: list):
     return {p.name: p.character for p in players}.get(player)
 
 
-def highestRank(puuID, region):
+def highestRank(puuID: str, region: str):
     mmr_details = valo_api.get_mmr_details_by_puuid(
         version="v2", region=region, puuid=puuID
     )
