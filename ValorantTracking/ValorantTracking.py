@@ -539,30 +539,34 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Combo Box for all Acts
             self.Act = QtWidgets.QComboBox(self.LeaderBoardInput)
-            self.Act.setCurrentText("E5A3")
+            self.Act.setCurrentText("E6A1")
             self.Act.setObjectName("Act")
             self.Act.addItem("")
-            self.Act.setItemText(0, "E5A3")
+            self.Act.setItemText(0, "E6A1")
             self.Act.addItem("")
-            self.Act.setItemText(1, "E5A2")
+            self.Act.setItemText(1, "E5A3")
             self.Act.addItem("")
-            self.Act.setItemText(2, "E5A1")
+            self.Act.setItemText(2, "E5A2")
             self.Act.addItem("")
-            self.Act.setItemText(3, "E4A3")
+            self.Act.setItemText(3, "E5A1")
             self.Act.addItem("")
-            self.Act.setItemText(4, "E4A2")
+            self.Act.setItemText(4, "E4A3")
             self.Act.addItem("")
-            self.Act.setItemText(5, "E4A1")
+            self.Act.setItemText(5, "E4A2")
             self.Act.addItem("")
-            self.Act.setItemText(6, "E3A3")
+            self.Act.setItemText(6, "E4A1")
             self.Act.addItem("")
-            self.Act.setItemText(7, "E3A2")
+            self.Act.setItemText(7, "E3A3")
             self.Act.addItem("")
-            self.Act.setItemText(8, "E3A1")
+            self.Act.setItemText(8, "E3A2")
             self.Act.addItem("")
-            self.Act.setItemText(9, "E2A3")
+            self.Act.setItemText(9, "E3A1")
             self.Act.addItem("")
-            self.Act.setItemText(10, "E2A2")
+            self.Act.setItemText(10, "E2A3")
+            self.Act.addItem("")
+            self.Act.setItemText(11, "E2A2")
+            self.Act.addItem("")
+            self.Act.setItemText(12, "E2A1")
             self.Act.setEditable(True)
             self.horizontalLayout_7.addWidget(self.Act)
             self.ActEdit = self.Act.lineEdit()
@@ -1270,7 +1274,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             msgBox.setText(f"{format(error)}")
             msgBox.setWindowTitle("an error occurred")
             msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-            returnValue = msgBox.exec()
+            msgBox.exec()
 
     def get_information(self):
         try:
@@ -1349,6 +1353,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
             # API Problem is there, then continue
             lastRank = RankDetails.by_season
+            lastRank = {k: v for k, v in lastRank.items()}
             for x in lastRank:
                 try:
                     if (
@@ -1706,6 +1711,12 @@ class Ui_ValorantTrackerByNavisGames(object):
 
         except BaseException as error:
             print(traceback.format_exc())
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setText(f"{format(error)}")
+            msgBox.setWindowTitle("an error occurred")
+            msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            msgBox.exec()
 
     def get_match_information(self):
         try:
