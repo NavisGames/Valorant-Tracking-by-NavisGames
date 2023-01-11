@@ -256,7 +256,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerBanner.setAlignment(QtCore.Qt.AlignCenter)
             self.PlayerBanner.setWordWrap(False)
             self.PlayerBanner.setFrameShape(QtWidgets.QFrame.Box)
-            self.PlayerBanner.setLineWidth(2)
+            self.PlayerBanner.setLineWidth(0)
             self.PlayerBanner.setObjectName("PlayerBanner")
             self.horizontalLayout_2.addWidget(self.PlayerBanner)
 
@@ -338,7 +338,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.GStats = QtWidgets.QFrame(self.StatsFrame)
             self.GStats.setFrameShape(QtWidgets.QFrame.Box)
             self.GStats.setFrameShadow(QtWidgets.QFrame.Plain)
-            self.GStats.setLineWidth(2)
+            self.GStats.setLineWidth(0)
             self.GStats.setObjectName("GStats")
             self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.GStats)
             self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
@@ -412,7 +412,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.CompScrollArea.setObjectName("CompScrollArea")
             self.CompScrollArea.setFrameShape(QtWidgets.QFrame.Box)
             self.CompScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
-            self.CompScrollArea.setLineWidth(2)
+            self.CompScrollArea.setLineWidth(0)
             self.CompScrollLayout = QtWidgets.QWidget()
             self.CompScrollLayout.setGeometry(QtCore.QRect(0, 0, 519, 355))
             self.CompScrollLayout.setObjectName("CompScrollLayout")
@@ -448,7 +448,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchHistory.setEnabled(True)
             self.MatchHistory.setFrameShape(QtWidgets.QFrame.NoFrame)
             self.MatchHistory.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.MatchHistory.setLineWidth(2)
+            self.MatchHistory.setLineWidth(0)
             self.MatchHistory.setObjectName("MatchHistory")
             self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.MatchHistory)
             self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
@@ -476,7 +476,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.HistoryScrollLayout.setObjectName("HistoryScrollLayout")
             self.HistoryScrollArea.setFrameShape(QtWidgets.QFrame.Box)
             self.HistoryScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
-            self.HistoryScrollArea.setLineWidth(2)
+            self.HistoryScrollArea.setLineWidth(0)
             self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.HistoryScrollLayout)
             self.horizontalLayout_4.setObjectName("horizontalLayout_4")
 
@@ -630,7 +630,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.PlayerScrollArea = QtWidgets.QScrollArea(self.Leaderboard)
             self.PlayerScrollArea.setFrameShape(QtWidgets.QFrame.Box)
             self.PlayerScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
-            self.PlayerScrollArea.setLineWidth(3)
+            self.PlayerScrollArea.setLineWidth(0)
             self.PlayerScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
             self.PlayerScrollArea.setSizeAdjustPolicy(
                 QtWidgets.QAbstractScrollArea.AdjustIgnored
@@ -830,6 +830,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchScoreboard = QtWidgets.QTableWidget(self.MatchTracker)
             self.MatchScoreboard.setFrameShape(QtWidgets.QFrame.WinPanel)
             self.MatchScoreboard.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.MatchScoreboard.setLineWidth(0)
             self.MatchScoreboard.setSizeAdjustPolicy(
                 QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow
             )
@@ -887,6 +888,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchTeamA.setSizePolicy(sizePolicy)
             self.MatchTeamA.setFrameShape(QtWidgets.QFrame.WinPanel)
             self.MatchTeamA.setFrameShadow(QtWidgets.QFrame.Plain)
+            self.MatchTeamA.setLineWidth(0)
             self.MatchTeamA.setLineWidth(1)
             self.MatchTeamA.setSizeAdjustPolicy(
                 QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow
@@ -1067,7 +1069,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.MatchTeamB.setSizePolicy(sizePolicy)
             self.MatchTeamB.setFrameShape(QtWidgets.QFrame.WinPanel)
             self.MatchTeamB.setFrameShadow(QtWidgets.QFrame.Plain)
-            self.MatchTeamB.setLineWidth(1)
+            self.MatchTeamB.setLineWidth(0)
             self.MatchTeamB.setSizeAdjustPolicy(
                 QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow
             )
