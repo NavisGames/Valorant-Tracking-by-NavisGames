@@ -1353,7 +1353,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
             # API Problem is there, then continue
             lastRank = RankDetails.by_season
-            lastRank = {k: v for k, v in lastRank.items()}
+            lastRank = dict(reversed(list(lastRank.items())))
             for x in lastRank:
                 try:
                     if (
