@@ -7,7 +7,7 @@ from PyQt5.QtGui import QImage
 from valo_api.endpoints.raw import EndpointType
 from valo_api.responses.match_history import MatchHistoryPointV3
 
-current_season = "E5A3"
+current_season = "E6A1"
 
 intervals = (
     ("Weeks", 604800),  # 60 * 60 * 24 * 7
