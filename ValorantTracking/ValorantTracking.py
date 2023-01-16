@@ -921,21 +921,11 @@ class Ui_ValorantTrackerByNavisGames(object):
             # Sets PUU-ID and Region
             self.PlayerIDs.setText(f"{puuid} | {Region}")
 
-            # Wins, Games Played
-            try:
-                wins = RankDetails.by_season[current_season.lower()].wins
-                games_played = RankDetails.by_season[current_season.lower()].number_of_games
-            except AttributeError:
-                wins = 0
-                games_played = 0
-
             # Creates List with MMR, Comp Wins, Comp Games
             previous_ranks = [
                 f"Rank: {Rank} {RR}rr\n"
                 f"Peak Rank: {PeakRank}\n"
                 f"Matchmaking Ratio: {MMR}\n\n"
-                f"Competitive Wins: {wins}\n"
-                f"Competitive Games played: {games_played}\n\n"
             ]
 
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
