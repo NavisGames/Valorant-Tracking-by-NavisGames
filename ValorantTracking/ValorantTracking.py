@@ -20,7 +20,6 @@ from functions import (
     get_image,
     get_image_async,
     get_matches,
-    highestRank,
     ranklist,
 )
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -915,7 +914,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             Account_level = Details.account_level
             Card = str(Details.card.wide)
             Rank = RankDetails.current_data.currenttierpatched
-            PeakRank = highestRank(puuID=puuid, region=Region)
+            PeakRank = RankDetails.highest_rank.patched_tier
             RR = RankDetails.current_data.ranking_in_tier
             MMR = RankDetails.current_data.elo
 
@@ -941,8 +940,8 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Gets Last Rank Adds last Ranks with MMR, Wins, Games to the List | if player didn't play in this act or an
             # API Problem is there, then continue
-            lastRank = RankDetails.by_season
-            lastRank = dict(reversed(list(lastRank.items())))
+            ActRanks = RankDetails.by_season
+            lastRank = dict(reversed(ActRanks.items()))
             for x in lastRank:
                 try:
                     if (
@@ -1166,7 +1165,7 @@ class Ui_ValorantTrackerByNavisGames(object):
                 f'>Account Level {Account_level} | {Rank} </span><img src="{tier_icon}"width="33 '
                 f'"height="33"/><span style=" font-size:20pt;"> {RR}rr</span></p></body></html>'
             )
-
+            self.HomeError.setText(f"")
         except BaseException as error:
             print(traceback.format_exc())
             self.HomeError.setText(f"{format(error)}")
