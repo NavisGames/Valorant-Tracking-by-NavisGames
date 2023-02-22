@@ -28,6 +28,7 @@ categories:
       - "other"
 
 prerelease: true
+include-pre-releases: true
 sort-by: "title"
 
 template: |
