@@ -7,7 +7,7 @@ from PyQt5.QtGui import QImage
 from valo_api.endpoints.raw import EndpointType
 from valo_api.responses.match_history import MatchHistoryPointV3
 
-current_season = "E6A1"
+current_season = "E6A2"
 
 intervals = (
     ("Weeks", 604800),  # 60 * 60 * 24 * 7
@@ -18,7 +18,7 @@ intervals = (
 )
 
 ranklist = [
-    "UNRANKED",
+    "Unranked",
     "Unused 1",
     "Unused 2",
     "Iron 1",
@@ -130,4 +130,7 @@ def get_matches(region: str, puuid: str) -> List[MatchHistoryPointV3]:
             query_args["endIndex"] + step_size, match_history.Total
         )
 
-    return [valo_api.get_match_details_v2(match_id=match_id) for match_id in match_ids]
+    return [
+        valo_api.get_match_details_v2(match_id=match_id)
+        for match_id in match_ids
+    ]
