@@ -569,7 +569,7 @@ class Ui_ValorantTrackerByNavisGames(object):
 
             # Creating Combo Box for all Acts
             self.Act = QtWidgets.QComboBox(self.LeaderBoardInput)
-            self.Act.setCurrentText("E6A1")
+            self.Act.setCurrentText("E6A2")
             self.Act.setObjectName("Act")
             self.Act.addItem("")
             self.Act.setItemText(0, "E6A2")
