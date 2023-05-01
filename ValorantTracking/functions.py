@@ -77,57 +77,27 @@ def display_time(seconds: int, granularity=2):
     return " ".join(result[:granularity])
 
 
-def clearLayout(layout):
+def clear_layout(layout):
     if layout is not None:
         while layout.count():
             child = layout.takeAt(0)
             if child.widget() is not None:
                 child.widget().deleteLater()
             elif child.layout() is not None:
-                clearLayout(child.layout())
+                clear_layout(child.layout())
 
 
-def findTeamOfPlayer(player: str, players: list):
+def find_team_of_player(player: str, players: list):
     return {p.name: p.team for p in players}.get(player)
 
 
-def findStatsOfPlayer(player: str, players: list):
+def find_stats_of_player(player: str, players: list):
     return {p.name: p.stats for p in players}.get(player)
 
 
-def findRoundPlayer(player: str, player_stats: list):
+def find_round_player(player: str, player_stats: list):
     return {p.player_display_name: p for p in player_stats}.get(player)
 
 
-def findAgentOfPlayer(player: str, players: list):
+def find_agent_of_player(player: str, players: list):
     return {p.name: p.character for p in players}.get(player)
-
-
-def get_matches(region: str, puuid: str) -> List[MatchHistoryPointV3]:
-    step_size = 20  # maximum is 20
-
-    match_ids = set()
-    query_args = {
-        "startIndex": 0,
-        "endIndex": step_size,
-    }
-    while True:
-        match_history = valo_api.get_raw_data_v1(
-            EndpointType.MATCH_HISTORY,
-            region=region,
-            value=puuid,
-            queries=query_args,
-        )
-        for match in match_history.History:
-            match_ids.add(match.MatchID)
-
-        if query_args["endIndex"] >= match_history.Total:
-            # All matches processed
-            break
-        # Update query args. Do the next pagination step.
-        query_args["startIndex"] = query_args["endIndex"] + 1
-        query_args["endIndex"] = min(
-            query_args["endIndex"] + step_size, match_history.Total
-        )
-
-    return [valo_api.get_match_details_v2(match_id=match_id) for match_id in match_ids]
