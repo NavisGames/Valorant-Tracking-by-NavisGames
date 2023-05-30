@@ -826,7 +826,7 @@ class Ui_ValorantTrackerByNavisGames(object):
             self.verticalLayout_9.addWidget(self.match_error)
 
             # Index, Layout, adding Match Tracker
-            self.tabs.addTab(self.match_tracker, "MATCH")
+            # self.tabs.addTab(self.match_tracker, "MATCH")
             self.verticalLayout_7.addWidget(self.tabs)
             valorant_tracking_by_navisgames.setCentralWidget(self.centralwidget)
             self.tabs.setCurrentIndex(0)
