@@ -2,7 +2,7 @@ import aiohttp
 import httpx as http
 from PyQt5.QtGui import QImage
 
-current_season = "E6A3"
+current_season = "e6a3"
 
 intervals = (
     ("Weeks", 604800),  # 60 * 60 * 24 * 7
