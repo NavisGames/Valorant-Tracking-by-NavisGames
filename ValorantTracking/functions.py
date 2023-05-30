@@ -1,11 +1,6 @@
-from typing import List
-
 import aiohttp
 import httpx as http
-import valo_api
 from PyQt5.QtGui import QImage
-from valo_api.endpoints.raw import EndpointType
-from valo_api.responses.match_history import MatchHistoryPointV3
 
 current_season = "E6A3"
 
